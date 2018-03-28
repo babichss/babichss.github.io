@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>RevealJS : c:\Users\babic\Projects\Speeches\How to Angular for A+\index.md</title>
+        <title>How to Angular for A+</title>
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/theme/moon.css" id="theme">
         
@@ -73,39 +73,51 @@
 </style>
 
 ![](images/title-slide.png)
-</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section  data-markdown><script type="text/template">
 # How to Angular for A+
-</script></section><section ><section data-markdown><script type="text/template">
-## Core ideas</script></section><section data-markdown><script type="text/template">
+
+</script></section><section ><section data-markdown><script type="text/template">
+## Core ideas
+</script></section><section data-markdown><script type="text/template">
 ### Components
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Abstract component
-![](images/Component.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/Component.png)
+
+</script></section><section data-markdown><script type="text/template">
 - Component Logic
 - Template
 - Scoped Styles
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Angular component
-![](images/AngularComponent.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/AngularComponent.png)
+
+</script></section><section data-markdown><script type="text/template">
 ### Unidirectional Data flow
 
-![](images/UnidirectionalDataFlow.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/UnidirectionalDataFlow.png)
+
+</script></section><section data-markdown><script type="text/template">
 ### Dependency Injection
-![](images/DependencyInjection.svg)</script></section><section data-markdown><script type="text/template">
+![](images/DependencyInjection.png)
+</script></section><section data-markdown><script type="text/template">
 
 ### Web Components Similarity
 
-![](images/WebComponent.svg)
-</script></section></section><section ><section data-markdown><script type="text/template">
+![](images/WebComponent.png)
+
+</script></section></section><section ><section data-markdown><script type="text/template">
 ## Angular guts
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Angular modules
 
-![](images/AngularModule.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/AngularModule.png)
+
+</script></section><section data-markdown><script type="text/template">
 ```js
 import { NgModule } from '@angular/core';
 
@@ -120,7 +132,8 @@ import { SomePipe } from './some.pipe';
 })
 export class SomeModule {}
 ```
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### "DECLARATIONS" property
 Is for things you’ll use in your templates: components, directives, pipes
 
@@ -129,23 +142,29 @@ Is for services
 
 #### "EXPORTS" property
 Exposes listed items so you can import them in other modules
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 Declarations (components, directives, pipes) are in **local** scope
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 Providers (services) are in **global** scope
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Feature module
 
 - **Do not** import `BrowserModule`
 - Always **export** stuff
 - **Do not mix** component/pipes/directives and services
 - **Do not user** browser-specific API **directly**
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Lazy loading
 
 Load view as separate module **only** is it was navigated to.
-</script></section><section data-markdown><script type="text/template">
-### Dependency Injection in details</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
+### Dependency Injection in details
+</script></section><section data-markdown><script type="text/template">
 
 #### "provide" and "use*"
 
@@ -166,61 +185,78 @@ providers: [{
   }
 }]
 ...
-```</script></section><section data-markdown><script type="text/template">
+```
+</script></section><section data-markdown><script type="text/template">
 ### NgZone
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### zone.js zones
 
 Closed environments that let you monitor, control, and react to all events, from asynchronous tasks to errors thrown
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 in simple words — hooks to all async operations
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### zones in angular
 
 - uses zone to be aware of **possible** data changes
 - `runOutsideAngular` allows to run code without change detection
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Change Detection mechanism
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Can be triggered by:
 - **Events** - click, submit, etc.
 - **XHR** - Fetching data from a remote server
 - **Timers** - setTimeout(), setInterval()
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Why?
 
 ngZone
-</script></section><section data-markdown><script type="text/template">
-#### Each component has its own change detector</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
+#### Each component has its own change detector
+</script></section><section data-markdown><script type="text/template">
 #### And components are building their own change detector trees
-![](images/ChangeDetectiontree.svg)</script></section><section data-markdown><script type="text/template">
+![](images/ChangeDetectiontree.png)
+</script></section><section data-markdown><script type="text/template">
 #### Change detection strategies
 - Default
 - OnPush
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### ChangeDetectionStrategy.Default
 
 Performs from root component to each branch.
 
 Slightest data change in **any** components triggers data check for **entire** tree.
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Tickle one, fire all
-![](images/ChangeDetectiontreeDefault.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/ChangeDetectiontreeDefault.png)
+
+</script></section><section data-markdown><script type="text/template">
 #### ChangeDetectionStrategy.OnPush
 Turn off change default detection for component.
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### OnPush & immutable data
 Triggers only if **@Input** property value was changed entirely, by reference
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 #### Push me. And then just touch me
-![](images/ChangeDetectiontreeOnPush.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/ChangeDetectiontreeOnPush.png)
+
+</script></section><section data-markdown><script type="text/template">
 #### OnPush & Observable
 
 - Uses stream for passing new data;
 - Using `ChangeDetectorRef::markForCheck()` allows us to manually mark components subtree for check;
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Component with observable input
 
 ```js
@@ -238,13 +274,16 @@ export class CounterComponent {
     });
   }
 }
-```</script></section><section data-markdown><script type="text/template">
+```
+</script></section><section data-markdown><script type="text/template">
 #### Observe and protect!
-![](images/ChangeDetectiontreeOnPushObservable.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/ChangeDetectiontreeOnPushObservable.png)
+
+</script></section><section data-markdown><script type="text/template">
 ## RxJS & Observables
 Library for transforming, composing, and querying streams of data. We mean all kinds of data too, from simple arrays of values, to series of events (unfortunate or otherwise), to complex flows of data.
-</script></section></section><section  data-markdown><script type="text/template">
+
+</script></section></section><section  data-markdown><script type="text/template">
 ```js
 class MyComponent {
   constructor(private stuff: MostOfAngularStuff) {
@@ -252,13 +291,16 @@ class MyComponent {
   }
 }
 ```
-</script></section><section ><section data-markdown><script type="text/template">
+
+</script></section><section ><section data-markdown><script type="text/template">
 ### Observable
 
-![](images/Observable.svg)
-</script></section><section data-markdown><script type="text/template">
+![](images/Observable.png)
+
+</script></section><section data-markdown><script type="text/template">
 ## NGRX
-![](images/NGRX.svg)</script></section><section data-markdown><script type="text/template">
+![](images/NGRX.png)
+</script></section><section data-markdown><script type="text/template">
 ### Store
 ```js
 const ACTION = '[Store] Action';
@@ -275,7 +317,8 @@ export function reducer(state: {}, { type, payload }) {
     ...
   }
 }
-```</script></section><section data-markdown><script type="text/template">
+```
+</script></section><section data-markdown><script type="text/template">
 ### USing in component
 ```js
 @Component(...)
@@ -286,7 +329,8 @@ class ViewComponent {
     this.property = state.select('property');
   }
 }
-```</script></section><section data-markdown><script type="text/template">
+```
+</script></section><section data-markdown><script type="text/template">
 ### Effects
 ```js
 @Injectable()
@@ -298,8 +342,10 @@ class StateEffects {
     .switchMap(action => this.srv.doMagic(action))
     .map(response => new ChangeData(response))
 }
-```</script></section></section><section  data-markdown><script type="text/template">
-## Looking forward</script></section><section  data-markdown><script type="text/template">
+```
+</script></section></section><section  data-markdown><script type="text/template">
+## Looking forward
+</script></section><section  data-markdown><script type="text/template">
 ### New features
 - Ivy Renderer
 - New Compilers
