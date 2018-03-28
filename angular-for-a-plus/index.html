@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Speeches\How to Angular for A+\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+        
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/gruvbox-dark.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"><style>
+  @font-face {
+    font-family: Text;
+    src: url("./fonts/Text.ttf");
+  }
+  @font-face {
+    font-family: Header;
+    src: url("./fonts/Header.ttf");
+  }
+  @font-face {
+    font-family: Code;
+    src: url("./fonts/Code.ttf");
+  }
+  .reveal {
+    font-family: Text !important;
+  }
+  .reveal h1,
+  .reveal h2,
+  .reveal h3,
+  .reveal h4,
+  .reveal h5,
+  .reveal h5 {font-family: Header !important;}
+
+  .reveal h1 {
+    font-size: 3em;
+  }
+
+  .reveal code,
+  .reveal pre {font-family: Code !important;}
+
+  .reveal section img {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+</style>
+
+![](images/title-slide.png)
+</script></section><section  data-markdown><script type="text/template">
+# How to Angular for A+
+</script></section><section ><section data-markdown><script type="text/template">
+## Core ideas</script></section><section data-markdown><script type="text/template">
+### Components
+</script></section><section data-markdown><script type="text/template">
+### Abstract component
+![](images/Component.svg)
+</script></section><section data-markdown><script type="text/template">
+- Component Logic
+- Template
+- Scoped Styles
+</script></section><section data-markdown><script type="text/template">
+### Angular component
+![](images/AngularComponent.svg)
+</script></section><section data-markdown><script type="text/template">
+### Unidirectional Data flow
+
+![](images/UnidirectionalDataFlow.svg)
+</script></section><section data-markdown><script type="text/template">
+### Dependency Injection
+![](images/DependencyInjection.svg)</script></section><section data-markdown><script type="text/template">
+
+### Web Components Similarity
+
+![](images/WebComponent.svg)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Angular guts
+</script></section><section data-markdown><script type="text/template">
+### Angular modules
+
+![](images/AngularModule.svg)
+</script></section><section data-markdown><script type="text/template">
+```js
+import { NgModule } from '@angular/core';
+
+import { SomeComponent } from './some.component';
+import { SomeDirective } from './some.directive';
+import { SomePipe } from './some.pipe';
+
+@NgModule({
+  declarations: [SomeComponent, SomeDirective, SomePipe],
+  providers: [SomeService],
+  exports: [SomeComponent, SomeDirective, SomePipe]
+})
+export class SomeModule {}
+```
+</script></section><section data-markdown><script type="text/template">
+#### "DECLARATIONS" property
+Is for things you’ll use in your templates: components, directives, pipes
+
+#### "PROVIDERS" property
+Is for services
+
+#### "EXPORTS" property
+Exposes listed items so you can import them in other modules
+</script></section><section data-markdown><script type="text/template">
+Declarations (components, directives, pipes) are in **local** scope
+</script></section><section data-markdown><script type="text/template">
+Providers (services) are in **global** scope
+</script></section><section data-markdown><script type="text/template">
+#### Feature module
+
+- **Do not** import `BrowserModule`
+- Always **export** stuff
+- **Do not mix** component/pipes/directives and services
+- **Do not user** browser-specific API **directly**
+</script></section><section data-markdown><script type="text/template">
+#### Lazy loading
+
+Load view as separate module **only** is it was navigated to.
+</script></section><section data-markdown><script type="text/template">
+### Dependency Injection in details</script></section><section data-markdown><script type="text/template">
+
+#### "provide" and "use*"
+
+```js
+...
+providers: [{
+  provide: SomeService,
+  useClass: SomeOtherService
+}]
+...
+```
+```js
+...
+providers: [{
+  provide: SomeService,
+  useValue: {
+    method() {...}
+  }
+}]
+...
+```</script></section><section data-markdown><script type="text/template">
+### NgZone
+</script></section><section data-markdown><script type="text/template">
+#### zone.js zones
+
+Closed environments that let you monitor, control, and react to all events, from asynchronous tasks to errors thrown
+</script></section><section data-markdown><script type="text/template">
+in simple words — hooks to all async operations
+</script></section><section data-markdown><script type="text/template">
+#### zones in angular
+
+- uses zone to be aware of **possible** data changes
+- `runOutsideAngular` allows to run code without change detection
+</script></section><section data-markdown><script type="text/template">
+### Change Detection mechanism
+</script></section><section data-markdown><script type="text/template">
+#### Can be triggered by:
+- **Events** - click, submit, etc.
+- **XHR** - Fetching data from a remote server
+- **Timers** - setTimeout(), setInterval()
+</script></section><section data-markdown><script type="text/template">
+#### Why?
+
+ngZone
+</script></section><section data-markdown><script type="text/template">
+#### Each component has its own change detector</script></section><section data-markdown><script type="text/template">
+#### And components are building their own change detector trees
+![](images/ChangeDetectiontree.svg)</script></section><section data-markdown><script type="text/template">
+#### Change detection strategies
+- Default
+- OnPush
+</script></section><section data-markdown><script type="text/template">
+#### ChangeDetectionStrategy.Default
+
+Performs from root component to each branch.
+
+Slightest data change in **any** components triggers data check for **entire** tree.
+</script></section><section data-markdown><script type="text/template">
+#### Tickle one, fire all
+![](images/ChangeDetectiontreeDefault.svg)
+</script></section><section data-markdown><script type="text/template">
+#### ChangeDetectionStrategy.OnPush
+Turn off change default detection for component.
+</script></section><section data-markdown><script type="text/template">
+#### OnPush & immutable data
+Triggers only if **@Input** property value was changed entirely, by reference
+</script></section><section data-markdown><script type="text/template">
+#### Push me. And then just touch me
+![](images/ChangeDetectiontreeOnPush.svg)
+</script></section><section data-markdown><script type="text/template">
+#### OnPush & Observable
+
+- Uses stream for passing new data;
+- Using `ChangeDetectorRef::markForCheck()` allows us to manually mark components subtree for check;
+</script></section><section data-markdown><script type="text/template">
+### Component with observable input
+
+```js
+import { ... } from '@angular/core';
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class CounterComponent {
+  constructor(private cd: ChangeDetectorRef) {}
+  @Input() data: Observable<any>;
+  ngOnInit() {
+    this.data.subscribe(value => {
+      this._data = value;
+      this.cd.markForCheck(); // tell CD to verify this subtree
+    });
+  }
+}
+```</script></section><section data-markdown><script type="text/template">
+#### Observe and protect!
+![](images/ChangeDetectiontreeOnPushObservable.svg)
+</script></section><section data-markdown><script type="text/template">
+## RxJS & Observables
+Library for transforming, composing, and querying streams of data. We mean all kinds of data too, from simple arrays of values, to series of events (unfortunate or otherwise), to complex flows of data.
+</script></section></section><section  data-markdown><script type="text/template">
+```js
+class MyComponent {
+  constructor(private stuff: MostOfAngularStuff) {
+    this.stuff.subscribe(stuff => console.log(stuff));
+  }
+}
+```
+</script></section><section ><section data-markdown><script type="text/template">
+### Observable
+
+![](images/Observable.svg)
+</script></section><section data-markdown><script type="text/template">
+## NGRX
+![](images/NGRX.svg)</script></section><section data-markdown><script type="text/template">
+### Store
+```js
+const ACTION = '[Store] Action';
+class DoAction {
+  readonly type = ACTION;
+  constructor(public payload: SomeType) { }
+}
+
+export function reducer(state: {}, { type, payload }) {
+  switch (type) {
+    ...
+    case ACTION:
+      return { ...state, { property: payload }
+    ...
+  }
+}
+```</script></section><section data-markdown><script type="text/template">
+### USing in component
+```js
+@Component(...)
+class ViewComponent {
+  property: Observable<string>;
+  constructor(private store: Store<any>) {
+    const state = this.store.select('reducer');
+    this.property = state.select('property');
+  }
+}
+```</script></section><section data-markdown><script type="text/template">
+### Effects
+```js
+@Injectable()
+class StateEffects {
+  constructor(private actions: Actions, private srv: Service) {}
+  @Effect()
+  action: this.actions
+    .ofType(ACTION)
+    .switchMap(action => this.srv.doMagic(action))
+    .map(response => new ChangeData(response))
+}
+```</script></section></section><section  data-markdown><script type="text/template">
+## Looking forward</script></section><section  data-markdown><script type="text/template">
+### New features
+- Ivy Renderer
+- New Compilers
+- Service Worker Improvements
+- Component tree-shaking
+- Component Dev Kit (CDK)
+- Typescript 2.6.x support
+
+### And more
+</script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "moon",
+  "highlightTheme": "gruvbox-dark",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "none",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
