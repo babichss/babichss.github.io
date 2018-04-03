@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Speeches\JSFest 2018\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+        
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/gruvbox-dark.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">
+<style>
+  @font-face {
+    font-family: Text;
+    src: url("./fonts/Text.ttf");
+  }
+  @font-face {
+    font-family: Header;
+    src: url("./fonts/Header.ttf");
+  }
+  @font-face {
+    font-family: Code;
+    src: url("./fonts/Code.ttf");
+  }
+  .reveal {
+    font-family: Text !important;
+  }
+  .reveal h1,
+  .reveal h2,
+  .reveal h3,
+  .reveal h4,
+  .reveal h5,
+  .reveal h5 {font-family: Header !important;}
+
+  .reveal h1 {
+    font-size: 3em;
+  }
+
+  .reveal code,
+  .reveal pre {font-family: Code !important;}
+
+  .reveal section img {
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+  }
+</style>
+
+# I know what you did to V8 last summer
+</script></section><section ><section data-markdown><script type="text/template">
+<!-- Introducation -->
+# v8</script></section><section data-markdown><script type="text/template">
+## What is it?
+
+- Google's 
+- open source
+- high-performance
+- JavaScript engine, 
+- written in C++
+</script></section><section data-markdown><script type="text/template">
+## How it works?
+![](images/CompilationPipe.png)
+</script></section><section data-markdown><script type="text/template">
+## What is interpreter?
+- JIT-compiler
+- Produces unoptimized code
+- Allows quick startup
+- Can consume a big amount of memory
+</script></section><section data-markdown><script type="text/template">
+## What is optimization compiler?
+- Looks for "hot" code
+- Produces optimized code
+- Optimized code is fast to call
+</script></section><section data-markdown><script type="text/template">
+## Garbage Collector
+mechanism for automatic memory cleanup</script></section><section data-markdown><script type="text/template">
+very simple scheme
+![](images/simple-gc-scheme.png)
+</script></section><section data-markdown><script type="text/template">
+### Seek and destroy
+**Scavenge** - fast cycle to kill everyone not referenced.
+
+Objects which survived **two** scavengings are promoted to **old-space**.
+</script></section><section data-markdown><script type="text/template">
+### Mistake of a survivor
+
+**Mark&Sweep** - less frequent event, occurs when **old-space** is full or new object is **promoted** to old-space.
+</script></section><section data-markdown><script type="text/template">
+## Optimization</script></section><section data-markdown><script type="text/template">
+### Initial optimizations
+- Inline Caching;
+- Hidden Classes;</script></section><section data-markdown><script type="text/template">
+### Optimization compiler
+- Each unoptimized function call is traced; 
+- If call results are consistent, optimizations took place;
+</script></section><section data-markdown><script type="text/template">
+## Deoptimization
+Occurs when, e.g., function is polymorphic, so compiler can't predict argument and result types.</script></section></section><section ><section data-markdown><script type="text/template">
+# What they actually did last summer
+</script></section><section data-markdown><script type="text/template">
+## full-codegen and Crankshaft are dead
+Those were used in v8 <v5.9
+
+**Full-codegen** was full compiler and **Crankshaft** served well as optimized compiler.
+</script></section><section data-markdown><script type="text/template">
+## Hail to Ignition and TurboFan
+</script></section><section data-markdown><script type="text/template">
+## Ignition
+New JIT-compiler which is at least **10%** faster than Full-Codegen.
+</script></section><section data-markdown><script type="text/template">
+## TurboFan
+New **optimization compiler**. Guess what?
+
+No more **optimization killers**!
+</script></section><section data-markdown><script type="text/template">
+### TurboFan. Say yes! to:
+
+- **Generators** and **async** functions
+- **for-of** and **destructuring**
+- **try-catch** and **try-finally** (!)
+- Compound **let** or **const** assignment
+- Object literals that contain \__**proto**__, or **get** or **set** declarations.
+- **debugger** or **with** statements, literal calls to **eval()** (ehhm, ok, just say "hi" to it)
+</script></section></section><section ><section data-markdown><script type="text/template">
+<!-- PERFORMANCE IMPROVEMENTS -->
+# Performance improvements</script></section><section data-markdown><script type="text/template">
+## Try/catch
+
+![](images/PerfTryCatch.svg)
+</script></section><section data-markdown><script type="text/template">
+## Try/catch
+
+A much less performance impact using **try/catch**, will not be noticeable on most of tasks.
+</script></section><section data-markdown><script type="text/template">
+
+## Property deletion
+![](images/PropDel.svg)
+</script></section><section data-markdown><script type="text/template">
+## Property deletion
+- **delete** random property is slowest
+- set to **undefined** is great for random property
+- **delete** last added property is fastest (no new hidden class created)
+</script></section><section data-markdown><script type="text/template">
+## Arrayifying arguments
+
+![](images/ArrayifyingArgs.svg)</script></section><section data-markdown><script type="text/template">
+## Arrayifying arguments
+- If it really necessary, **spread** operator is fastest solution;
+- **Array.prototype.slice** is slowest;
+</script></section><section data-markdown><script type="text/template">
+## Currying, binding
+![](images/Currying.svg)
+</script></section><section data-markdown><script type="text/template">
+## Currying, binding
+
+- **Arrow function** is fastest approach, but all methods are almost equal for now
+</script></section><section data-markdown><script type="text/template">
+## Function character count
+![](images/FuncCharCount.svg)
+</script></section><section data-markdown><script type="text/template">
+## Function character count
+
+Whitespace, variable name character count, function signatures and comments no longer factors in whether a function will inline.
+</script></section><section data-markdown><script type="text/template">
+## Return Object type
+
+![](images/ObjectReturnType.svg)
+</script></section><section data-markdown><script type="text/template">
+# Q&A</script></section></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "moon",
+  "highlightTheme": "gruvbox-dark",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "none",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
