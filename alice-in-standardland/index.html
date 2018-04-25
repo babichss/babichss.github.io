@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Speeches\KharkivCSS 2018\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+        
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/gruvbox-dark.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section ><section data-markdown><script type="text/template"><style>
+@font-face {
+  font-family: Text;
+  src: url("./fonts/Text.ttf");
+}
+@font-face {
+  font-family: Header;
+  src: url("./fonts/Header.ttf");
+}
+@font-face {
+  font-family: Code;
+  src: url("./fonts/Code.ttf");
+}
+.reveal {
+  font-family: Text !important;
+}
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h5 {font-family: Header !important;}
+
+.reveal h1 {
+  font-size: 3em;
+}
+
+.reveal code,
+.reveal pre {font-family: Code !important;}
+
+.reveal section img {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  max-height: 480px;
+}
+* {color: white !important;}
+</style>
+
+# Alice in standardland
+</script></section><section data-markdown><script type="text/template">
+## A long time ago there was a tale...
+</script></section><section data-markdown><script type="text/template">
+## And Hakon's email (1994)
+
+```css
+h1.font.size = 24pt 100%
+
+speech.*.weight = 35db
+speech.em.weight = 40db
+
+align.style = left
+head.align.style = center
+print.head.align.style = right
+```</script></section><section data-markdown><script type="text/template">
+![](./images/hakon1995.jpg)
+
+Hakon Wium Lie (1995)</script></section><section data-markdown><script type="text/template">
+## More common sense comes in 1996
+### CSS1
+</script></section><section data-markdown><script type="text/template">
+## Evolving
+### CSS2
+1998
+### CSS2.1
+2007 - 2011
+</script></section><section data-markdown><script type="text/template">
+## That's even not my final form!
+### CSS3
+2011, 2012
+</script></section></section><section ><section data-markdown><script type="text/template">
+## There is no CSS4
+![](./images/nospoon.jpg)</script></section><section data-markdown><script type="text/template">
+### Actually, there is no CSS3 as well</script></section><section data-markdown><script type="text/template">
+![](./images/nocss3.jpg)</script></section><section data-markdown><script type="text/template">
+## CSS modules
+- 2012-06-19: **Media Queries**
+- 2011-09-29: **Namespaces**
+- 2011-09-29: **Selectors Level 3**
+- 2011-06-07: **Color**
+</script></section><section data-markdown><script type="text/template">
+## Levels
+
+- Each feature starts from level **1**.
+- Everything present in CSS2.1 spec automatically became level 3.
+- If feature is presented in 2018, it will become level 1.
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Working group</script></section><section data-markdown><script type="text/template">
+## CSSWG
+
+- module editors
+- CSS WG members
+- www-style contributors
+</script></section><section data-markdown><script type="text/template">
+## A bit of statistics
+
+- **124** active members
+- 36 groups and companies</script></section><section data-markdown><script type="text/template">
+### Top 5 participants
+- Google, Inc. - 20
+- Apple, Inc. - 12
+- Microsoft Corporation - 11
+- W3C Invited Experts - 11
+- Mozilla Foundation - 9
+</script></section><section data-markdown><script type="text/template">
+## How the hell they are communicating?
+</script></section><section data-markdown><script type="text/template">
+### Public mailing lists
+
+http://lists.w3.org/Archives/Public/www-style/
+http://lists.w3.org/Archives/Public/public-css-testsuite/
+</script></section><section data-markdown><script type="text/template">
+### Telecons
+
+Once per week for 1 hour.
+
+Posted in:
+- https://www.w3.org/blog/CSS/
+- https://twitter.com/csswg
+</script></section><section data-markdown><script type="text/template">
+### F2Fs (face-to-face)</script></section><section data-markdown><script type="text/template">
+#### Regular
+- 3-4 times a year
+- 3 days 9am - 6pm</script></section><section data-markdown><script type="text/template">
+#### Annual Technical Plenary and Advisory Committee Meetings
+- Once a year
+- One week long</script></section><section data-markdown><script type="text/template">
+### You'll not believe. IRC.
+As backup channel
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Awhhh, so speccy!</script></section><section data-markdown><script type="text/template">
+### Stages
+
+- Editor's Draft (ED)
+- Working Draft (WD)
+- Transition – Last Call Working Draft (LCWD)
+- Candidate Recommendation (CR)
+- Transition – Proposed Recommendations (PR)
+- Recommendation (REC)
+</script></section><section data-markdown><script type="text/template">
+### How to spec
+
+- Implementations lead 
+- Designers lead 
+- Standards lead 
+</script></section><section data-markdown><script type="text/template">
+#### Implementations lead 
+border-radius 
+</script></section><section data-markdown><script type="text/template">
+#### Designers lead
+border-image, requested initially by Robert Koberg
+</script></section><section data-markdown><script type="text/template">
+#### Standards lead 
+Yep, **multiple backgrounds**.
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Over the hills and far away</script></section><section data-markdown><script type="text/template">
+## what you possibly didn't know to exists but yet can start using</script></section><section data-markdown><script type="text/template">
+## Stage 4
+- 'all' Property
+- Break Properties
+- Custom Properties
+- 'font-variant' Property
+- grid layout
+...and more</script></section><section data-markdown><script type="text/template">
+
+## Stage 2 & 3
+
+- `:has()` Relational Pseudo-Class
+- `:any-link` Hyperlink Pseudo-Class
+- `color-mod()` Function
+- Hexadecimal Alpha Notation
+- `image-set()` Function
+...and more
+</script></section><section data-markdown><script type="text/template">
+
+## New directions
+Books and UI
+</script></section><section data-markdown><script type="text/template">
+Q&A</script></section></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "moon",
+  "highlightTheme": "gruvbox-dark",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "none",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
