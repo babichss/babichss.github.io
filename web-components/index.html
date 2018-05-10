@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Speeches\WebComponents\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+        
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/sunburst.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"><link rel="stylesheet" href="style.css">
+
+<h1 class="title">
+Mutilation and suffering
+<small>powered by W3C</small>
+</h1></script></section><section ><section data-markdown><script type="text/template">
+# What is Web component</script></section><section data-markdown><script type="text/template">
+## Custom Element
+```js
+class AppDrawer extends HTMLElement {...}
+window.customElements.define('app-drawer', AppDrawer);
+```
+<div class="links">
+[MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
+[W3C](https://www.w3.org/TR/custom-elements/)
+</div>
+</script></section><section data-markdown><script type="text/template">
+## Shadow DOM
+```js
+this.root = this.attachShadow({open: true});
+```
+<div class="links">
+[MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+[W3C](https://www.w3.org/TR/shadow-dom/)
+</div>
+</script></section><section data-markdown><script type="text/template">
+## Template element
+```html
+<template id="template">
+  <h1></h1>
+</template>
+```
+<div class="links">
+[MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
+[W3C](https://www.w3.org/TR/html5/semantics-scripting.html#the-template-element)
+</div>
+</script></section><section data-markdown><script type="text/template">
+## HTML Import
+```html
+<!-- component.html -->
+<script src="custom.element.js">__SCRIPT_END__
+<template id="template">
+  <style></style>
+  ...
+</template>
+<!-- index.html -->
+<link rel="import" href="component.html"></link>
+...
+<x-component></x-component>
+```
+<div class="links">
+[MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/HTML_Imports)
+[W3C](https://www.w3.org/TR/html-imports/)
+</div>
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Problems</script></section><section data-markdown><script type="text/template">
+## We are spoiled by frameworks, fellas</script></section><section data-markdown><script type="text/template">
+## Browser support
+| <img class="tlogo" src="./images/chrome.svg"> <br><img class="tlogo" src="./images/opera.svg"> | <br><img class="tlogo" src="./images/safari.svg"> | <br><img class="tlogo" src="./images/firefox.svg"> | <br><img class="tlogo" src="./images/edge.svg">
+-- | :-- | :-- | :-- | :--
+Custom Element    | ✔️<sup>⭐</sup> | ✔️<sup>⭐</sup> | ❌<sup>⭐</sup> | ❌ 
+Shadow DOM        | ✔️ | ✔️<sup>⭐</sup> | ❌<sup>⭐</sup> | ❌ 
+Template Element  | ✔️ | ✔️ | ✔️ | ✔️<sup>⭐</sup>
+HTML Import       | ✔️ | ❌ | ❌<sup>⭐</sup> | ❌</script></section><section data-markdown><script type="text/template">
+## Confusions</script></section><section data-markdown><script type="text/template">
+### Data is passing via two channels
+**Attributes** for primitives
+
+**Properties** for objects</script></section><section data-markdown><script type="text/template">
+### You should syncronize attributes and properties manually
+*set*, *get* for props
+
+*attributeChangedCallback* for attributes</script></section><section data-markdown><script type="text/template">
+### Font-family is global
+Yes. For Shadow DOM.</script></section><section data-markdown><script type="text/template">
+*document . currentScript . ownerDocument*
+### or go global</script></section><section data-markdown><script type="text/template">
+### Styles scoping</script></section><section data-markdown><script type="text/template">
+## Issues</script></section><section data-markdown><script type="text/template">
+### Rendering complexity</script></section><section data-markdown><script type="text/template">
+```js
+const template = this.listItemSource.cloneNode(true);
+const listItem = template.getElementById('listItem');
+listItem.id = '';
+const input = listItem.querySelector('input');
+input.setAttribute("id", `item:${item}`);
+input.setAttribute("value", `${item.toLocaleLowerCase()}`);
+const label = listItem.querySelector('label');
+label.innerText = item;
+label.setAttribute('for', `item:${item}`);
+ul.appendChild(listItem);
+```</script></section><section data-markdown><script type="text/template">
+### No *currentScript* in es module
+So, no **true** encapsulation for HTML Imports</script></section><section data-markdown><script type="text/template">
+### SVG has no shadow root
+(like *img* or *input*)</script></section><section data-markdown><script type="text/template">
+### Style paths are relative to main document, not component
+
+<!-- Find more --></script></section></section><section ><section data-markdown><script type="text/template">
+# Solutions?</script></section><section data-markdown><script type="text/template">
+## Future support</script></section><section data-markdown><script type="text/template">
+## Polymer
+<div class="links">
+[polymer-project.org](https://www.polymer-project.org/)
+</div></script></section><section data-markdown><script type="text/template">
+## Polyfills
+<div class="links">
+[webcomponents.org](https://www.webcomponents.org/polyfills)
+</div>
+</script></section><section data-markdown><script type="text/template">
+## Indirect usage</script></section><section data-markdown><script type="text/template">
+### VueJS
+<div class="links">
+[Use Vue.js to create custom web components](http://vuetips.com/vue-web-components)
+[Building Native Web Components with Vue.js](https://alligator.io/vuejs/custom-elements/)
+[Integrate Web Components with Your Vue.js App](https://alligator.io/vuejs/vue-integrate-web-components/)
+</div>
+</script></section><section data-markdown><script type="text/template">
+### React
+<div class="links">
+[reactjs.org: Web Components](https://reactjs.org/docs/web-components.html)
+</div>
+</script></section><section data-markdown><script type="text/template">
+### Angular
+<div class="links">
+[Angular Elements Overview](https://angular.io/guide/elements)
+</div>
+</script></section></section><section  data-markdown><script type="text/template">
+# Conclusions</script></section><section  data-markdown><script type="text/template">
+# Q&A
+
+</script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "moon",
+  "highlightTheme": "sunburst",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "none",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>

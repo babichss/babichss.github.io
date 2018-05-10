@@ -1,0 +1,86 @@
+@font-face {
+  font-family: Text;
+  src: url("./fonts/Text.otf");
+}
+@font-face {
+  font-family: Header;
+  src: url("./fonts/Header.ttf");
+}
+@font-face {
+  font-family: Code;
+  src: url("./fonts/Code.ttf");
+}
+@font-face {
+  font-family: Icon;
+  src: url("./fonts/icomoon.ttf");
+}
+@font-face {
+  font-family: TitleFont;
+  src: url("./fonts/Title.ttf");
+}
+body {
+  background-color: #2d3436;
+}
+.reveal section .tlogo {
+  width: 50px;
+}
+.reveal .links {
+  padding-top: 10px;
+  margin: 0 5%;
+  font-size: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  float: left;
+}
+.links a:before {
+  content: "";
+  height: 1
+}
+.reveal sup {
+  font-size: 50%;
+}
+.reveal a:before {
+  content: "\eadb";
+  font-family: Icon;
+  margin-right: 3px;
+  font-size: 75%;
+}
+.reveal a {
+  color: #74b9ff;
+}
+.reveal a:hover {
+  color: #81ecec;
+}
+.reveal {
+  font-family: Text !important;
+}
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h5 {
+  font-family: Header;
+  color: #b2bec3;
+}
+
+.reveal h1.title {
+  font-family: TitleFont;
+}
+
+.reveal h1 {
+  font-size: 3em;
+}
+
+.reveal code,
+.reveal pre {font-family: Code !important;}
+
+.reveal section img {
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background-color: transparent;
+  max-height: 480px;
+}
+p, li {color: #dfe6e9 !important;}
