@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>RevealJS : c:\Users\babic\Projects\Speeches\WebComponents\index.md</title>
+        <title>STORY OF PAIN, SUFFERING AND FINAL RELIEF WRITTEN BY OLD PIRATE</title>
         <link rel="stylesheet" href="css/reveal.css">
-        <link rel="stylesheet" href="css/theme/moon.css" id="theme">
-        
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
        
         <!-- For syntax highlighting -->
-        <link rel="stylesheet" href="lib/css/sunburst.css">
+        <link rel="stylesheet" href="lib/css/idea.css">
 
         
 
@@ -34,13 +34,12 @@
     <body>
 
         <div class="reveal">
-            <div class="slides"><section  data-markdown><script type="text/template"><link rel="stylesheet" href="style.css">
+            <div class="slides"><section  data-markdown><script type="text/template"># web components
 
-<h1 class="title">
-Mutilation and suffering
-<small>powered by W3C</small>
-</h1></script></section><section ><section data-markdown><script type="text/template">
-# What is Web component</script></section><section data-markdown><script type="text/template">
+STORY OF PAIN, SUFFERING AND FINAL RELIEF<br>WRITTEN BY OLD PIRATE
+</script></section><section ><section data-markdown><script type="text/template">
+# What is Web component
+</script></section><section data-markdown><script type="text/template">
 ## Custom Element
 ```js
 class AppDrawer extends HTMLElement {...}
@@ -50,7 +49,8 @@ window.customElements.define('app-drawer', AppDrawer);
 [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)
 [W3C](https://www.w3.org/TR/custom-elements/)
 </div>
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ## Shadow DOM
 ```js
 this.root = this.attachShadow({open: true});
@@ -59,7 +59,8 @@ this.root = this.attachShadow({open: true});
 [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
 [W3C](https://www.w3.org/TR/shadow-dom/)
 </div>
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ## Template element
 ```html
 <template id="template">
@@ -70,7 +71,8 @@ this.root = this.attachShadow({open: true});
 [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template)
 [W3C](https://www.w3.org/TR/html5/semantics-scripting.html#the-template-element)
 </div>
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ## HTML Import
 ```html
 <!-- component.html -->
@@ -88,32 +90,49 @@ this.root = this.attachShadow({open: true});
 [MDN](https://developer.mozilla.org/en-US/docs/Web/Web_Components/HTML_Imports)
 [W3C](https://www.w3.org/TR/html-imports/)
 </div>
-</script></section></section><section ><section data-markdown><script type="text/template">
-# Problems</script></section><section data-markdown><script type="text/template">
-## We are spoiled by frameworks, fellas</script></section><section data-markdown><script type="text/template">
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Problems
+</script></section><section data-markdown><script type="text/template">
+## We are spoiled by frameworks, fellas
+</script></section><section data-markdown><script type="text/template">
 ## Browser support
-| <img class="tlogo" src="./images/chrome.svg"> <br><img class="tlogo" src="./images/opera.svg"> | <br><img class="tlogo" src="./images/safari.svg"> | <br><img class="tlogo" src="./images/firefox.svg"> | <br><img class="tlogo" src="./images/edge.svg">
+Feature           | Chrome  | Safari    | Firefox | Edge
 -- | :-- | :-- | :-- | :--
-Custom Element    | ✔️<sup>⭐</sup> | ✔️<sup>⭐</sup> | ❌<sup>⭐</sup> | ❌ 
-Shadow DOM        | ✔️ | ✔️<sup>⭐</sup> | ❌<sup>⭐</sup> | ❌ 
-Template Element  | ✔️ | ✔️ | ✔️ | ✔️<sup>⭐</sup>
-HTML Import       | ✔️ | ❌ | ❌<sup>⭐</sup> | ❌</script></section><section data-markdown><script type="text/template">
-## Confusions</script></section><section data-markdown><script type="text/template">
+Custom Element    | Yes     | Partial   | Hidden  | No 
+Shadow DOM        | Yes     | Partial   | Hidden  | No 
+Template Element  | Yes     | Yes       | Yes     | Partial
+HTML Import       | Yes     | No        | Hidden  | No
+
+</script></section><section data-markdown><script type="text/template">
+## Confusions
+</script></section><section data-markdown><script type="text/template">
 ### Data is passing via two channels
 **Attributes** for primitives
 
-**Properties** for objects</script></section><section data-markdown><script type="text/template">
-### You should syncronize attributes and properties manually
-*set*, *get* for props
+**Properties** for objects
+</script></section><section data-markdown><script type="text/template">
+### Attribute is not a property
+- You should syncronize attributes and properties manually:
+  - *set*, *get* for props
+  - *attributeChangedCallback* for attributes
+</script></section><section data-markdown><script type="text/template">
+### * is Mighty Thor for text styles
 
-*attributeChangedCallback* for attributes</script></section><section data-markdown><script type="text/template">
-### Font-family is global
-Yes. For Shadow DOM.</script></section><section data-markdown><script type="text/template">
-*document . currentScript . ownerDocument*
-### or go global</script></section><section data-markdown><script type="text/template">
-### Styles scoping</script></section><section data-markdown><script type="text/template">
-## Issues</script></section><section data-markdown><script type="text/template">
-### Rendering complexity</script></section><section data-markdown><script type="text/template">
+```css
+li {color: lime;} /* not inherited */
+* {color: lime;} /* inherited! */
+```
+</script></section><section data-markdown><script type="text/template">
+`document.currentScript.ownerDocument`
+### or go global
+</script></section><section data-markdown><script type="text/template">
+### Styles scoping
+</script></section><section data-markdown><script type="text/template">
+## Issues
+</script></section><section data-markdown><script type="text/template">
+### Rendering complexity
+</script></section><section data-markdown><script type="text/template">
 ```js
 const template = this.listItemSource.cloneNode(true);
 const listItem = template.getElementById('listItem');
@@ -125,44 +144,60 @@ const label = listItem.querySelector('label');
 label.innerText = item;
 label.setAttribute('for', `item:${item}`);
 ul.appendChild(listItem);
-```</script></section><section data-markdown><script type="text/template">
-### No *currentScript* in es module
-So, no **true** encapsulation for HTML Imports</script></section><section data-markdown><script type="text/template">
+```
+</script></section><section data-markdown><script type="text/template">
 ### SVG has no shadow root
-(like *img* or *input*)</script></section><section data-markdown><script type="text/template">
-### Style paths are relative to main document, not component
+</script></section><section data-markdown><script type="text/template">
+### Style paths
+are relative to main document, not component
+</script></section><section data-markdown><script type="text/template">
+### Nesting is not obvious
+You should cache actual currentScript reference to be able to access correct document context
 
-<!-- Find more --></script></section></section><section ><section data-markdown><script type="text/template">
-# Solutions?</script></section><section data-markdown><script type="text/template">
-## Future support</script></section><section data-markdown><script type="text/template">
+<!-- Find more -->
+</script></section></section><section ><section data-markdown><script type="text/template">
+# Solutions?
+</script></section><section data-markdown><script type="text/template">
+## Future support
+</script></section><section data-markdown><script type="text/template">
 ## Polymer
 <div class="links">
 [polymer-project.org](https://www.polymer-project.org/)
-</div></script></section><section data-markdown><script type="text/template">
+</div>
+</script></section><section data-markdown><script type="text/template">
 ## Polyfills
 <div class="links">
 [webcomponents.org](https://www.webcomponents.org/polyfills)
 </div>
-</script></section><section data-markdown><script type="text/template">
-## Indirect usage</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
+## Indirect usage
+</script></section><section data-markdown><script type="text/template">
 ### VueJS
 <div class="links">
 [Use Vue.js to create custom web components](http://vuetips.com/vue-web-components)
 [Building Native Web Components with Vue.js](https://alligator.io/vuejs/custom-elements/)
 [Integrate Web Components with Your Vue.js App](https://alligator.io/vuejs/vue-integrate-web-components/)
 </div>
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### React
 <div class="links">
 [reactjs.org: Web Components](https://reactjs.org/docs/web-components.html)
 </div>
-</script></section><section data-markdown><script type="text/template">
+
+</script></section><section data-markdown><script type="text/template">
 ### Angular
 <div class="links">
 [Angular Elements Overview](https://angular.io/guide/elements)
 </div>
-</script></section></section><section  data-markdown><script type="text/template">
-# Conclusions</script></section><section  data-markdown><script type="text/template">
+</script></section></section><section  data-markdown><script type="text/template">
+# Conclusions
+</script></section><section  data-markdown><script type="text/template">
+# Small Demo
+<!-- --- -->
+<!-- # babichjs -->
+</script></section><section  data-markdown><script type="text/template">
 # Q&A
 
 </script></section></div>
@@ -208,8 +243,8 @@ So, no **true** encapsulation for HTML Imports</script></section><section data-
   "notesSeparator": "note:",
   "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
   "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
-  "theme": "moon",
-  "highlightTheme": "sunburst",
+  "theme": "none",
+  "highlightTheme": "idea",
   "controls": true,
   "progress": true,
   "slideNumber": false,
@@ -230,7 +265,7 @@ So, no **true** encapsulation for HTML Imports</script></section><section data-
   "mouseWheel": false,
   "hideAddressBar": true,
   "previewLinks": false,
-  "transition": "none",
+  "transition": "slide",
   "transitionSpeed": "default",
   "backgroundTransition": "default",
   "viewDistance": 3,
@@ -240,6 +275,7 @@ So, no **true** encapsulation for HTML Imports</script></section><section data-
   "parallaxBackgroundVertical": null,
   "slideExplorerEnabled": true,
   "browserPath": null,
+  "customTheme": "theme",
   "attributes": ""
 };
             options = extend(defaultOptions, options, queryOptions);

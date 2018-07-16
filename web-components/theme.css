@@ -1,0 +1,131 @@
+@import 'style.css';
+@font-face {
+  font-family: Title;
+  src: url(fonts/TradeWinds-Regular.ttf);
+}
+
+@font-face {
+  font-family: Text;
+  src: url(fonts/Leander.ttf);
+}
+
+@font-face {
+  font-family: Code;
+  src: url(fonts/RobotoMono-Regular.ttf);
+}
+
+body {
+  background-color: black;
+  background-image: url(images/jolly\ roger.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+}
+
+.reveal code {
+  font-family: Code;
+  font-size: 20pt;
+  padding: 10pt 5pt;
+  line-height: 30pt;
+}
+
+.reveal .slides {
+  --font-size: 24pt;
+  font-size: var(--font-size);
+  font-family: Text;
+  text-align: left;
+}
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: Title;
+  margin-bottom: var(--font-size);
+}
+
+.reveal h1 {
+  font-size: calc(var(--font-size) * 2.7);
+  text-transform: uppercase;
+  letter-spacing: 10pt;
+}
+
+.reveal h2 {
+  font-size: calc(var(--font-size) * 2.3);
+  text-transform: uppercase;
+}
+
+.reveal h3 {
+  font-size: calc(var(--font-size) * 1.6);
+  text-transform: uppercase;
+}
+
+.reveal p {
+  line-height: calc(var(--font-size) * 1.5);
+}
+
+.reveal ul {
+  line-height: calc(var(--font-size) * 1.5);
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--font-size);
+  columns: 2;
+}
+
+.reveal ul li {
+  text-align: left;
+}
+
+.reveal table {
+  width: 100%;
+  border: 1pt solid #eee;
+  border-collapse: collapse;
+}
+
+.reveal table th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.reveal table td:not(:first-child) {
+  text-align: center;
+}
+
+.reveal table td, .reveal table th {
+  padding: 5pt 10pt;
+  border: 1pt solid #eee;
+}
+
+.reveal .links {
+  font-size: 12pt;
+  display: flex;
+}
+
+.reveal .links a {
+  display: block;
+  color: white;
+  margin-right: 6pt;
+  padding: 3pt 5pt;
+  background-color: #3c40c6;
+  border-radius: 7pt;
+  text-decoration: none;
+  transition-duration: 400ms;
+  transition-property: background-color;
+}
+
+.reveal .links a:hover {
+  background-color: #575fcf;
+}
+
+.reveal .links a:before {
+  font-size: 9pt;
+  margin-right: 4pt;
+  font-family: icomoon;
+  content: "\e9cb";
+}
+
+.reveal .footnote li {
+  font-size: 10pt;
+}
+
+.reveal sup {
+  vertical-align: top;
+  font-size: 75%;
+}
