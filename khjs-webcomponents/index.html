@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\KharkivJS\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/idea.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"><section data-background="./img/16_9.png"></section></script></section><section  data-markdown><script type="text/template">
+<img src="./img/me.png" width=400/></script></section><section  data-markdown><script type="text/template">
+<img src="./img/lvivcss_qr.svg" width=400/></script></section><section  data-markdown><script type="text/template">
+<img src="./img/hidden_code.svg" width=400/></script></section><section ><section data-markdown><script type="text/template">
+# Webcomponents</script></section><section data-markdown><script type="text/template">
+<h2>How to live with them and without <span class="hid">f</span>rameworks</h2></script></section></section><section ><section data-markdown><script type="text/template">
+## What is webcomponent</script></section><section data-markdown><script type="text/template">
+### Custom Element
+```js
+class Item extends HTMLElement {...}
+window.customElements.define('app-item', Item);
+```</script></section><section data-markdown><script type="text/template">
+### Template
+```html
+<template id="template">
+  <h1></h1>
+</template>
+```</script></section><section data-markdown><script type="text/template">
+### Shadow DOM
+```js
+this.root = this.attachShadow({open: true});
+```</script></section><section data-markdown><script type="text/template">
+### HTML Impo<span class="hid">r</span>t
+```html
+<!-- component.html -->
+<script src="custom.element.js">__SCRIPT_END__
+<template id="template">
+  <style></style>
+  ...
+</template>
+<!-- index.html -->
+<link rel="import" href="component.html"></link>
+...
+<x-component></x-component>
+```</script></section></section><section ><section data-markdown><script type="text/template">
+## Actually, it is painful</script></section><section data-markdown><script type="text/template">
+```js
+const template = this.listItemSource.cloneNode(true);
+const listItem = template.getElementById('listItem');
+listItem.id = '';
+const input = listItem.querySelector('input');
+input.setAttribute("id", `item:${item}`);
+input.setAttribute("value", `${item.toLocaleLowerCase()}`);
+const label = listItem.querySelector('label');
+label.innerText = item;
+label.setAttribute('for', `item:${item}`);
+ul.appendChild(listItem);
+```</script></section><section data-markdown><script type="text/template">
+### A lot of probl<span class="hid">e</span>ms
+#### with you</script></section></section><section ><section data-markdown><script type="text/template">
+## But what if I told you...</script></section><section data-markdown><script type="text/template">
+### ...you can do it easily?</script></section><section data-markdown><script type="text/template">
+### Abstract component</script></section><section data-markdown><script type="text/template">
+### Familiar concept
+<!-- Angular --></script></section></section><section ><section data-markdown><script type="text/template">
+## One important thing</script></section><section data-markdown><script type="text/template">
+### Think positive and look for wa<span class="hid">y</span>s</script></section></section><section ><section data-markdown><script type="text/template">
+## Decorators</script></section><section data-markdown><script type="text/template">
+![](./img/decorator-in-west-london.jpg)
+<!-- Fun pictures --></script></section><section data-markdown><script type="text/template">
+```
+@HideShitDoHit()
+class CleanAss {
+	...
+}
+```</script></section><section data-markdown><script type="text/template">
+### Point of no return
+```
+export const HideShitDoHit = (options) => (_Class) => {
+	//do weird magic
+	// No need to return
+}
+```</script></section><section data-markdown><script type="text/template">
+### Decorate everything!
+#### psst, wanna some code?</script></section></section><section  data-markdown><script type="text/template">
+## Main part</script></section><section ><section data-markdown><script type="text/template">
+## This is only one of many possible w<span class="hid">a</span>ys</script></section><section data-markdown><script type="text/template">
+### Think wider, do your best</script></section><section data-markdown><script type="text/template">
+## It is just a core technology</script></section></section><section  data-markdown><script type="text/template">
+# DEMO</script></section><section  data-markdown><script type="text/template">
+# SKOL!</script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "idea",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "none",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
