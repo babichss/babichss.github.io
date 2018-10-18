@@ -1,83 +1,154 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>RevealJS : c:\Users\babic\Projects\WTF_PWA\index.md</title>
-        <link rel="stylesheet" href="css/reveal.css">
-        <link rel="stylesheet" href="css/theme/none.css" id="theme">
-         <link rel="stylesheet" href="theme.css" id="theme">
-       
-        <!-- For syntax highlighting -->
-        <link rel="stylesheet" href="lib/css/idea.css">
 
-        
+<head>
+  <meta charset="utf-8">
+  <title>PWA in depth</title>
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/none.css" id="theme">
+  <link rel="stylesheet" href="theme.css" id="theme">
 
-        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-        <script>
-          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-        </script>
+  <!-- For syntax highlighting -->
+  <link rel="stylesheet" href="lib/css/idea.css">
 
-        <style type="text/css">
-            @page {    
-              margin: 0;
-              size: auto; 
-            }
-        </style>
 
-        <script>
-         if(window.location.search.match( /print-pdf-now/gi )) {
-           window.print();
-         }
-      </script>
 
-    </head>
-    <body>
+  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+  <script>
+    document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
+  </script>
 
-        <div class="reveal">
-            <div class="slides"><section  data-markdown><script type="text/template">
+  <style type="text/css">
+    @page {
+      margin: 0;
+      size: auto;
+    }
+  </style>
+
+  <script>
+    if (window.location.search.match(/print-pdf-now/gi)) {
+      window.print();
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-markdown>
+        <script type="text/template">
 <!-- TITLE -->
-</script></section><section  data-markdown><script type="text/template">
+
+</script>
+      </section>
+      <section data-markdown>
+        <script type="text/template">
 <!-- ICON -->
 <img src="./images/me.png" width=400/>
-</script></section><section  data-markdown><script type="text/template">
+
+</script>
+      </section>
+      <section data-markdown>
+        <script type="text/template">
 <!-- LVIVCSS -->
 <img src="./images/lvivcss_qr.svg" width=400/>
-</script></section><section  data-markdown><script type="text/template">
+
+</script>
+      </section>
+      <section data-markdown>
+        <script type="text/template">
 <!-- CODE -->
 <img src="./images/code.png" width=400/>
-</script></section><section  data-markdown><script type="text/template">
+
+</script>
+      </section>
+      <section data-markdown>
+        <script type="text/template">
 # Vivisection of PWA
-</script></section><section ><section data-markdown><script type="text/template">
+
+</script>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
 ## PWA concept
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Fast & Reliable
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Goals
 - Increase engagement
 - Deliver fast, work faster
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Outcome
 - Increased conversion
 - Money
 - More money  
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
 ## Service worker
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Lifecycle
 Install | Wait | Activate
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Purpose
 We give you web-server so you can call web-server while calling web-server
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Fetch interception
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 <h2>Cache handling</h2>
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Feature provider
 Background sync, Web Push, etc.
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### How to
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 #### Register
 
 ```
@@ -89,24 +160,50 @@ try {
   // Panic here
 }
 ```
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 #### Listen
 
 ```
 self.addEventListener('install', event => { ... });
 ```
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Service worker fun facts
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 #### When it is up?
 Desktop: when browser is allowed to run background process
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 #### When it is up?
 Mobile: almost always due to system control over browsing context
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
 ## Cache API
 Allows you to control you cache and implement your own cache strategies
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ## Cache API
 
 ```
@@ -114,43 +211,89 @@ const cache = await caches.open(name);
 // Do your sick magic
 ```
 <!-- CODE EXAMPLE -->
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
 ## Web Push + Notification
 ```
 serviceWorkerRegistration.pushManager
 serviceWorkerRegistration.showNotification;
 
-```</script></section><section data-markdown><script type="text/template">
+```
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### WebPush
 
 Register → Permission → Subscribe → Wait
 
 uses push service
-</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Notification
 
 Can show notification with actions.
 
 EDGE uses system notifications.
-</script></section></section><section ><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
 ## BackgroundSync
-Allows your worker to utilize tasks in queue when connection is available</script></section><section data-markdown><script type="text/template">
+Allows your worker to utilize tasks in queue when connection is available
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ```
 const reg = await navigator.serviceWorker.ready;
 reg.sync.register('myFirstSync');
-```</script></section><section data-markdown><script type="text/template">
+```
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ```
 self.addEventListener('sync', event => {
   if (event.tag == 'myFirstSync') {
     event.waitUntil(doSomeStuff());
   }
 });
-```</script></section><section data-markdown><script type="text/template">
-can be one-off and periodic</script></section><section data-markdown><script type="text/template">
+```
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+can be one-off and periodic
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ## Aaaaaaand...
 <h3>this is still not PWA</h3>
-</script></section></section><section ><section data-markdown><script type="text/template">
-## WebManifest</script></section><section data-markdown><script type="text/template">
+
+</script>
+        </section>
+      </section>
+      <section>
+        <section data-markdown>
+          <script type="text/template">
+## WebManifest
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ```
 {
   "background_color": "purple",
@@ -165,92 +308,104 @@ can be one-off and periodic</script></section><section data-markdown><script ty
   "short_name": "PWA",
   "start_url": "/pwa/index.html"
 }
-```</script></section><section data-markdown><script type="text/template">
+```
+</script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
 ### Installs your site as app
 Make your site an app
-</script></section></section><section  data-markdown><script type="text/template">
-<h1>Selfie</h1></script></section></div>
-        </div>
 
-        <script src="lib/js/head.min.js"></script>
-        <script src="js/reveal.js"></script>
+</script>
+        </section>
+      </section>
+      <section data-markdown>
+        <script type="text/template">
+<h1>Selfie</h1></script>
+      </section>
+    </div>
+  </div>
 
-        <script>
-            function extend() {
-              var target = {};
-              for (var i = 0; i < arguments.length; i++) {
-                var source = arguments[i];
-                for (var key in source) {
-                  if (source.hasOwnProperty(key)) {
-                    target[key] = source[key];
-                  }
-                }
-              }
-              return target;
-            }
-            // Optional libraries used to extend on reveal.js
-            var deps = [
-              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
-              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-              { src: 'plugin/math/math.js', async: true }
-            ];
-            // default options to init reveal.js
-            var defaultOptions = {
-              controls: true,
-              progress: true,
-              history: true,
-              center: true,
-              transition: 'default',
-              dependencies: deps
-            };
-            // options from URL query string
-            var queryOptions = Reveal.getQueryHash() || {};
-            var options = {
-  "notesSeparator": "note:",
-  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
-  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
-  "theme": "none",
-  "highlightTheme": "idea",
-  "controls": true,
-  "progress": true,
-  "slideNumber": false,
-  "history": true,
-  "keyboard": true,
-  "overview": true,
-  "center": true,
-  "touch": true,
-  "loop": false,
-  "rtl": false,
-  "shuffle": false,
-  "fragments": true,
-  "embedded": false,
-  "help": true,
-  "showNotes": false,
-  "autoSlide": 0,
-  "autoSlideStoppable": true,
-  "mouseWheel": false,
-  "hideAddressBar": true,
-  "previewLinks": false,
-  "transition": "none",
-  "transitionSpeed": "default",
-  "backgroundTransition": "default",
-  "viewDistance": 3,
-  "parallaxBackgroundImage": "",
-  "parallaxBackgroundSize": "",
-  "parallaxBackgroundHorizontal": null,
-  "parallaxBackgroundVertical": null,
-  "slideExplorerEnabled": true,
-  "browserPath": null,
-  "customTheme": "theme",
-  "attributes": ""
-};
-            options = extend(defaultOptions, options, queryOptions);
-            Reveal.initialize(options);
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
 
-        </script>
-        
-    </body>
+  <script>
+    function extend() {
+      var target = {};
+      for (var i = 0; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (source.hasOwnProperty(key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    }
+    // Optional libraries used to extend on reveal.js
+    var deps = [
+      { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+      { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } },
+      { src: 'plugin/math/math.js', async: true }
+    ];
+    // default options to init reveal.js
+    var defaultOptions = {
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      transition: 'default',
+      dependencies: deps
+    };
+    // options from URL query string
+    var queryOptions = Reveal.getQueryHash() || {};
+    var options = {
+      "notesSeparator": "note:",
+      "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+      "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+      "theme": "none",
+      "highlightTheme": "idea",
+      "controls": true,
+      "progress": true,
+      "slideNumber": false,
+      "history": true,
+      "keyboard": true,
+      "overview": true,
+      "center": true,
+      "touch": true,
+      "loop": false,
+      "rtl": false,
+      "shuffle": false,
+      "fragments": true,
+      "embedded": false,
+      "help": true,
+      "showNotes": false,
+      "autoSlide": 0,
+      "autoSlideStoppable": true,
+      "mouseWheel": false,
+      "hideAddressBar": true,
+      "previewLinks": false,
+      "transition": "none",
+      "transitionSpeed": "default",
+      "backgroundTransition": "default",
+      "viewDistance": 3,
+      "parallaxBackgroundImage": "",
+      "parallaxBackgroundSize": "",
+      "parallaxBackgroundHorizontal": null,
+      "parallaxBackgroundVertical": null,
+      "slideExplorerEnabled": true,
+      "browserPath": null,
+      "customTheme": "theme",
+      "attributes": ""
+    };
+    options = extend(defaultOptions, options, queryOptions);
+    Reveal.initialize(options);
+
+  </script>
+
+</body>
+
 </html>
