@@ -1,116 +1,73 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\web-components-2019\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/idea.css">
 
-<head>
-  <meta charset="utf-8">
-  <title>Web Components 2019</title>
-  <link rel="stylesheet" href="css/reveal.css">
-  <link rel="stylesheet" href="css/theme/none.css" id="theme">
-  <link rel="stylesheet" href="theme.css" id="theme">
+        
 
-  <!-- For syntax highlighting -->
-  <link rel="stylesheet" href="lib/css/idea.css">
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
 
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
 
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
 
-  <!-- If the query includes 'print-pdf', use the PDF print sheet -->
-  <script>
-    document.write('<link rel="stylesheet" href="css/print/' + (window.location.search.match(/print-pdf/gi) ? 'pdf' : 'paper') + '.css" type="text/css" media="print">');
-  </script>
+    </head>
+    <body>
 
-  <style type="text/css">
-    @page {
-      margin: 0;
-      size: auto;
-    }
-  </style>
-
-  <script>
-    if (window.location.search.match(/print-pdf-now/gi)) {
-      window.print();
-    }
-  </script>
-
-</head>
-
-<body>
-
-  <div class="reveal">
-    <div class="slides">
-      <section data-markdown>
-        <script type="text/template"><section data-background="#bf1e2e">
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"><section data-background="#bf1e2e">
   <img class="title-logo" src="./assets/logo.svg"/>
   <img class="title-qr" src="./assets/qrcode.svg"/>
-</section>
-</script>
-      </section>
-      <section data-markdown>
-        <script type="text/template">
+</section></script></section><section  data-markdown><script type="text/template">
 <section data-background="#bf1e2e">
   <h1 class="title">Webcomponents 2019</h1>
-</section>
-</script>
-      </section>
-      <section data-markdown>
-        <script type="text/template">
-<img src="./assets/me.jpg" class="me">
-</script>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
+</section></script></section><section  data-markdown><script type="text/template">
+<img src="./assets/me.jpg" class="me"></script></section><section ><section data-markdown><script type="text/template">
 ## What is webcomponent
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ### Component
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ### Prehistoric **Microsoft HTML Component**
 ```html
 <ul>
   <li style="behavior:url(hilite.htc)">Foo Foo Foo</li>
 </ul>
 ```
-<p class="fragment">Since <b class="fragment">IE5</b></p>
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
+<p class="fragment">Since <b class="fragment">IE5</b></p></script></section></section><section ><section data-markdown><script type="text/template">
 ## Building parts
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 #### Custom Element
 ```js
 class XButton extends HTMLElement {}
 window.customElements.define('x-button', XButton);
 ```
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 #### HTML Template
 ```html
 <template id="myTemplate">
   <h1>Hello, world!</h1>
 </template>
 ```
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 #### Shadow DOM
 ```html
 ▼ <x-button>
@@ -118,29 +75,15 @@ window.customElements.define('x-button', XButton);
     <h1>Hello, world!</h1>
   </x-button>
 ```
-
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section></section><section ><section data-markdown><script type="text/template">
 ## Modern state
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ### W3C spec
 |  <th colspan=2>State</th> 
 | -: | - |
 | Custom Elements | <icn c="🗎"></icn> | LS |
 | HTML Templates | <icn c="🗎"></icn> | LS |
-| Shadow DOM | <icn c="🗋"></icn> | WD |
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+| Shadow DOM | <icn c="🗋"></icn> | WD |</script></section><section data-markdown><script type="text/template">
 #### Support
 
 |  | Chrome | Firefox | EDGE | Safari |
@@ -149,16 +92,8 @@ window.customElements.define('x-button', XButton);
 | HTML Templates | <icn c="✔"></icn> | <icn c="✔"></icn> | <icn c="✔"></icn> | <icn c="✔"></icn> |
 | Shadow DOM | <icn c="✔"></icn> | <icn c="✔"></icn> | <icn c="✘"></icn> | <icn c="⚑"></icn> |
 | HTML Imports <td colspan="4">Deprecated</td>
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-#### Custom Element
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
+#### Custom Element</script></section><section data-markdown><script type="text/template">
 ```js
 class XElement extends HTMLElement {
   static get observedAttributes() {
@@ -171,16 +106,8 @@ class XElement extends HTMLElement {
   attributeChangedCallback() { }
 }
 ```
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-#### HTML Template
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
+#### HTML Template</script></section><section data-markdown><script type="text/template">
 ```html
 <template id="tmpl"><h1>Hello!</h1></template>
 ```
@@ -188,11 +115,7 @@ class XElement extends HTMLElement {
 const tmpl = document.getElementById('tmpl');
 const clone = tmpl.content.cloneNode(true);
 target.appendChild(clone);
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 #### HTML Template slot
 ```html
 <template>
@@ -203,11 +126,7 @@ target.appendChild(clone);
 <x-element>
   Hello!
 </x-element>
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 #### Named HTML Template slot
 ```html
 <template>
@@ -220,16 +139,8 @@ target.appendChild(clone);
   <h1 slot="title">Hello!</h1>
   <p slot="content">World!</p>
 </x-element>
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-#### Shadow DOM
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
+#### Shadow DOM</script></section><section data-markdown><script type="text/template">
 ```js
 class XElement extends HTMLElement {
   shadow: ShadowRoot;
@@ -238,11 +149,7 @@ class XElement extends HTMLElement {
     this.attachShadow({ mode: 'open' }); // 'open' | 'closed'
   }
 }
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ```html
 ▼ <x-button>
   ▼ #shadow-root
@@ -254,27 +161,13 @@ class XElement extends HTMLElement {
     <h1>Hello, world!</h1>
   </x-button>
 ```
-
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section></section><section ><section data-markdown><script type="text/template">
 ## Problems
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 
 - Misconceptions like "attribute is property"
 - Impenetrable inner CSS (mostly)
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ### Rendering
 ```js
 const template = this.listItemSource.cloneNode(true);
@@ -287,11 +180,7 @@ const label = listItem.querySelector('label');
 label.innerText = item;
 label.setAttribute('for', `item:${item}`);
 ul.appendChild(listItem);
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ### Multiple Style nodes
 ```html
 <x-element>
@@ -305,38 +194,16 @@ ul.appendChild(listItem);
 </code>
 </pre>
 </div>
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 - A ton of issues from HTML Imports
 - SVG has no shadow root
 - CSS files path resolving
 - ...
 - No profit (
-
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
-## Future
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-### New spec proposals
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
-#### Template Instantiation and update
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Future</script></section><section data-markdown><script type="text/template">
+### New spec proposals</script></section><section data-markdown><script type="text/template">
+#### Template Instantiation and update</script></section><section data-markdown><script type="text/template">
 ```html
 <template id="tmpl"><h1>{{greet}}</h1></template>
 ```
@@ -345,11 +212,7 @@ const tmpl = document.getElementById('tmpl');
 const clone = tmpl.createInstance({ greet: 'Hello!' });
 target.appendChild(clone);
 clone.update({ greet: 'Goodbye!' });
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 #### CSS Shadow Parts
 ```html
 <template ><h1 part="title">{{greet}}</h1></template>
@@ -358,36 +221,18 @@ clone.update({ greet: 'Goodbye!' });
 x-element::part(title) { 
   color: red;
 }
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 #### Modules
 ```js
 import styles from './mycomponent.css';
 import template from './mycomponent.html";
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 #### Styles as objects
 ```js
 shadowRoot.adoptedStyleSheets = [styles];
-```
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section></section><section ><section data-markdown><script type="text/template">
 ## Frameworks
-
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+</script></section><section data-markdown><script type="text/template">
 ### VueJS
 
 ```js
@@ -398,11 +243,7 @@ import VueWebComponent from './components/VueWebComponent';
 const XElement = wrap(Vue, VueWebComponent);
 
 window.customElements.define('my-custom-element', XElement);
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ```js
 import Vue from 'vue';
 import App from './App.vue';
@@ -415,11 +256,7 @@ new Vue({
   el: '#app',
   render: h => h(App)
 });
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ### React
 ```js
 class HelloMessage extends React.Component {
@@ -431,21 +268,13 @@ class HelloMessage extends React.Component {
     );
   }
 }
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ```js
 const mountPoint = document.createElement('div');
 this.attachShadow({ mode: 'open' }).appendChild(mountPoint);
 const name = this.getAttribute('name');
 ReactDOM.render(<h1>{name}</h1>, mountPoint);
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ### Angular
 ```ts
 import {
@@ -458,11 +287,7 @@ import {
 ->schemas: [CUSTOM_ELEMENTS_SCHEMA],
   ...
 })
-```
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section><section data-markdown><script type="text/template">
 ```ts
 // TONS. TONS of black magic
 ...
@@ -477,18 +302,14 @@ export class ButtonModule {
   ->customElements.define('custom-button', customButton);
   }
 }
-```
-</script>
-        </section>
-      </section>
-      <section>
-        <section data-markdown>
-          <script type="text/template">
-## Frameworkless solutions
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+```</script></section></section><section ><section data-markdown><script type="text/template">
+## Frameworkless solutions</script></section><section data-markdown><script type="text/template">
+### Libraries
+- Hybrids;
+- LitElement;
+- Polymer;
+- Slim.js;
+- Stencil</script></section><section data-markdown><script type="text/template">
 ### 2014
 | Frameworks | Web Standards |
 |-|-|
@@ -498,11 +319,7 @@ export class ButtonModule {
 | Templates | Rendering |
 | Rendering optimization |  |
 | Modules |  |
-| Language extensions |  |
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+| Language extensions |  |</script></section><section data-markdown><script type="text/template">
 ### 2019
 | Frameworks | Web Standards |
 |-|-|
@@ -514,11 +331,7 @@ export class ButtonModule {
 | | ES7 |
 | | Events |
 | | Standard Elements |
-| | Rendering |
-</script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
+| | Rendering |</script></section><section data-markdown><script type="text/template">
 ### SalesForce Lightning WebComponents
 ```ts
 import { LightningElement, api, track } from 'lwc';
@@ -528,103 +341,92 @@ export default class ContactForm extends LightningElement {
 	@track fields = ['Name', 'Title', 'Phone', 'Email'];
 }
 
-```
-</script>
-        </section>
-      </section>
-      <section data-markdown>
-        <script type="text/template">
-## babich.js
-</script>
-      </section>
-      <section data-markdown>
-        <script type="text/template">
+```</script></section></section><section  data-markdown><script type="text/template">
+## babich.js</script></section><section  data-markdown><script type="text/template">
 ## Demo
-</script>
-      </section>
-    </div>
-  </div>
+</script></section></div>
+        </div>
 
-  <script src="lib/js/head.min.js"></script>
-  <script src="js/reveal.js"></script>
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
 
-  <script>
-    function extend() {
-      var target = {};
-      for (var i = 0; i < arguments.length; i++) {
-        var source = arguments[i];
-        for (var key in source) {
-          if (source.hasOwnProperty(key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-      return target;
-    }
-    // Optional libraries used to extend on reveal.js
-    var deps = [
-      { src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
-      { src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-      { src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
-      { src: 'plugin/notes/notes.js', async: true, condition: function () { return !!document.body.classList; } },
-      { src: 'plugin/math/math.js', async: true }
-    ];
-    // default options to init reveal.js
-    var defaultOptions = {
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
-      transition: 'default',
-      dependencies: deps
-    };
-    // options from URL query string
-    var queryOptions = Reveal.getQueryHash() || {};
-    var options = {
-      "notesSeparator": "note:",
-      "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
-      "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
-      "theme": "none",
-      "highlightTheme": "idea",
-      "controls": true,
-      "progress": true,
-      "slideNumber": false,
-      "history": true,
-      "keyboard": true,
-      "overview": true,
-      "center": true,
-      "touch": true,
-      "loop": false,
-      "rtl": false,
-      "shuffle": false,
-      "fragments": true,
-      "embedded": false,
-      "help": true,
-      "showNotes": false,
-      "autoSlide": 0,
-      "autoSlideStoppable": true,
-      "mouseWheel": false,
-      "hideAddressBar": true,
-      "previewLinks": false,
-      "transition": "slide",
-      "transitionSpeed": "default",
-      "backgroundTransition": "default",
-      "viewDistance": 3,
-      "parallaxBackgroundImage": "",
-      "parallaxBackgroundSize": "",
-      "parallaxBackgroundHorizontal": null,
-      "parallaxBackgroundVertical": null,
-      "slideExplorerEnabled": true,
-      "browserPath": null,
-      "customTheme": "theme",
-      "attributes": ""
-    };
-    options = extend(defaultOptions, options, queryOptions);
-    Reveal.initialize(options);
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "idea",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "slide",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "title": "Web Components 2019",
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
 
-  </script>
-
-</body>
-
+        </script>
+        
+    </body>
 </html>
