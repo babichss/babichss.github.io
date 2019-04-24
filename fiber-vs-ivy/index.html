@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>RevealJS : c:\Users\babic\Projects\ivy-vs-fiber\index.md</title>
+        <title>Fiber vs Ivy</title>
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/theme/none.css" id="theme">
          <link rel="stylesheet" href="custom.css" id="theme">
@@ -34,48 +34,69 @@
     <body>
 
         <div class="reveal">
-            <div class="slides"><section  data-markdown><script type="text/template">## Please, stand by...</script></section><section  data-markdown><script type="text/template">
-<section data-background-image="imgs/me.png"></section></script></section><section  data-markdown><script type="text/template">
-<section data-background-image="imgs/about.png"></section></script></section><section  data-markdown><script type="text/template">
-# Fiber*Ivy</script></section><section  data-markdown><script type="text/template">
-## Порівняльний аналіз</script></section><section  data-markdown><script type="text/template">
+            <div class="slides"><section  data-markdown><script type="text/template">## Please, stand by...
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-image="imgs/me.png"></section>
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-image="imgs/about.png"></section>
+</script></section><section  data-markdown><script type="text/template">
+# Fiber*Ivy
+</script></section><section  data-markdown><script type="text/template">
+## Порівняльний аналіз
+</script></section><section  data-markdown><script type="text/template">
 <!-- React -->
 ![](imgs/react-bike.png)
-<p class="fragment">React</p></script></section><section  data-markdown><script type="text/template">
+<p class="fragment">React</p>
+</script></section><section  data-markdown><script type="text/template">
 <!-- Fun react -->
-<section data-background-image="imgs/react-stupid.png"></section></script></section><section  data-markdown><script type="text/template">
+<section data-background-image="imgs/react-stupid.png"></section>
+</script></section><section  data-markdown><script type="text/template">
 <!-- Angular -->
 ![](imgs/angular-harley.jpg)
-<p class="fragment">Angular</p></script></section><section  data-markdown><script type="text/template">
+<p class="fragment">Angular</p>
+</script></section><section  data-markdown><script type="text/template">
 <!-- Fun Angular -->
-<section data-background-image="imgs/angular-stupid.png"></section></script></section><section  data-markdown><script type="text/template">
+<section data-background-image="imgs/angular-stupid.png"></section>
+</script></section><section  data-markdown><script type="text/template">
 <!-- Vue -->
 ![](imgs/vue-moped.jpg)
-<p class="fragment">Vue</p></script></section><section  data-markdown><script type="text/template">
+<p class="fragment">Vue</p>
+</script></section><section  data-markdown><script type="text/template">
 
-### React Stack</script></section><section  data-markdown><script type="text/template">
+### React Stack
+</script></section><section  data-markdown><script type="text/template">
 
-### Angular Renderer2</script></section><section  data-markdown><script type="text/template">
-## Чому React і Angular змінили такі важливі частини</script></section><section  data-markdown><script type="text/template">
+### Angular Renderer2
+</script></section><section  data-markdown><script type="text/template">
+## Чому React і Angular змінили такі важливі частини
+</script></section><section  data-markdown><script type="text/template">
 ### React
 Великі апдейти — великі проблеми
 <aside class="notes"><p>Low UI performance on big updates</p>
 </aside></script></section><section  data-markdown><script type="text/template">
 ### Angular
 - Багатослівний
-- Тягне в бандл все, що погано лежить</script></section><section  data-markdown><script type="text/template">
-## Як вони змінилися</script></section><section  data-markdown><script type="text/template">
-### React (Stack 🡒 Fiber)</script></section><section  data-markdown><script type="text/template">
-#### Відмінності</script></section><section  data-markdown><script type="text/template">
+- Тягне в бандл все, що погано лежить
+</script></section><section  data-markdown><script type="text/template">
+## Як вони змінилися
+</script></section><section  data-markdown><script type="text/template">
+### React (Stack 🡒 Fiber)
+</script></section><section  data-markdown><script type="text/template">
+#### Відмінності
+</script></section><section  data-markdown><script type="text/template">
 #### Новий алгоритм
-"Smarter, not faster"</script></section><section  data-markdown><script type="text/template">
+"Smarter, not faster"
+</script></section><section  data-markdown><script type="text/template">
 #### Швидкодія
 10 - 15% приріст швидкості рендерингу
 
 Notes:
-localvoid.github.io/uibench</script></section><section  data-markdown><script type="text/template">
-### Angular Renderer2 🡒 Angular Ivy</script></section><section  data-markdown><script type="text/template">
-#### Відмінності</script></section><section  data-markdown><script type="text/template">
+localvoid.github.io/uibench
+</script></section><section  data-markdown><script type="text/template">
+### Angular Renderer2 🡒 Angular Ivy
+</script></section><section  data-markdown><script type="text/template">
+#### Відмінності
+</script></section><section  data-markdown><script type="text/template">
 #### Renderer2
 ```js
 export function View_AppComponent_0(_l) {
@@ -93,7 +114,8 @@ export function View_AppComponent_0(_l) {
 	);
 }
 
-```</script></section><section  data-markdown><script type="text/template">
+```
+</script></section><section  data-markdown><script type="text/template">
 #### Ivy
 ```js
 function AppComponent_Template(rf, ctx) {
@@ -106,11 +128,13 @@ function AppComponent_Template(rf, ctx) {
 		i0.ɵtextBinding(1, i0.ɵinterpolation1("Hello, ", ctx.title, "!"));
 	}
 }
-```</script></section><section  data-markdown><script type="text/template">
+```
+</script></section><section  data-markdown><script type="text/template">
 #### Новий пайплайн
 ![](imgs/ng-pipeline-old.png)
 ![](imgs/ng-new-pipeline.png)
-</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section  data-markdown><script type="text/template">
 #### Швидкодія
 <p>
 	10000 елементів
@@ -120,26 +144,33 @@ function AppComponent_Template(rf, ctx) {
 - Ivy: *1.4с*
 
 <p class="fragment">і трошки магії в 8.beta — нічого не рендериться, але виконується ~4.5с</p>
-</script></section><section  data-markdown><script type="text/template">
-## Чим вони стали</script></section><section  data-markdown><script type="text/template">
-### Чому Fiber крутий</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section  data-markdown><script type="text/template">
+## Чим вони стали
+</script></section><section  data-markdown><script type="text/template">
+### Чому Fiber крутий
+</script></section><section  data-markdown><script type="text/template">
 #### Новий алгоритм
 - Job chunks.
 - Prioritize, rebase and reuse work in progress.
 - Yield back and forth between parents and children to support layout in React.
 - Ability to return multiple elements from render().
-- Better support for error boundaries.</script></section><section  data-markdown><script type="text/template">
+- Better support for error boundaries.
+</script></section><section  data-markdown><script type="text/template">
 ### Чому Ivy крутий
 - Новий пайплайн
 - Немає metadata.json
 - Tree Shaking
 - Прибрано залежність від Platform-Browser і сильно спрощено бутстрапінг
-</script></section><section  data-markdown><script type="text/template">
-## Fiber vs Ivy</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section  data-markdown><script type="text/template">
+## Fiber vs Ivy
+</script></section><section  data-markdown><script type="text/template">
 ### JSX and HTML templates
 ```html
 <div><h1>Hello, {{title}}!</h1></div>
-```</script></section><section  data-markdown><script type="text/template">
+```
+</script></section><section  data-markdown><script type="text/template">
 #### Компільований JSX
 ```js
 App.prototype.render = function () {
@@ -154,7 +185,8 @@ App.prototype.render = function () {
 			)
 		);
 };
-```</script></section><section  data-markdown><script type="text/template">
+```
+</script></section><section  data-markdown><script type="text/template">
 #### Компільований шаблон Angular
 ```js
 function AppComponent_Template(rf, ctx) {
@@ -169,34 +201,49 @@ function AppComponent_Template(rf, ctx) {
 		i0.ɵtextBinding(2, i0.ɵinterpolation1("Hello, ", ctx.title, "!"));
 	}
 }
-```</script></section><section  data-markdown><script type="text/template">
-### Change detection</script></section><section  data-markdown><script type="text/template">
+```
+</script></section><section  data-markdown><script type="text/template">
+### Change detection
+</script></section><section  data-markdown><script type="text/template">
 #### Fiber
 |  |  |
 |:--|:--|
 | Trigger | setState() |
 | Check | Render Phase |
-| Update | Commit Phase |</script></section><section  data-markdown><script type="text/template">
+| Update | Commit Phase |
+</script></section><section  data-markdown><script type="text/template">
 #### Ivy
 |  |  |
 |:--|:--|
 | Trigger | ZoneJS or ChangeDetectorRef |
-| Check, Update |  templateFn() |</script></section><section  data-markdown><script type="text/template">
-## Висновки</script></section><section  data-markdown><script type="text/template">
+| Check, Update |  templateFn() |
+</script></section><section  data-markdown><script type="text/template">
+## Висновки
+</script></section><section  data-markdown><script type="text/template">
 ### React крутіший за Angular
-<h4 class="fragment">Бо для крутих результатів йому було достатньо невеликих змін</h4></script></section><section  data-markdown><script type="text/template">
+<h4 class="fragment">Бо для крутих результатів йому було достатньо невеликих змін</h4>
+</script></section><section  data-markdown><script type="text/template">
 ### Angular крутіший за React
 <h4 class="fragment">Бо він подобається мені</h4>
-<h4 class="fragment">і він змінює багато.</h4></script></section><section  data-markdown><script type="text/template">
-## Для чого це все?</script></section><section  data-markdown><script type="text/template">
-![](imgs/tv.jpg)</script></section><section  data-markdown><script type="text/template">
+<h4 class="fragment">і він змінює багато.</h4>
+</script></section><section  data-markdown><script type="text/template">
+## Для чого це все?
+</script></section><section  data-markdown><script type="text/template">
+![](imgs/tv.jpg)
+</script></section><section  data-markdown><script type="text/template">
 ### Навчіться робити безумні речі
-</script></section><section  data-markdown><script type="text/template">
-## Станьте рок-зіркою</script></section><section  data-markdown><script type="text/template">
-### Слідкуйте за кращими</script></section><section  data-markdown><script type="text/template">
-### Порівнюйте рішення</script></section><section  data-markdown><script type="text/template">
-### Вчіться</script></section><section  data-markdown><script type="text/template">
-### Вдосконалюйтесь</script></section><section  data-markdown><script type="text/template">
+
+</script></section><section  data-markdown><script type="text/template">
+## Станьте рок-зіркою
+</script></section><section  data-markdown><script type="text/template">
+### Слідкуйте за кращими
+</script></section><section  data-markdown><script type="text/template">
+### Порівнюйте рішення
+</script></section><section  data-markdown><script type="text/template">
+### Вчіться
+</script></section><section  data-markdown><script type="text/template">
+### Вдосконалюйтесь
+</script></section><section  data-markdown><script type="text/template">
 <div class="fragment point">
 	✔ Слідкуйте
 </div>
@@ -208,9 +255,11 @@ function AppComponent_Template(rf, ctx) {
 </div>
 <div class="fragment point">
 	✔ Розвивайтесь
-</div></script></section><section  data-markdown><script type="text/template">
+</div>
+</script></section><section  data-markdown><script type="text/template">
 ## Пишіть велосипеди	
-<h3 class="fragment"><b>Будьте</b> рок-зіркою</h3></script></section><section  data-markdown><script type="text/template">
+<h3 class="fragment"><b>Будьте</b> рок-зіркою</h3>
+</script></section><section  data-markdown><script type="text/template">
 Чути оплески, щасливі сльози, крики "Сірожа, я тебе люблю", на сцену летять ліфчики
 </script></section></div>
         </div>
