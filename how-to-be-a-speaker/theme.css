@@ -1,0 +1,188 @@
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Regular.ttf');
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Medium.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Bold.ttf');
+	font-weight: 600;
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Bold.ttf');
+	font-weight: 700;
+}
+
+:root {
+  --background: #f1f2f6;
+  --text-color: #2f3542;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  font-family: Manrope3;
+  font-weight: bold;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: Rubik;
+}
+
+html {
+  font-size: 60pt;
+}
+
+.reveal .me {
+  width: 400pt;
+  height: 400pt;
+  border-radius: 50%;
+  border: 5pt white solid;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 10pt 25pt;
+}
+
+.reveal p,
+.reveal ul {
+  font-size: 0.5em;
+  line-height: 1.2;
+}
+
+.reveal ul {
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.reveal ul li {
+  clear: left;
+  float: left;
+  display: block;
+  text-align: left;
+}
+
+.reveal ul li:not(:last-child) {
+  margin-bottom: 15pt;
+}
+
+.reveal ul li::before {
+  content: "•";
+  display: inline-block;
+  width: 30pt;
+  margin-left: -30pt;
+}
+
+.reveal h1 {
+  font-weight: 700;
+}
+
+.reveal h2 {
+  font-weight: 500;
+}
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-weight: 400;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  text-transform: uppercase;
+}
+
+.reveal h1:not(:last-child),
+.reveal h2:not(:last-child),
+.reveal h3:not(:last-child),
+.reveal h4:not(:last-child),
+.reveal h5:not(:last-child),
+.reveal h6:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+.reveal strong {
+  font-weight: bold;
+}
+
+.reveal code {
+  font-size: 0.3em;
+  padding: 0 10pt;
+  text-align: left;
+  line-height: 2em;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 5pt 25pt;
+  font-family: Hasklig;
+}
+
+.reveal pre:not(:last-child) {
+  margin-bottom: 10pt;
+}
+
+h1.title {
+  color: white;
+}
+
+.title-logo,
+.title-qr {
+  display: inline-block;
+  height: 150pt;
+}
+
+.reveal table th,
+.reveal table td {
+  font-size: 0.5em;
+  padding: 3pt 8pt;
+}
+
+.reveal table {
+  margin: 0 auto;
+}
+
+.reveal table th {
+  font-weight: 500;
+}
+
+icn {
+  display: inline-flex;
+  border-radius: 50%;
+  color: white;
+  width: 30pt;
+  height: 30pt;
+  justify-content: center;
+  align-items: center;
+}
+
+icn::after {
+  content: attr(c);
+  display: flex;
+  font-size: 21pt;
+}
+
+icn[c=✔],
+icn[c=🗎] {
+  background-color: #6ab04c;
+}
+
+icn[c=⚑] {
+  background-color: #f9ca24;
+}
+
+icn[c=✘],
+icn[c=🗋] {
+  background-color: #eb4d4b;
+}
+
+.reveal b {
+  font-weight: 600;
+}

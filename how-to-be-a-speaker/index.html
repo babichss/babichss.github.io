@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\speaker\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/idea.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"># Як стати спікером</script></section><section ><section data-markdown><script type="text/template">
+
+## Історія успіху одного Сергійка
+</script></section><section data-markdown><script type="text/template">
+![](assets/me.png)
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Навіщо ставати спікером</script></section><section data-markdown><script type="text/template">
+- Увага людей;
+- Цінність для компанії;
+- Можливість покататись за чужий рахунок по конференціях;</script></section></section><section ><section data-markdown><script type="text/template">
+## Як обирати теми</script></section><section data-markdown><script type="text/template">
+
+- Актуальність;
+- Ваш особистий досвід;
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Як перестати боятись сцени
+</script></section><section data-markdown><script type="text/template">
+
+# НІЯК
+</script></section><section data-markdown><script type="text/template">
+
+- Знайдіть свій "ритуал";
+- Зазвичай тривога проходить після початку виступу;
+- Алкоголь перед виступом можна, але лише для бувалих спікерів );
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Як робити слайди</script></section><section data-markdown><script type="text/template">
+### Як не робити слайди
+
+![](/assets/bad-slide.png)</script></section><section data-markdown><script type="text/template">
+### Як робити слайди
+
+- Короткий, тезовий текст;
+- Читабельний розмір тексту;
+- Контрастні кольори.</script></section><section data-markdown><script type="text/template">
+
+- Якщо тез багато — розділити на кілька слайдів
+</script></section><section data-markdown><script type="text/template">
+
+```ts
+// Коду має бути рівно стільки, скільки треба
+class ShowOnlyImportant {
+  // show only what matters
+  someMethod(arg: Arguments) {
+    ...
+    return result;
+  }
+}
+```</script></section><section data-markdown><script type="text/template">
+
+Схеми і графіки також мають бути максимально читабельні.
+Якщо на схемі забагато тексту — приберіть весь.
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Як тримати увагу аудиторії</script></section><section data-markdown><script type="text/template">
+- Жарти;
+- Інтонація;
+- Акценти.</script></section></section><section ><section data-markdown><script type="text/template">
+## Як правильно не відповідати на питання</script></section><section data-markdown><script type="text/template">
+
+- Вміти визнати, що ви не володієте інформацією;
+- Спробувати змусити запитуючого самого відповісти;
+- Запропонувати обговорити питання після доповіді.
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Як переживати невдалий виступ
+</script></section><section data-markdown><script type="text/template">
+
+- З посмішкою. Це буває часто;
+- Зробити роботу над помилками. Досулхатись критики;
+- Використати як матеріал для жартів на наступний раз.
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Як ставати кращим спікером</script></section><section data-markdown><script type="text/template">
+
+- Саморозвиток;
+- Робота над голосом;
+- Робота над поставою.
+</script></section><section data-markdown><script type="text/template">
+- Ви на сцені, ви — актор;
+- Знайдіть свою індивідуальну фішку;
+- Не будьте нудні.
+</script></section></section><section  data-markdown><script type="text/template">
+ ![](assets/qrcode.svg)
+</script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "idea",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "slide",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "title": "Galloping with Web Components like it's 2019",
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
