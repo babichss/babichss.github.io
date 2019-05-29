@@ -1,0 +1,19 @@
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Regular.ttf');
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Medium.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Bold.ttf');
+	font-weight: 600;
+}
+@font-face {
+	font-family: Rubik;
+	src: url('./assets/fonts/Rubik-Bold.ttf');
+	font-weight: 700;
+}
