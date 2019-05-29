@@ -17,6 +17,11 @@
 	src: url('./assets/fonts/Rubik-Bold.ttf');
 	font-weight: 700;
 }
+@font-face {
+	font-family: Manrope3;
+	src: url('./assets/fonts/manrope-bold.ttf');
+	font-weight: 700;
+}
 
 :root {
   --background: #f1f2f6;
