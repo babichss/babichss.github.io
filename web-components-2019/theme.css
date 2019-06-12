@@ -110,11 +110,27 @@ html {
 h1.title {
   color: white;
 }
-
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .title-logo,
 .title-qr {
   display: inline-block;
+}
+.title-qr {
   height: 150pt;
+}
+.title-qr-2 {
+  height: 200pt;
+}
+.reveal .title-logo {
+  height: 80pt;
+  margin-right: 20pt;
+}
+.reveal .flex-center h2 {
+  margin-bottom: 0;
 }
 
 .reveal table th,
@@ -163,4 +179,8 @@ icn[c=🗋] {
 
 .reveal b {
   font-weight: 600;
+}
+
+.reveal small {
+  font-size: 50%;
 }
