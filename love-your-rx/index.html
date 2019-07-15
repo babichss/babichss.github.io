@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Доповіді\OdessaJS`19\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/Atom-One-Light.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template"><section data-background="#bf1e2e">
+  <div class="flex-center">
+    <img class="title-logo" src="./assets/GlobalCSS v3.svg"/>
+    <img class="title-qr" src="./assets/qrcode.svg"/>
+  </div>
+</section></script></section><section  data-markdown><script type="text/template">
+<section data-background-image="assets/me.png"></section></script></section><section  data-markdown><script type="text/template">
+<div class="imgs-line">
+  <img src="assets/fish.jpg">
+  <img src="assets/tits.jpg" class="fragment">
+</div></script></section><section  data-markdown><script type="text/template">
+<section data-background="#2196F3">
+  <h1 class="title">Як почати любити RxJS та NGRX</h1>
+</section>
+</script></section><section ><section data-markdown><script type="text/template">
+## Як не любити RxJS та state-management</script></section><section data-markdown><script type="text/template">
+### Subscribe-hell
+```ts
+this.source.pipe(
+  map(({ id }) => id)
+).subscribe(id => {
+  this.http.get(`endpoint/${id}`).subscribe(result => {
+    this.data = result;
+  })
+});
+```</script></section><section data-markdown><script type="text/template">
+### Діряві підписки</script></section><section data-markdown><script type="text/template">
+```ts
+this.source.subscribe(x => this.target = x);
+```</script></section><section data-markdown><script type="text/template">
+### Store як уособлення хаосу та ентропії</script></section><section data-markdown><script type="text/template">
+### Store і компонент</script></section><section data-markdown><script type="text/template">
+```ts
+...
+items: Item[];
+constructor(
+  private store: Store<any>
+) {
+  this.store.pipe(
+    select(state => state.mystore.items)
+  ).subscribe(items => this.items = items);
+}
+...
+```</script></section><section data-markdown><script type="text/template">
+### <тут страшне>
+```ts
+onClick(id: any) {
+  this.foo.pipe(
+    first(),
+    withLatestFrom(
+      this.items,
+      this.anotherItems
+    )
+  ).subscribe(([foo, items, anotherItems]) => {
+    //... black magic ...
+    this.store.dispatch(new Action(something));
+  });
+}
+```</script></section></section><section ><section data-markdown><script type="text/template">
+## Як навчится любити RxJS</script></section><section data-markdown><script type="text/template">
+### Highway from hell
+```ts
+this.source.pipe(
+  map(({ id }) => id),
+  flatMap(id => this.http.get(`endpoint/${id}`))
+).subscribe(result => this.data = result);
+```</script></section><section data-markdown><script type="text/template">
+### Підписки і відписки</script></section><section data-markdown><script type="text/template">
+#### Ручна відписка
+```ts
+subscriptions: Subscription[];
+...
+  this.subscriptions.push(
+    this.source.subscribe(...);
+  );
+...
+ngOnDestroy() {
+  this.subscriptions.forEach(sub => sub.unsubscribe());
+}
+```</script></section><section data-markdown><script type="text/template">
+#### Поки смерть не розлучить нас
+```ts
+destroyed$: Subject<undefined> = new Subject();
+...
+this.source.pipe(
+  takeUntil(this.destroyed$)
+).subscribe(...);
+...
+ngOnDestroy() {
+  this.destroyed$.next();
+}
+```</script></section><section data-markdown><script type="text/template">
+### Пайп async
+```ts
+readonly items$: Observable<Item[]> = this.store.pipe(
+  select(selectItems)
+);
+```
+```html
+<li *ngFor="let item of items$ | async">...</li>
+```</script></section><section data-markdown><script type="text/template">
+#### Незаслужено забутий Subject
+```ts
+readonly source: Subject<boolean> = new Subject();
+...
+this.source.next(true);
+```</script></section><section data-markdown><script type="text/template">
+#### Trigger
+
+```ts
+readonly trigger$ofSubmit: Subject<IData> = new Subject();
+```
+```html
+<button (click)="trigger$ofSubmit.next(data)">Click me!</button>
+```</script></section><section data-markdown><script type="text/template">
+#### Action
+
+```ts
+readonly action$ofSubmit: Observable<SubmitData> = this
+  .trigger$ofSubmit.pipe(
+    map(data => new SubmitData(data))
+  );
+```</script></section><section data-markdown><script type="text/template">
+
+```ts
+merge(
+  this.action$ofSubmit,
+  this.action$ofDelete,
+  this.action$ofMenAndOrcs
+).subscribe(action => this.store.dispatch(action))
+```</script></section></section><section ><section data-markdown><script type="text/template">
+
+## Як користуватися NGRX...</script></section><section data-markdown><script type="text/template">
+...ну, не те щоб на повну, але явно потужніше, ніж зазвичай</script></section><section data-markdown><script type="text/template">
+### Selector, Entity, Effects</script></section><section data-markdown><script type="text/template">
+#### Selector
+- Користуйтесь feature selector
+- Селектори зручно використовувати для створення view-даних</script></section><section data-markdown><script type="text/template">
+#### Entity
+- Полегшують роботу з колекціями
+- Ідеально підходять для нормалізованих даних</script></section><section data-markdown><script type="text/template">
+#### Без Entity 
+```ts
+...
+return {
+  ...state,
+  items: state.items
+    .filter(({id}) => id !== action.payload.itemId)
+}
+...
+```</script></section><section data-markdown><script type="text/template">
+#### З Entity
+```ts
+...
+return adapter.removeOne(action.payload.itemId, state);
+...
+```</script></section><section data-markdown><script type="text/template">
+#### Effects
+- Асинхронні операції
+- Каскадні, залежні дії
+</script></section></section><section ><section data-markdown><script type="text/template">
+## NGRX 8</script></section><section data-markdown><script type="text/template">
+#### Action Creators
+```ts
+// Before
+export class LogInfo {
+  readonly type = '[Logger] Info'
+}
+// After
+export const logInfo = createAction('[Logger] Info');
+```</script></section><section data-markdown><script type="text/template">
+#### Від switch-case до on в редюсерах
+```ts
+const initialState: CounterState = { count: 0 };
+export const reducer = createReducer(
+  initialState,
+  on(add, (state, { payload }) => ({
+    ...state,
+    count: state.count + payload.value
+  }))
+);
+```</script></section><section data-markdown><script type="text/template">
+#### Ефекти &mdash; від декораторів до factory
+```ts
+@Injectable()
+export class CounterEffects {
+  logAdd = createEffect(() => this.actions.pipe(
+    ofType(add),
+    // ...
+  ), { dispatch: false })
+}
+```</script></section></section><section  data-markdown><script type="text/template">
+### Висновки
+- RxJS &mdash; це просто
+- NGRX &mdash; це зручно
+- Якщо вам здається, що ви можете придумати щосб зручніше &mdash; робіть
+- Best practices &mdash; лише поради, а не релігія
+</script></section><section ><section data-markdown><script type="text/template">
+## Посилання
+</script></section><section data-markdown><script type="text/template">
+### Давайте зробимо гарне фото
+</script></section><section data-markdown><script type="text/template">
+# Дякую
+</script></section><section data-markdown><script type="text/template">
+## Моя хвилинка слави</script></section><section data-markdown><script type="text/template">
+<div class="flex-center">
+  <h2 class="title-logo">
+    <a href="https://www.facebook.com/babichssofficial" target="_blank">Babich Sergiy</a>
+  </h2>
+  <img class="title-qr-2" src="./assets/babichofficial.svg"/>
+</div></script></section><section data-markdown><script type="text/template">
+<div class="flex-center">
+  <a href="https://t.me/lvivcss" target="_blank"><img class="title-logo" src="./assets/LvivCSS-color.svg"/></a>
+  <img class="title-qr-2" src="./assets/tmelvivcss.svg"/>
+</div></script></section><section data-markdown><script type="text/template">
+<div class="flex-center">
+  <a href="https://t.me/first_lviv_frontend_chat" target="_blank"><h2>Перша Львівська Фронтярня</h2></a>
+  <img class="title-qr-2" src="./assets/front-chat.svg"/>
+</div></script></section></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "Atom-One-Light",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "slide",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "title": "Як навчитися робити прості речі просто",
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
