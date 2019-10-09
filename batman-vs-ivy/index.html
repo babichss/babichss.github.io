@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Batman vs Ivy</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/xt256.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">KharkivJS x10
+</script></section><section  data-markdown><script type="text/template">
+<section data-background-image="./assets/cover.jpg">
+  <h1>Batman<br>vs<br>Ivy</h1>
+</section>
+</script></section><section ><section data-markdown><script type="text/template">
+## Bloodline
+
+- Renderer (Angular 2)
+- Renderer2 (Angular 4-8)
+- Renderer3 (Ivy)
+
+<aside class="notes"><p>Renderer used same principle to generate template code but used more words. Much more.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+Your favorite framework version
+<img src="assets/hero-batman.png" height=400/>
+</script></section><section data-markdown><script type="text/template">
+Your favorite framework version when next version is released
+<img src="assets/adam-west-batman.jpg" height=400/>
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Ivy Goals
+
+- Faster builds
+- Smaller build
+- New features
+
+<aside class="notes"><p>&#39;Locality&#39; principle, compiling one component at a time. Resulting in faster incremental builds.
+10% to 30% size decrease, nanananabatman, High Order Components, improved template type checking, performance tweaks, memory usage optimization, component lazy-loading, etc..</p>
+</aside></script></section><section data-markdown><script type="text/template">
+<img src="assets/surprised-batman.jpg" height=400/>
+
+</script></section></section><section ><section data-markdown><script type="text/template">
+### New compiler
+</script></section><section data-markdown><script type="text/template">
+#### Compiling pipe
+<img src="assets/pipe-batman.jpg" height=400/>
+</script></section><section data-markdown><script type="text/template">
+
+Template HTML
+
+↓
+
+Template Instructions
+
+↓
+
+DOM
+
+</script></section><section data-markdown><script type="text/template">
+```html
+<p>{{greeting}}</p>
+```
+</script></section><section data-markdown><script type="text/template">
+#### Renderer2 output (AOT):
+```js
+function View_AppComponent_0(_l) {
+  return ɵvid(0, [
+      (_l()(), ɵeld(0, 0, null, null, 1, "p", [], null, null, null, null, null)),
+      (_l()(), ɵted(1, null, ["", ""]))
+    ], null,
+    function(_ck, _v) {
+      var _co = _v.component;
+      var currVal_0 = _co.greeting;
+      _ck(_v, 1, 0, currVal_0);
+    });
+}
+```
+</script></section><section data-markdown><script type="text/template">
+#### Ivy output (JIT):
+```js
+function AppComponent_Template(rf, ctx) {
+  if (rf & 1) {
+    ɵɵelementStart(0, "p");
+    ɵɵtext(1);
+    ɵɵelementEnd();
+  }
+  if (rf & 2) {
+    ɵɵadvance(1);
+    ɵɵtextInterpolate(ctx.greeting);
+  }
+}
+```
+</script></section></section><section  data-markdown><script type="text/template">
+<section data-background="assets/debug-batman.jpg">
+<h3>Better debugging</h3>
+</section>
+</script></section><section ><section data-markdown><script type="text/template">
+```html
+<input (focus)="reset()">
+<button (click)="reset()">
+  1
+  <span></span>
+</button>
+<button (click)="reset()">2</button>
+```
+</script></section><section data-markdown><script type="text/template">
+```bash
+ERROR TypeError: ctx.reset is not a function
+at AppComponent_Template_input_focus_0_listener
+  (app.component.html:1)
+```
+```bash
+ERROR TypeError: Cannot read property 'length' of undefined
+at AppComponent.fire (app.component.ts:12)
+at AppComponent_Template_button_click_1_listener
+  (app.component.html:2)
+```
+</script></section><section data-markdown><script type="text/template">
+#### ng global object
+```js
+getComponent: ƒ getComponent(element)
+getContext: ƒ getContext$1(element)
+getDebugNode: ƒ getDebugNode(element)
+getDirectives: ƒ getDirectives(target)
+getHostElement: ƒ getHostElement(directive)
+getInjector: ƒ getInjector(target)
+getListeners: ƒ getListeners(element)
+getRootComponents: ƒ getRootComponents(target)
+getViewComponent: ƒ getViewComponent(element)
+markDirty: ƒ markDirty(component)
+```
+</script></section><section data-markdown><script type="text/template">
+```js
+const x = ng.getComponent($0) // AppComponent {...}
+x.fire()
+Uncaught TypeError: Cannot read property 'length' of undefined
+at AppComponent.fire (app.component.ts:14)
+at <anonymous>:1:3
+```
+</script></section></section><section  data-markdown><script type="text/template">
+<section data-background="assets/tree-shaking-batman.jpg">
+<h3>Improved tree-shaking</h3>
+</section>
+</script></section><section  data-markdown><script type="text/template">
+- Template instructions are atomic functions
+- More friendly to tree-shaking
+
+```ts
+ɵɵelementStart(0, "p");
+ɵɵtext(1);
+ɵɵelementEnd();
+```
+<aside class="notes"><p>Ivy, on the other hand, breaks things down into smaller, more atomic functions. These atomic functions make the renderer code much more friendly to tree-shaking, because they generate only the code you need from the template you’ve written.</p>
+</aside></script></section><section ><section data-markdown><script type="text/template">
+## Dynamic loading
+
+</script></section><section data-markdown><script type="text/template">
+### Routing
+<pre class="fragment"><code class="javascript">// now
+const routes: Routes = [{
+  path: 'lazy',
+  loadChildren: './lazy/lazy.module#LazyModule'
+}];</code></pre>
+
+<pre class="fragment"><code class="javascript">// ivy
+const routes: Routes = [{ 
+  path: 'lazy',
+  loadChildren: () => import('./lazy/lazy/module')
+    .then(x => x.MyModule)
+}];</code></pre>
+
+</script></section><section data-markdown><script type="text/template">
+### Dynamic components
+</script></section><section data-markdown><script type="text/template">
+#### Standalone component
+```ts
+@Component(...) class MyComponent {
+  public counter: number = 0;
+  constructor(readonly service: SomeService) {}
+  add() {
+    this.counter++;
+    this.service.save();
+    ɵdetectChanges(this);
+  }
+}
+```
+<aside class="notes"><p>We can dynamically load and render components without modules, but those components wouldn&#39;t contain any injector or ngzone functionality. Just provide injector and call change detector manually in component and it simply works.</p>
+<p>Show DEMO</p>
+</aside></script></section><section data-markdown><script type="text/template">
+
+```ts
+import('../components/component').then(({ MyComponent }) => {
+  const injector = ɵɵdirectiveInject(INJECTOR);
+  ɵrenderComponent(MyComponent, {
+    host: 'host-selector',
+    injector
+  });
+});
+```
+
+<aside class="notes"><p>Ivy allows us to load modules and components asynchronously, because it stores all the necessary information for initializing a module or component in the static class properties, rather than in a separately compiled NgModuleDefinition or ViewDefinition. The most important thing that gives Ivy is the incredible expandability and isolation of business logic.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+#### Component Def
+```js
+MyComponent.ngComponentDef = defineComponent({
+  type: MyComponent,
+  selectors: [...],
+  factory: function MyComponent_Factory(t) {...},
+  consts: ...,
+  vars: ...,
+  template: function MyComponent_Template(rf, ctx) {
+    if (rf & 1) { ... } if (rf & 2) { ... }
+  },
+  encapsulation: ...
+});
+```
+
+<aside class="notes"><p>Metadata for component now is stored in component itself</p>
+</aside></script></section></section><section ><section data-markdown><script type="text/template">
+## Higher Order Components and mixins
+As component metadata is stored in component, we can override lifecycle hooks, add properties, even use your own render function!
+</script></section><section data-markdown><script type="text/template">
+```ts
+// Mixin with decorator
+function fromStore(config: {[k: string]: string}) {
+  return (def: ComponentDef<any>) => {
+    const originalFactory = def.factory;
+    def.factory = () => {
+      const cmp = originalFactory(def.type);
+      const store = directiveInject(TodoStore);
+      config.forEach((key: string) => {
+        cmp[key] = store.pipe(select(config[key]));
+      });
+      return cmp;
+    };
+  };
+}
+```
+</script></section><section data-markdown><script type="text/template">
+#### Optional Modules
+
+Notes:
+This is not released functionality. Ivy makes NgModules optional, so you can implement your own dependency handling mechanism, as it was proofed by Minko Gechev.
+</script></section><section data-markdown><script type="text/template">
+##### NgModule
+```js
+// my-component.component.ts
+@Component(...) class MyComponent {}
+
+// my-module.module.ts
+@NgModule({ declarations: [MyComponent] })
+class MyModule {}
+
+// app.component.ts
+@Component({ tempate: '<app-my-component></app-my-component>' })
+
+// app.module.ts
+@NgModule({ imports: [MyModule] })
+class AppModule
+```
+<aside class="notes"><p>One of NgModule goals is to provide dependencies to components. Sometimes it is redundant.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+##### Tree-shakable component
+```js
+// my-component.component.ts
+@Component(...) class MyComponent {}
+
+// app.component.ts
+@Component({
+  imports: [MyComponent], // <- not a part of Angular
+  tempate: '<app-my-component></app-my-component>'
+}) class AppComponent {}
+```
+</script></section></section><section  data-markdown><script type="text/template">
+<section data-background="assets/fast-batman.jpg">
+<h2>Performance</h2>
+</section>
+</script></section><section ><section data-markdown><script type="text/template">
+### Iterative DOM
+
+- Tree-shakable templates
+- Reduced Memory usage
+- Updates DOM-nodes directly
+
+<aside class="notes"><p>The interesting aspect is that only the instructions that we will use are going to end up in the final bundle, all the rest is tree-shaked away.
+This is the revolutionary aspect: being able to make the rendering engine itself tree shakable. If a component does not reference an instruction, it will not be used and hence excluded from the bundle.
+Iterative DOM has also the advantage of allocating less memory. Differently from the virtual DOM, memory is used only when we add or remove DOM nodes.
+For value changes, the updates are done in-place in the tree structure.
+As we typically don&#39;t add/remove many elements in our application templates (at least in the majority of spa cases), this translates into a remarkable memory saving, especially for large projects.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### Template Type checking 
+
+- \__ng_typecheck__.ts
+- Type constructor
+
+<aside class="notes"><p>A type constructor is a specially shaped TypeScript method that permits type inference of any generic type parameters of the class from the types of expressions bound to inputs or outputs, and the types of elements that match queries performed by the directive. It also catches any errors in the types of these expressions.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### Bundle size
+
+- New rendering pipe
+- Template instructions tree shaking
+
+<aside class="notes"><p>The new angular pipeline skips template data structures and angular interpreter. Angular template pass through new compiler and generates template instructions, which does not need runtime interpreter to process at runtime. These instructions are JavaScript code that would directly create DOM.</p>
+</aside></script></section><section data-markdown><script type="text/template">
+### Compilation
+
+- Locality principle: each component is independent, no parent info required;
+- Usage of precompiled components;
+
+<aside class="notes"><p>Locality is the process of compiling each component independently with its own local information that rebuilds faster by compiling partial changes and not the entire project files. This increases speed of your build process. In the current angular code, each component has its parent information, which lead to compilation dependencies, whereas in Ivy, each component is independent.</p>
+<p>With this process you can ship a precompiled code as a 3rd party lib. Additionally, it doesn’t require any metadata for compilation.</p>
+</aside></script></section></section><section  data-markdown><script type="text/template">
+## Migration
+
+- Update packages
+- Enable Ivy
+- Run postinstall script
+
+Should work now.
+
+<aside class="notes"><p>DO NOT USE IN PRODUCTION! YET.</p>
+</aside></script></section><section  data-markdown><script type="text/template">
+## Conclusion
+- Fast
+- Light
+- Performant
+- Open for experiments
+</script></section><section  data-markdown><script type="text/template">
+## The end
+<img src="assets/kurwa.jpg" height=400/>
+
+<a href="https://babichss.github.io/batman-vs-ivy/links.md" target="_blank">Useful links</a>
+
+</script></section><section  data-markdown><script type="text/template">
+### Post-credit scene
+
+- Twitter: <a href="http://twitter.com/babichss" target="_blank">@babichss</a>, <a href="http://twitter.com/lvivcss" target="_blank">@lvivcss</a>
+- FB: <a href="http://fb.me/babichssofficial" target="_blank">/babichssofficial</a>
+- Telegram: <a href="http://t.me/lvivcss" target="_blank">LvivCSS</a>, <a href="https://t.me/first_lviv_frontend_chat" target="_blank">Перша Львівська Фронтярня</a></script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "xt256",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "slide",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
