@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\babic\Projects\Доповіді\LvivCSS\index.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/none.css" id="theme">
+         <link rel="stylesheet" href="theme.css" id="theme">
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/Zenburn.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">LvivCSS'19</script></section><section  data-markdown><script type="text/template">
+## Тут мали бути слайди.
+<p>Но ми вчора пили.</p></script></section><section  data-markdown><script type="text/template">
+# Як я робив найкращий сайт для найкращої конференції
+</script></section><section ><section data-markdown><script type="text/template">
+## З чого все починалось</script></section><section data-markdown><script type="text/template">
+### 2017, WordPress
+<ul>
+	<li class="fragment">Безкоштовна тема</li>
+	<li class="fragment">Так собі кастомізація</li>
+</ul>
+</script></section><section data-markdown><script type="text/template">
+### 2018, Angular
+<ul>
+	<li class="fragment">Firebase</li>
+	<li class="fragment">Жахливий дизайн</li>
+</ul>
+</script></section></section><section  data-markdown><script type="text/template">
+## Ідеї для нового сайту
+<ul>
+	<li class="fragment">Легкість</li>
+	<li class="fragment">Швидкість</li>
+	<li class="fragment">Зрозумілість</li>
+	<li class="fragment">Доступність</li>
+</ul>
+</script></section><section ><section data-markdown><script type="text/template">
+## Дизайн
+</script></section><section data-markdown><script type="text/template">
+### Текст
+В друкованій продукції немає анімацій.
+
+**Виразність** досягається _іншими_ засобами.
+</script></section><section data-markdown><script type="text/template">
+### Мінімум кольорів і різних елементів
+
+Це — відсутність візуального шуму.
+</script></section><section data-markdown><script type="text/template">
+### Натхнення журналами і газетами
+Notes: Вертикальна структура контенту.
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Процес розробки
+</script></section><section data-markdown><script type="text/template">
+### Розробка контенту
+<ul>
+	<li class="fragment">Чиста верстка</li>
+	<li class="fragment">Pug</li>
+	<li class="fragment">Handlebars</li>
+	<li class="fragment">React</li>
+</ul>
+</script></section><section data-markdown><script type="text/template">
+### Деплой
+<ul>
+	<li class="fragment">Firebase</li>
+	<li class="fragment">Github pages</li>
+</ul>
+</script></section></section><section ><section data-markdown><script type="text/template">
+## Технології
+</script></section><section data-markdown><script type="text/template">
+### CSS Grid & CSS Columns
+Майбутнє вже сьогодні.
+
+Edge, Firefox, Chrome, Safari, Opera, iOS Safari
+
+Notes:
+Не без багів. розказати про переніс абсолютного елемента в пепередню колонку
+</script></section><section data-markdown><script type="text/template">
+### Мінімум JS
+
+<ul>
+	<li class="fragment">Велика кількість речей може бути реалізована на CSS</li>
+	<li class="fragment">Велика кількість речей може бути реалізована в три рядочки JS</li>
+</ul>
+
+</script></section><section data-markdown><script type="text/template">
+### Service worker
+
+Надавати додатковий досвід користувачу дуже важливо.
+</script></section></section><section  data-markdown><script type="text/template">
+## Не експериментуйте. Використовуйте</script></section><section  data-markdown><script type="text/template">
+
+# Дякую</script></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^[\r\n?|\n]---[\r\n?|\n]$",
+  "verticalSeparator": "^[\r\n?|\n]--[\r\n?|\n]$",
+  "theme": "none",
+  "highlightTheme": "Zenburn",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "slide",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "slideExplorerEnabled": true,
+  "browserPath": null,
+  "customTheme": "theme",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
