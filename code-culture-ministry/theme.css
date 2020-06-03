@@ -1,0 +1,66 @@
+@font-face {
+  font-family: General;
+  font-weight: normal;
+  src: url(fonts/Manrope-Medium.otf);
+}
+
+@font-face {
+  font-family: General;
+  font-weight: bold;
+  src: url(fonts/Manrope-ExtraBold.otf);
+}
+
+html {
+  font-size: 14pt;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: General;
+  letter-spacing: 5px;
+}
+
+.reveal {
+  font-family: General;
+  font-size: 1.8rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.5;
+}
+
+body {
+  background-color: #0d0c0a
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+li {
+  list-style: none;
+}
+
+.reveal ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 0.4rem;
+}
+
+li::before {
+  content: "— ";
+  margin-left: -2rem;
+}
+
+li::after {
+  content: ";";
+}
+
+li:last-child::after {
+  content: ".";
+}
