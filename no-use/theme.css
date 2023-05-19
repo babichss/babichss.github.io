@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+
+:root {
+  --r-heading-text-transform: none;
+  --r-main-font: "Manrope";
+  --r-heading-font: var(--r-main-font);
+}
+
+.reveal {
+  font-family: var(--r-main-font);
+}
+
+.reveal pre {
+  width: auto;
+}
+
+.reveal .code-wrapper code {
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+.reveal img {
+  max-height: 60%;
+}
+
+.reveal .slides li {
+  list-style: none;
+  list-style-type: "— ";
+  margin-bottom: 0.5em;
+}

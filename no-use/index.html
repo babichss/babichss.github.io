@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Reveal JS presentation</title>
+
+    <meta
+      name="description"
+      content="A framework for easily creating beautiful presentations using HTML"
+    />
+    <meta name="author" content="Hakim El Hattab" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css" />
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+
+    <!-- highlight Theme -->
+
+    <link
+      rel="stylesheet"
+      href="libs/highlight.js/11.3.1/styles/gradient-dark.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css"
+    />
+
+    <!-- Revealjs Theme -->
+
+    <link
+      rel="stylesheet"
+      href="libs/reveal.js/4.3.1/theme/hull-blue.css"
+      id="theme"
+    />
+
+    <link rel="stylesheet" href="libs/styles/tasklist.css" />
+    <link rel="stylesheet" href="libs/styles/iota.css" />
+    <link rel="stylesheet" href="libs/styles/layout.css" />
+
+    <!-- Revealjs Theme -->
+
+    <link rel="stylesheet" href="theme.css" />
+
+    <!-- css list -->
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <img src="/img/me.jpg" width="320" />
+          <h2>СЕРГІЙ БАБІЧ</h2>
+          <h4>awesome frontend developer</h4>
+        </section>
+
+        <section>
+          <h1>Оптимізація</h1>
+          <h2>і зайці</h2>
+        </section>
+
+        <section>
+          <section>
+            <h4>
+              Для чого нам потрібні хуки <code>useMemo</code> та
+              <code>useCallback</code>?
+            </h4>
+            <p><em>думка авдиторії</em></p>
+          </section>
+
+          <section>
+            <h4>Що таке ‘re-render’ компонента та коли він відбувається?</h4>
+            <p><em>думка авдиторії</em></p>
+          </section>
+
+          <section>
+            <h4><code>memo</code></h4>
+            <p><em>думка авдиторії</em></p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Як насправді працюють “магічні” хуки</h2>
+          </section>
+
+          <section>
+            <h3><code>useMemo</code></h3>
+            <pre><code class="language-js">function updateMemo&lt;T&gt;(
+  nextCreate: () =&gt; T,
+  deps: Array&lt;mixed&gt; | void | null
+): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array&lt;mixed&gt; | null = prevState[1];
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+  if (shouldDoubleInvokeUserFnsInHooksDEV) {
+    nextCreate();
+  }
+  const nextValue = nextCreate();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+</code></pre>
+          </section>
+
+          <section>
+            <h3><code>useCallback</code></h3>
+            <pre><code class="language-js">function updateCallback&lt;T&gt;(callback: T, deps: Array&lt;mixed&gt; | void | null): T {
+  const hook = updateWorkInProgressHook();
+  const nextDeps = deps === undefined ? null : deps;
+  const prevState = hook.memoizedState;
+  if (prevState !== null) {
+    if (nextDeps !== null) {
+      const prevDeps: Array&lt;mixed&gt; | null = prevState[1];
+      if (areHookInputsEqual(nextDeps, prevDeps)) {
+        return prevState[0];
+      }
+    }
+  }
+  hook.memoizedState = [callback, nextDeps];
+  return callback;
+}
+</code></pre>
+          </section>
+
+          <section>
+            <h3><code>areHookInputsEqual</code></h3>
+            <pre><code class="language-js">function areHookInputsEqual(
+  nextDeps: Array&lt;mixed&gt;,
+  prevDeps: Array&lt;mixed&gt; | null,
+) {
+  ...
+  for (let i = 0; i &lt; prevDeps.length &amp;&amp; i &lt; nextDeps.length; i++) {
+    if (is(nextDeps[i], prevDeps[i])) {
+      continue;
+    }
+    return false;
+  }
+  return true;
+}
+</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section data-background="./img/optimizaec.jpg">
+            <h2 class="fragment">Передчасний оптимізаєць</h2>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <pre><code class="language-jsx">const a = useValue();
+const b = useAnotherValue();
+
+const c = useMemo(() =&gt; a + b, [a, b]);
+
+return &lt;MyComponent value={c} /&gt;;
+</code></pre>
+          </section>
+
+          <section>
+            <ol>
+              <li class="fragment">Створили функцію і масив залежностей;</li>
+              <li class="fragment">Викликали `useMemo`;</li>
+              <li class="fragment">Прочитали поточний fiber state;</li>
+              <li class="fragment">Перевірили залежності на рівність;</li>
+              <li class="fragment">Вернули збережене значення, АБО;</li>
+              <li class="fragment">
+                викликали `create`-функцію, зберегли значення, вернули;
+              </li>
+              <li class="fragment">передали значення в компонент</li>
+            </ol>
+          </section>
+
+          <section>
+            <pre><code class="language-jsx">const a = useValue();
+const b = useAnotherValue();
+
+const c = a + b;
+
+return &lt;MyComponent value={c} /&gt;;
+</code></pre>
+          </section>
+
+          <section>
+            <ol>
+              <li class="fragment">Додали два числа</li>
+              <li class="fragment">передали значення в компонент</li>
+            </ol>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <pre><code class="language-jsx">const array = [...]
+const onClick = useCallback((item, index) =&gt; { ... }, []);
+const showModal = useCallback(() =&gt; { ... }, []);
+
+return (
+  &lt;&gt;
+    &lt;Button onClick={showModal}/&gt;
+    {array.map((item, index) =&gt;(
+      &lt;MyComponent  onClick={() =&gt; onClick(item, index)} /&gt;
+    ))}
+  &lt;/&gt;
+)
+</code></pre>
+          </section>
+
+          <section>
+            <ol>
+              <li class="fragment">Створили функцію і масив залежностей;</li>
+              <li class="fragment">Викликали `useCallback`;</li>
+              <li class="fragment">Прочитали поточний fiber state;</li>
+              <li class="fragment">Перевірили залежності на рівність;</li>
+              <li class="fragment">Вернули збережений інстанс функції, АБО;</li>
+              <li class="fragment">зберегли новий інстанс та вернули його;</li>
+              <li class="fragment">передали в компонент</li>
+            </ol>
+          </section>
+
+          <section>
+            <pre><code class="language-jsx">const array = [...]
+function onItemClick(item, index) { ... };
+function showModal() { ... };
+
+return (
+  &lt;&gt;
+    &lt;Button onClick={showModal}/&gt;
+    {array.map((item, index) =&gt;(
+      &lt;MyComponent onClick={() =&gt; onItemClick(item, index)} /&gt;
+    ))}
+  &lt;/&gt;
+)
+</code></pre>
+          </section>
+
+          <section>
+            <ol>
+              <li class="fragment">Створили функцію</li>
+              <li class="fragment">передали в компонент</li>
+            </ol>
+          </section>
+
+          <section>
+            <p>
+              Ре-рендер відбудеться в будь-якому випадку, якщо вам компонент не
+              мемоїзований явно через <code>memo</code>.
+            </p>
+          </section>
+        </section>
+
+        <section>
+          <div class="fragment">А як же garbage collector?!</div>
+          <div class="fragment">
+            А ніяк. Ви робіть свою роботу, він робить свою.
+          </div>
+        </section>
+
+        <section>
+          <h2>Два слова про час</h2>
+          <ul>
+            <li class="fragment">
+              Людина тупо не помічає всього, шо менше за 0,1 секунди;
+            </li>
+            <li class="fragment">
+              Якщо ви покращите обробку масива з трьох елементів з 10 мс до 1мс,
+              про це знатимете лише ви. Користувачам то до спини (див. п.1);
+            </li>
+            <li class="fragment">
+              Час, затрачений на таку "оптимізацію", можна було б із більшою
+              користю провести, длубаючи у носі;
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <section>
+            <h2>Много слів про оптимізацію</h2>
+            <ul>
+              <li class="fragment">useMemo і useCallback не оптимізують</li>
+              <li class="fragment">Вони мають забезпечити сталий референс</li>
+              <li class="fragment">Вони не гарантують кешування</li>
+            </ul>
+          </section>
+
+          <section>
+            <ul>
+              <li class="fragment">
+                Дуже часто виконання useMemo в рази дорожче, ніж сам обрахунок
+                значення
+              </li>
+              <li class="fragment">
+                Примітиви і так порівнюються за значенням, а не за посиланням
+              </li>
+              <li class="fragment">
+                Якщо у вас в useMemo виконуються важкі обчислення та
+                перетворення, спробуйте винести їх за компонент
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <ul>
+              <li class="fragment">
+                useCallback часто безглуздий при використанні в масивах
+              </li>
+              <li class="fragment">
+                На мою особисту думку більшість проблем з оптимізацією виникають
+                через невдалий дизайн даних та ієрархії компонентів
+              </li>
+              <li class="fragment">
+                Зміна структури даних та прибрання зайвих ре-рендерів в дочірніх
+                компонентах допоможе з оптимізацією в десятки разів краще
+              </li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h2>Висновки</h2>
+          <ul>
+            <li class="fragment">useMemo та useCallback вас не врятують</li>
+            <li class="fragment">оптимізуйте, лише коли маєте проблеми</li>
+            <li class="fragment">
+              оптимізуйте дані та вартість ре-рендера замість пропсів
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <p>Дякую. Тепер питання. Бігом.</p>
+          <img src="/img/qr.svg" width="320" />
+          <p>
+            <em>ютуб канал «Сергій Бабіч та Дивовижний світ веб розробки»</em>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <div class="line top"></div>
+    <div class="line bottom"></div>
+    <div class="line left"></div>
+    <div class="line right"></div>
+
+    <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+    <script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+
+    <script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+    <script>
+      const printPlugins = [
+        RevealNotes,
+        RevealHighlight,
+        RevealMath.MathJax3,
+        RevealAnimate,
+        RevealChalkboard,
+        RevealEmbedTweet,
+        RevealChart,
+      ];
+
+      const plugins = [
+        ...printPlugins,
+        RevealZoom,
+        RevealSearch,
+        RevealMarkdown,
+
+        RevealFullscreen,
+        RevealAnything,
+        //RevealAudioSlideshow,
+        //RevealAudioRecorder,
+
+        // poll
+        // question
+        // seminar
+        Verticator,
+      ];
+
+      // Also available as an ES module, see:
+      // https://revealjs.com/initialization/
+      Reveal.initialize({
+        controls: false,
+        controlsTutorial: true,
+        controlsLayout: "bottom-right",
+        controlsBackArrows: "faded",
+        progress: true,
+        slideNumber: false,
+        //#showSlideNumber "all" "print" "speaker"
+        hash: true, //# hash: false,
+        //# respondToHashChanges: true,
+        //# history: false,
+        keyboard: true,
+        //#keyboardCondition: null,
+        overview: true,
+        center: true,
+        touch: true,
+        loop: false,
+        rtl: false,
+        //#navigationMode: 'default', linear grid
+        shuffle: false,
+        fragments: true,
+        fragmentInURL: false,
+        embedded: false,
+        help: true,
+        //#pause: true
+        showNotes: false,
+        autoPlayMedia: false, // TODO fix this to a nullable value
+        //#preloadIframes: null. true false
+        //#autoAnimate: true
+        //#autoAnimateMatcher: null,
+        //#autoAnimateEasing: 'ease',
+        //autoAnimateDuration: 1.0,
+        //#autoAnimateUnmatched: true
+        //#autoAnimateStyles: []
+        autoSlide: 0, // TODO fix this to a falseable value
+        autoSlideStoppable: true,
+        autoSlideMethod: "0",
+        defaultTiming: 120,
+        mouseWheel: false,
+        //#previewLinks: false
+        //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+        //#postMessageEvents: false,
+        //#focusBodyOnPageVisibilityChange: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        backgroundTransition: "fade",
+        //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+        //#pdfSeparateFragments: true,
+        //#pdfPageHeightOffset: -1,
+        viewDistance: 3,
+        //#mobileViewDistance: 2,
+        display: "block",
+        //#hideInactiveCursor: true,
+        //#hideCursorTime: 5000
+
+        // Parallax Background
+        parallaxBackgroundImage: "",
+        parallaxBackgroundSize: "",
+        parallaxBackgroundHorizontal: 0,
+        parallaxBackgroundVertical: 0,
+
+        //Presentation Size
+        width: 960,
+        height: 700,
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2,
+        disableLayout: false,
+
+        audio: {
+          prefix: "audio/", // audio files are stored in the "audio" folder
+          suffix: ".ogg", // audio files have the ".ogg" ending
+          textToSpeechURL: null, // the URL to the text to speech converter
+          defaultNotes: false, // use slide notes as default for the text to speech converter
+          defaultText: false, // use slide text as default for the text to speech converter
+          advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+          autoplay: false, // automatically start slideshow
+          defaultDuration: 5, // default duration in seconds if no audio is available
+          defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+          playerOpacity: 0.05, // opacity value of audio player if unfocused
+          playerStyle:
+            "position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;", // style used for container of audio controls
+          startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+        },
+
+        chalkboard: {
+          // font-awesome.min.css must be available
+          //src: "chalkboard/chalkboard.json",
+          storage: "chalkboard-demo",
+        },
+
+        customcontrols: {
+          controls: [
+            {
+              id: "toggle-overview",
+              title: "Toggle overview (O)",
+              icon: '<i class="fa fa-th"></i>',
+              action: "Reveal.toggleOverview();",
+            },
+            {
+              icon: '<i class="fa fa-pen-square"></i>',
+              title: "Toggle chalkboard (B)",
+              action: "RevealChalkboard.toggleChalkboard();",
+            },
+            {
+              icon: '<i class="fa fa-pen"></i>',
+              title: "Toggle notes canvas (C)",
+              action: "RevealChalkboard.toggleNotesCanvas();",
+            },
+          ],
+        },
+        chart: {
+          defaults: {
+            color: "lightgray", // color of labels
+            scale: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 },
+              grid: { color: "lightgray" }, // color of grid lines
+            },
+          },
+          line: {
+            borderColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+            borderDash: [
+              [5, 10],
+              [0, 0],
+            ],
+          },
+          bar: {
+            backgroundColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+          },
+          pie: {
+            backgroundColor: [
+              [
+                "rgba(0,0,0,.8)",
+                "rgba(220,20,20,.8)",
+                "rgba(20,220,20,.8)",
+                "rgba(220,220,20,.8)",
+                "rgba(20,20,220,.8)",
+              ],
+            ],
+          },
+          radar: {
+            borderColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+          },
+        },
+        math: {
+          mathjax:
+            "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+          config: "TeX-AMS_HTML-full",
+          // pass other options into `MathJax.Hub.Config()`
+          TeX: { Macros: { RR: "{\\bf R}" } },
+        },
+        anything: [
+          {
+            className: "plot",
+            defaults: { width: 500, height: 500, grid: true },
+            initialize: function (container, options) {
+              options.target = "#" + container.id;
+              functionPlot(options);
+            },
+          },
+          {
+            className: "chart",
+            initialize: function (container, options) {
+              container.chart = new Chart(container.getContext("2d"), options);
+            },
+          },
+          {
+            className: "anything",
+            initialize: function (container, options) {
+              if (options && options.initialize) {
+                options.initialize(container);
+              }
+            },
+          },
+        ],
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: window.location.search.match(/print-pdf/gi)
+          ? printPlugins
+          : plugins,
+      });
+
+      // Change chalkboard theme :
+      function changeTheme(input) {
+        var config = {};
+        config.theme = input.value;
+        Reveal.getPlugin("RevealChalkboard").configure(config);
+        input.blur();
+      }
+
+      // // Handle the message inside the webview
+      // window.addEventListener('message', event => {
+
+      //     const message = event.data; // The JSON data our extension sent
+
+      //     switch (message.command) {
+      //         case 'refactor':
+      //             Reveal.toggleHelp();
+      //     }
+      // });
+
+      if (window.location.search.match(/print-pdf-now/gi)) {
+        setTimeout(() => {
+          window.print();
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>
