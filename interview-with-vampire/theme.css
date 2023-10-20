@@ -1,12 +1,12 @@
 @font-face {
   font-family: Gilroy;
-  src: url("./Gilroy-ExtraBold.otf");
+  src: url("./assets/TT\ Norms\ Pro\ Bold.otf");
   font-weight: 900;
 }
 
 @font-face {
   font-family: Gilroy;
-  src: url("./Gilroy-Light.otf");
+  src: url("./assets/TT\ Norms\ Pro\ Regular.otf");
   font-weight: 100;
 }
 
@@ -45,7 +45,7 @@ html {
   list-style: none;
   & li:before {
     content: "—";
-    margin-left: calc(-1em + 2pt);
+    margin-left: calc(-1em + 4pt);
     margin-right: 4pt;
   }
 }
