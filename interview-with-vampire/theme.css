@@ -11,7 +11,7 @@
 }
 
 html {
-  font-size: 32pt;
+  font-size: 30pt;
 }
 
 .reveal .slides {
@@ -43,9 +43,12 @@ html {
 .reveal ul {
   margin: 0;
   list-style: none;
-  & li:before {
-    content: "—";
-    margin-left: calc(-1em + 4pt);
-    margin-right: 4pt;
+  & li {
+    display: flex;
+    &:before {
+      content: "—";
+      margin-left: calc(-1em + 4pt);
+      margin-right: 4pt;
+    }
   }
 }
