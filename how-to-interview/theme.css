@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap");
+
+:root {
+  --r-main-font: Caveat;
+  --r-heading-font: var(--r-main-font);
+  --r-background-color: white;
+  --r-main-color: purple;
+  --r-heading-color: purple;
+}
+
+html {
+  font-size: 32pt;
+}
