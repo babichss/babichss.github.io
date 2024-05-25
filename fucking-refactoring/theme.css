@@ -2,6 +2,10 @@
   --r-heading1-size: 40px;
 }
 
+.reveal .slides {
+  text-align: left;
+}
+
 .reveal small {
   vertical-align: baseline;
 }
