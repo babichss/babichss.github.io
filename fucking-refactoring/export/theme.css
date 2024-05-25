@@ -1,0 +1,11 @@
+﻿:root {
+  --r-heading1-size: 40px;
+}
+
+.reveal small {
+  vertical-align: baseline;
+}
+
+.reveal img {
+  max-height: 60vh;
+}
