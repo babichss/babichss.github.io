@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Перепишіть це негайно!(?)</title>
+    
+    <meta
+    property="og:title"
+    content="Перепишіть це негайно!(?)"
+    />
+    <meta
+    property="og:description"
+    content="У цій доповіді я досліджую, як знайти баланс між практичністю та перфекціонізмом під час рефакторингу коду. На прикладі декількох популярних принципів розробки, ми побачимо на власні очі, що неможливо досягти стовідсоткового дотримання усіх найкращих практик. Які з цього висновки? Дізнаєтеся в кінці!"
+    />
+    <meta
+    name="description"
+    content="У цій доповіді я досліджую, як знайти баланс між практичністю та перфекціонізмом під час рефакторингу коду. На прикладі декількох популярних принципів розробки, ми побачимо на власні очі, що неможливо досягти стовідсоткового дотримання усіх найкращих практик. Які з цього висновки? Дізнаєтеся в кінці!"
+    />
+    <meta property="og:image" content="https://babichss.github.io/refactor-this-refactor-that/ogpreview.webp"/>
+
+    <meta name="author" content="Сергій Бабіч" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css" />
+    <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"
+    />
+
+    <!-- highlight Theme -->
+
+    <link
+      rel="stylesheet"
+      href="libs/highlight.js/11.3.1/styles/lightfair.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css"
+    />
+
+    <!-- Revealjs Theme -->
+
+    <link
+      rel="stylesheet"
+      href="libs/reveal.js/4.3.1/theme/black.css"
+      id="theme"
+    />
+
+    <link rel="stylesheet" href="libs/styles/tasklist.css" />
+    <link rel="stylesheet" href="libs/styles/iota.css" />
+    <link rel="stylesheet" href="libs/styles/layout.css" />
+
+    <!-- Revealjs Theme -->
+
+    <link rel="stylesheet" href="theme.css" />
+
+    <!-- css list -->
+    <link rel="shortcut icon" href="favicon.webp" type="image/webp"></link>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Перепишіть це негайно!</h1>
+          <p>
+            або <del>покрокова</del> інструкція до того, як врівноважувати
+            здоровий ґлузд та перфекціонізм при рефакторингу
+          </p>
+        </section>
+
+        <section>
+          <h2>Про мене</h2>
+          <ul>
+            <li>В розробці з 2011 року</li>
+            <li>Виступаю на конференціях з 2017 року</li>
+            <li>Люблю верстати</li>
+            <li>Вирощую огірки</li>
+          </ul>
+          <div class="my-links">
+            <figure>
+              <img src="youtube-qr.webp" width="160" />
+              <figcaption>
+                <a
+                  href="https://youtube.com/@babichweb?sub_confirmation=1"
+                  target="_blank"
+                  >YouTube</a
+                >
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="linkedin-qr.webp" width="160" />
+              <figcaption>
+                <a href="https://linkedin.com/in/babichss" target="_blank"
+                  >LinkedIn</a
+                >
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="telegram-qr.webp" width="160" />
+              <figcaption>
+                <a href="https://t.me/toisamyibabich" target="_blank"
+                  >Telegram</a
+                >
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section>
+          <h1>Дисклеймер</h1>
+          <p>
+            <small
+              >Усі приклади коду в доповіді висмоктані з пальця і можуть не
+              відображати реальних проблем, а самі розглянуті проблеми
+              притягнуті за вуха. Принципи й підходи, розглянуті в доповіді, не
+              є вичерпним списком, а обрані для ілюстрації основних ідей, що я
+              їх намагатимусь вам пояснити з перемінним успіхом. Меми взагалі
+              вставлені аби було, а не тому шо смішно і підходять. Ще мені
+              сказали, шо не можна тепер матюкатись. Срав пес (. І кажуть, що не
+              треба більше зі сцени казати, що я доробляв слайди вночі в
+              готельному номері після препаті. Тому я вам не скажу, де, коли і в
+              якому стані доробляв слайди. Усі думки, висловлені під час
+              доповіді, є виключно моїм субʼєктивним сприйняттям реальності і не
+              можуть розглядатися як абсолютна істина, а навпаки мають бути
+              піддані сумніву в дискусіях після виступу.</small
+            >
+          </p>
+        </section>
+
+        <section>
+          <h2>Переписувати чи рефакторити?</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Переписування</th>
+                <th>Рефакторинг</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  Усунення технічного боргу раз і назавжди. І створення нового,
+                  чого вже.
+                </td>
+                <td>
+                  Поступове усунення технічного боргу без breaking changes та з
+                  небагато меншими затратами часу на ітерацію.
+                </td>
+              </tr>
+              <tr>
+                <td>Використання сучасних технологій.</td>
+                <td>
+                  Осучаснення кодової бази відбувається так само ітеративно, без
+                  переривання процесу розробки.
+                </td>
+              </tr>
+              <tr>
+                <td>Покращення продуктивності та оптимізація архітектури.</td>
+                <td>
+                  Покращення продуктивності та оптимізація архітектури. Тільки
+                  потроху.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Наша мета<s> — 2002!</s></h2>
+          <ul>
+            <li>
+              <strong>Підтримуваність та гнучкість коду:</strong> Код повинен
+              бути легким для розуміння та готовим до швидких змін
+            </li>
+            <li>
+              <strong>Мінімізація технічного боргу:</strong> Постійне
+              вдосконалення коду без переривання процесу розробки
+            </li>
+            <li>
+              <strong>Масштабованість:</strong> Готовність коду до майбутніх
+              змін та вимог без ускладнень
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Уявний приклад поганого коду</h3>
+          <pre><code class="language-js">import React, { useState, useMemo, useCallback } from &quot;react&quot;;
+
+const Dashboard = () =&gt; {
+  const [users, setUsers] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [formErrors, setFormErrors] = useState({});
+  const currencyFilter = &quot;USD&quot;;
+
+  const fetchUsers = async () =&gt; {
+    const data = await fetch(&quot;/api/users&quot;).then((res) =&gt; res.json());
+    setUsers(data);
+  };
+
+  const fetchOrders = async () =&gt; {
+    const data = await fetch(&quot;/api/orders&quot;).then((res) =&gt; res.json());
+    setOrders(data);
+  };
+
+  const activeUsers = users.filter((user) =&gt; user.status === &quot;active&quot;);
+  const activeOrders = orders.filter(
+    (order) =&gt; order.status === &quot;active&quot; &amp;&amp; order.currency === currencyFilter
+  );
+
+  const validateOrder = useCallback((order) =&gt; {
+    if (order.amount &lt;= 0) {
+      setFormErrors((prev) =&gt; ({ ...prev, [order.id]: &quot;Invalid amount&quot; }));
+    } else {
+      setFormErrors((prev) =&gt; ({ ...prev, [order.id]: &quot;&quot; }));
+    }
+  }, []);
+
+  const handleValidation = useCallback(() =&gt; {
+    activeOrders.forEach(validateOrder);
+  }, [activeOrders, validateOrder]);
+
+  const orderSummary = useMemo(
+    () =&gt;
+      activeOrders.length &gt; 0
+        ? activeOrders.length &gt; 10
+          ? activeOrders.every((order) =&gt; order.priority === &quot;high&quot;)
+            ? activeOrders.some((order) =&gt; order.currency === &quot;USD&quot;)
+              ? &quot;Many high-priority USD orders&quot;
+              : &quot;Many high-priority non-USD orders&quot;
+            : &quot;Many orders with mixed priorities&quot;
+          : activeOrders.length &gt; 5
+          ? &quot;Few active orders&quot;
+          : &quot;Very few orders&quot;
+        : &quot;No active orders&quot;,
+    [activeOrders]
+  );
+
+  return (
+    &lt;div&gt;
+      &lt;button onClick={fetchUsers}&gt;Load Users&lt;/button&gt;
+      &lt;button onClick={fetchOrders}&gt;Load Orders&lt;/button&gt;
+      &lt;button onClick={handleValidation}&gt;Validate Orders&lt;/button&gt;
+
+      &lt;h2&gt;Users&lt;/h2&gt;
+      &lt;ul&gt;
+        {activeUsers.map((user) =&gt; (
+          &lt;li key={user.id}&gt;{user.name}&lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;h2&gt;Orders&lt;/h2&gt;
+      &lt;ul&gt;
+        {activeOrders.map((order) =&gt; (
+          &lt;li key={order.id}&gt;
+            {order.product} - {order.currency}
+            {formErrors[order.id] &amp;&amp; &lt;span&gt; - {formErrors[order.id]}&lt;/span&gt;}
+          &lt;/li&gt;
+        ))}
+      &lt;/ul&gt;
+
+      &lt;p&gt;{orderSummary}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default Dashboard;
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Я два рази<br />не повторюю<br />не повторюю</h2>
+          <p>DRY — Don’t Repeat Yourself</p>
+        </section>
+
+        <section>
+          <h3>Поганий код</h3>
+          <pre><code class="language-jsx">const Dashboard = () =&gt; {
+  …
+  const activeUsers = users
+    .filter(user =&gt; user.status === 'active');
+  const activeOrders = orders
+    .filter(order =&gt; order.status === 'active');
+  …
+}
+</code></pre>
+        </section>
+
+        <section>
+          <img src="./spidermen.webp" width="800" />
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>Проблема підтримки:</strong> Дублювання коду ускладнює
+              його підтримку, адже будь-які зміни в логіці потрібно повторювати
+              у кількох місцях, що збільшує ризик помилок
+            </li>
+            <li>
+              <strong>Зниження читабельності:</strong> Повторювана логіка робить
+              код менш прозорим і важким для розуміння, що ускладнює роботу з
+              ним іншим розробникам
+            </li>
+            <li>
+              <strong>Складність масштабування:</strong> У разі зміни вимог або
+              додавання нових функцій, необхідно оновлювати кожен дублікат коду,
+              що сповільнює процес розробки та збільшує ризик помилок
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Хороший(?) код</h3>
+          <pre><code class="language-js">function useFilterData(data, status) {
+  return data.filter((item) =&gt; item.status === status);
+}
+
+const activeUsers = useFilterData(users, &quot;active&quot;);
+const activeOrders = useFilterData(orders, &quot;active&quot;);
+</code></pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <b>Не повторюємся:</b> Уникли дублювання логіки, оскільки
+              фільтрація даних тепер відбувається через одну функцію, яку легко
+              перевикористовувати
+            </li>
+            <li>
+              <b>Легка підтримка:</b> Всі зміни робляться в одному місці, що
+              спрощує обслуговування коду і знижує ризик помилок
+            </li>
+            <li class="fragment strike">
+              <b>Гнучкість до змін:</b> Нові умови фільтрації або набори даних
+              легко додати без зміни основної структури коду
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <pre><code class="language-js">const useFilterData = (data, type, status, currency) =&gt; {
+  if (type === 'order') {
+    data = data.map(order =&gt; ({
+      ...order,
+      currency: order.currency === 'USD' ? 'US Dollar' : order.currency,
+    }));
+  }
+
+  return data.filter(item =&gt; {
+    if (type === 'order') {
+      return item.status === status &amp;&amp; item.currency === currency;
+    }
+    return item.status === status;
+  });
+};
+…
+const curr = 'US Dollar';
+const activeUsers = useFilter(users, 'user', 'active');
+const activeOrders = useFilter(orders, 'order', 'active', curr);
+</code></pre>
+        </section>
+
+        <section>
+          <blockquote>
+            <p>
+              Ну а згодом? Про наслідки можливі не подумать? Один лиш тільки раз
+              і вже крадеться піздець з своєю усмішкою хижой
+            </p>
+          </blockquote>
+        </section>
+
+        <section>
+          <h3>Можливі наслідки</h3>
+          <ul>
+            <li>
+              <strong>Зайва деталізація:</strong> Надмірне подрібнення функцій
+              або компонентів може призвести до надмірного утворення дрібних
+              сутностей, що ускладнює підтримку й навігацію по коду
+            </li>
+            <li>
+              <strong>Затрати часу:</strong> Виділення окремих функцій і хуків
+              для кожної задачі потребує більше часу на розробку й тестування,
+              що може бути зайвим для дрібних проєктів
+            </li>
+            <li>
+              <strong>Надмірна абстракція:</strong> Надто велика абстракція може
+              зробити код важким для розуміння, оскільки логіка розподіляється
+              між багатьма частинами, ускладнюючи роботу з ним
+            </li>
+            <li>
+              <strong>Не завжди виправдано для малих проєктів:</strong> У
+              простих або малих проєктах надмірне дотримання певних підходів
+              може зробити код важчим для читання та підтримки без суттєвих
+              переваг
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>З великою силою приходить велика відповідальність</h2>
+          <p>Але одна</p>
+        </section>
+
+        <section>
+          <h3>Поганий код</h3>
+          <pre><code class="language-js">const fetchUsers = async () =&gt; {
+  const data = await fetch(&quot;/api/users&quot;).then((res) =&gt; res.json());
+  setUsers(data);
+};
+
+const fetchOrders = async () =&gt; {
+  const data = await fetch(&quot;/api/orders&quot;).then((res) =&gt; res.json());
+  setOrders(data);
+};
+…
+const [formErrors, setFormErrors] = useState({});
+const validateOrder = useCallback((order) =&gt; {
+  if (order.amount &lt;= 0) {
+    setFormErrors((prev) =&gt; ({ ...prev, [order.id]: &quot;Invalid amount&quot; }));
+  } else {
+    setFormErrors((prev) =&gt; ({ ...prev, [order.id]: &quot;&quot; }));
+  }
+}, []);
+</code></pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>Зайві обов’язки:</strong> Компонент відповідає за кілька
+              різних задач, що ускладнює його підтримку та тестування
+            </li>
+            <li>
+              <strong>Ускладнене тестування:</strong> Потрібно враховувати
+              багато сценаріїв та станів компонента, що збільшує кількість
+              тестів і ускладнює їх написання
+            </li>
+            <li>
+              <strong>Погана масштабованість:</strong> Коли змінюються вимоги,
+              доводиться змінювати весь компонент, що робить його менш гнучким і
+              збільшує ризик помилок при змінах
+            </li>
+            <li>
+              <strong>Обмежене повторне використання:</strong> Логіка компонента
+              тісно пов’язана з конкретними сценаріями
+            </li>
+            <li>
+              <strong>Заплутаний код:</strong> Втрачається читабельність,
+              зростають затрати часу на підтримку та внесення змін
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Хороший(?) код</h3>
+          <pre><code class="language-js">import { useUsers } from &quot;./useUsers&quot;;
+import { useOrders } from &quot;./useOrders&quot;;
+import { validateOrder } from &quot;./validation&quot;;
+import { useFormErrors } from &quot;./useFormErrors&quot;;
+
+const Dashboard = () =&gt; {
+  const { users, fetchUsers } = useUsers();
+  const { orders, fetchOrders } = useOrders();
+  const { errors, validate } = useFormErrors();
+
+  const handleValidation = (order) =&gt; {
+    activeOrders.forEach(validate);
+  };
+  …
+}
+</code></pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>Чітке розділення обов’язків:</strong> Кожен модуль виконує
+              тільки свою задачу, наприклад, завантаження даних, валідація чи
+              обробка помилок, що робить код зрозумілішим та легшим для
+              підтримки
+            </li>
+            <li>
+              <strong>Полегшене тестування:</strong> Оскільки функції й хуки
+              ізольовані, їх можна тестувати незалежно, що спрощує написання
+              тестів і полегшує виявлення проблем
+            </li>
+            <li>
+              <strong>Масштабованість і гнучкість:</strong> Додавання нових
+              функцій або зміна існуючих не вимагає змін у всьому компоненті, що
+              підвищує гнучкість і знижує ризик помилок під час масштабування
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Можливі наслідки</h3>
+          <ul>
+            <li>
+              <strong>Важко знайти єдину відповідальність:</strong> Компоненти
+              часто мають поєднувати логіку й відображення, тому суворе
+              дотримання SRP може бути недоцільним і вимагати зайвих зусиль у
+              реальних проєктах
+            </li>
+            <li>
+              <strong>Сповільнення розробки:</strong> Поділ на дрібні модулі та
+              хуки збільшує час на розробку, тестування й інтеграцію, що може
+              негативно вплинути на швидкість проєкту
+            </li>
+            <li>
+              <strong>Підвищена складність коду:</strong> Надмірне розбиття на
+              окремі частини може зробити код заплутаним, складним для розуміння
+              та підтримки через велику кількість взаємозалежних компонентів
+            </li>
+            <li>
+              <strong>Ризик наплодити клонів:</strong> Поділ відповідальності
+              може призвести до створення занадто багатьох подібних компонентів,
+              що збільшить дублювання коду і ускладнить його підтримку
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Застав дурня богу молиться, то він і лоб розібʼє</h2>
+          <p>Народна мудрість. Не про KISS</p>
+        </section>
+
+        <section>
+          <h3>Поганий код</h3>
+          <pre><code class="language-js">const orderSummary = useMemo(
+  () =&gt;
+    activeOrders.length &gt; 0
+      ? activeOrders.length &gt; 10
+        ? activeOrders.every((order) =&gt; order.priority === &quot;high&quot;)
+          ? activeOrders.some((order) =&gt; order.currency === &quot;USD&quot;)
+            ? &quot;Many high-priority USD orders&quot;
+            : &quot;Many high-priority non-USD orders&quot;
+          : &quot;Many orders with mixed priorities&quot;
+        : activeOrders.length &gt; 5
+        ? &quot;Few active orders&quot;
+        : &quot;Very few orders&quot;
+      : &quot;No active orders&quot;,
+  [activeOrders]
+);
+</code></pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>Зниження зрозумілості:</strong> Складні або “езотеричні”
+              конструкції ускладнюють читання та розуміння коду, що може
+              призвести до виникнення помилок і зниження загальної прозорості
+            </li>
+            <li>
+              <strong>Труднощі з підтримкою:</strong> Складна структура коду
+              ускладнює внесення змін, адже будь-яка модифікація вимагає більше
+              часу на розуміння та може зачепити декілька частин системи,
+              підвищуючи ризик помилок
+            </li>
+            <li>
+              <strong>Ускладнення тестування:</strong> Через складний,
+              заплутаний або занадто “мудрий” код тестування стає важчим,
+              оскільки такі конструкції важче ізолювати для модульного
+              тестування та перевірити на коректність
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <img src="KISS.webp" />
+          <small>
+            ♫
+            <a
+              href="https://www.youtube.com/watch?v=ZhIsAZO5gl0"
+              target="_blank"
+            >
+              KISS — I Was Made For Lovin' You
+            </a>
+          </small>
+        </section>
+
+        <section>
+          <h3>Хороший(?) код</h3>
+          <pre><code class="language-js">const orderSummary = useMemo(() =&gt; {
+  if (activeOrders.length === 0) {
+    return &quot;No active orders&quot;;
+  }
+
+  if (activeOrders.length &gt; 10) {
+    const allHighPriority = activeOrders.every(
+      (order) =&gt; order.priority === &quot;high&quot;
+    );
+    const hasUsdOrders = activeOrders.some((order) =&gt; order.currency === &quot;USD&quot;);
+
+    if (allHighPriority) {
+      if (hasUsdOrders) {
+        return &quot;Many high-priority USD orders&quot;;
+      } else {
+        return &quot;Many high-priority non-USD orders&quot;;
+      }
+    } else {
+      return &quot;Many orders with mixed priorities&quot;;
+    }
+  }
+
+  if (activeOrders.length &gt; 5) {
+    return &quot;Few active orders&quot;;
+  }
+
+  return &quot;Very few orders&quot;;
+}, [activeOrders]);
+</code></pre>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>Простота полегшує підтримку:</strong> Код стає більш
+              зрозумілим і легким для читання, що зменшує ризик виникнення
+              помилок та спрощує його модифікацію
+            </li>
+            <li>
+              <strong>Легкість тестування:</strong> Чітка та проста логіка
+              дозволяє легко тестувати окремі частини коду, знижуючи складність
+              написання тестів
+            </li>
+            <li>
+              <strong>Швидке внесення змін:</strong> Простий код легше змінювати
+              або розширювати, що зменшує ризик зламу функціональності при
+              модифікаціях
+            </li>
+            <li>
+              <strong>Зменшення ризику помилок:</strong> Менша кількість
+              складних конструкцій знижує ймовірність помилок та забезпечує
+              стабільність коду при внесенні змін
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Можливі наслідки</h3>
+          <ul>
+            <li>
+              <strong>Може знизити продуктивність:</strong> Надмірна простота
+              може ігнорувати можливості для оптимізації, що негативно вплине на
+              швидкодію
+            </li>
+            <li>
+              <strong>Підвищує ризик дублювання коду:</strong> Спрощення може
+              призвести до повторення логіки в різних частинах програми замість
+              її перевикористання
+            </li>
+            <li>
+              <strong>Може обмежити гнучкість:</strong> Спрощений код часто
+              важче адаптувати до нових вимог або умов, що обмежує можливість
+              масштабування
+            </li>
+            <li>
+              <strong>Неповне вирішення складних проблем:</strong> Занадто
+              простий підхід може призвести до втрати важливих деталей або
+              функціональності, особливо в складних системах
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>і шо тепер, не рефакторить?</h1>
+        </section>
+
+        <section>
+          <ul>
+            <li>
+              <strong>DRY</strong> прагне уникнути дублювання, але може
+              ускладнити модулі, що порушить SRP і KISS
+            </li>
+            <li>
+              <strong>SRP</strong> забезпечує чітку відповідальність кожної
+              частини коду, але може призвести до дублювання логіки або
+              створення занадто багатьох компонентів
+            </li>
+            <li>
+              <strong>KISS</strong> зберігає код простим, але може призвести до
+              дублювання або порушення SRP
+            </li>
+          </ul>
+          <p>
+            Балансуючи ці три принципи, важливо враховувати контекст проєкту та
+            конкретні вимоги. Іноді варто порушити один із принципів, щоб
+            забезпечити простоту чи гнучкість, не жертвуючи зручністю підтримки.
+          </p>
+        </section>
+
+        <section>
+          <h2><img src="pyramid.webp" height="600" /></h2>
+        </section>
+
+        <section>
+          <h1>Висновки</h1>
+          <ul>
+            <li>
+              <strong>Зберігайте розумний баланс між принципами:</strong> Не всі
+              принципи та підходи працюють у кожному контексті. Важливо
+              адаптувати їх до специфіки проєкту, не жертвуючи підтримуваністю
+              чи швидкодією
+            </li>
+            <li>
+              <strong>Компроміси неминучі:</strong> Під час рефакторингу
+              доведеться балансувати між різними вимогами, такими як простота,
+              гнучкість і продуктивність
+            </li>
+            <li>
+              <strong>Контекст диктує рішення:</strong> Вибір підходів залежить
+              від реальних потреб проєкту, обмежень команди та термінів, а також
+              вартості підтримки в майбутньому
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <p>
+            <strong>Домашнє завдання</strong>: спробуйте відрефакторити код з
+            цієї презентації, але обовʼязково прислухайтеся до свого
+            внутрішнього маленького януковича
+          </p>
+          <figure style="margin: 0 auto; width: fit-content">
+            <img src="yanukovych.webp" height="200" />
+            <figcaption>
+              <small>
+                <em>— Астанавітєсь!</em>
+              </small>
+            </figcaption>
+          </figure>
+        </section>
+
+        <section>
+          <h2>Що почитати?</h2>
+          <p>
+            <small
+              >Не то шоб це прямо по темі доповіді, але цікаво і корисно
+              буде.</small
+            >
+          </p>
+          <ul>
+            <li class="book">
+              <a
+                href="https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition"
+                target="_blank"
+                ><b>The Pragmatic Programmer</b></a
+              >
+              — Andrew Hunt, David Thomas
+            </li>
+            <li class="book">
+              <a
+                href="https://www.oreilly.com/library/view/mythical-man-month-the/0201835959"
+                target="_blank"
+                ><b
+                  >The Mythical Man-Month: Essays on Software Engineering</b
+                ></a
+              >
+              — Frederick P. Brooks Jr
+            </li>
+            <li class="article">
+              <a
+                href="https://martinfowler.com/bliki/Yagni.html"
+                target="_blank"
+                ><b>You Aren't Gonna Need It</b></a
+              >
+              — Martin Fowler
+            </li>
+            <li class="article">
+              <a
+                href="https://martinfowler.com/articles/is-quality-worth-cost.html"
+                target="_blank"
+                ><b>Is High Quality Software Worth the Cost?</b></a
+              >
+              — Martin Fowler
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>
+            <a href="https://bit.ly/4eWrtgw" target="_blank"
+              >DataRobot наймає!</a
+            >
+          </h1>
+          <ul>
+            <li>Frontend Engineer</li>
+            <li>Senior Backend Engineer</li>
+          </ul>
+          <img src=./datarobot.webp width="200" style="margin-top: 3rem"/>
+        </section>
+
+        <section>
+          <h1>
+            Дякую,
+            <a href="https://fwdays.com/events" target="blank">приходьте ще</a>
+          </h1>
+        </section>
+      </div>
+    </div>
+
+    <div class="line top"></div>
+    <div class="line bottom"></div>
+    <div class="line left"></div>
+    <div class="line right"></div>
+
+    <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+    <script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+    <script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+
+    <script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+    <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+    <script>
+      const printPlugins = [
+        RevealNotes,
+        RevealHighlight,
+        RevealMath.MathJax3,
+        RevealAnimate,
+        RevealChalkboard,
+        RevealEmbedTweet,
+        RevealChart,
+      ];
+
+      const plugins = [
+        ...printPlugins,
+        RevealZoom,
+        RevealSearch,
+        RevealMarkdown,
+
+        RevealFullscreen,
+        RevealAnything,
+        //RevealAudioSlideshow,
+        //RevealAudioRecorder,
+
+        // poll
+        // question
+        // seminar
+        Verticator,
+      ];
+
+      // Also available as an ES module, see:
+      // https://revealjs.com/initialization/
+      Reveal.initialize({
+        controls: false,
+        controlsTutorial: true,
+        controlsLayout: "bottom-right",
+        controlsBackArrows: "faded",
+        progress: true,
+        slideNumber: false,
+        //#showSlideNumber "all" "print" "speaker"
+        hash: true, //# hash: false,
+        //# respondToHashChanges: true,
+        //# history: false,
+        keyboard: true,
+        //#keyboardCondition: null,
+        overview: true,
+        center: true,
+        touch: true,
+        loop: false,
+        rtl: false,
+        //#navigationMode: 'default', linear grid
+        shuffle: false,
+        fragments: true,
+        fragmentInURL: false,
+        embedded: false,
+        help: true,
+        //#pause: true
+        showNotes: false,
+        autoPlayMedia: false, // TODO fix this to a nullable value
+        //#preloadIframes: null. true false
+        //#autoAnimate: true
+        //#autoAnimateMatcher: null,
+        //#autoAnimateEasing: 'ease',
+        //autoAnimateDuration: 1.0,
+        //#autoAnimateUnmatched: true
+        //#autoAnimateStyles: []
+        autoSlide: 0, // TODO fix this to a falseable value
+        autoSlideStoppable: true,
+        autoSlideMethod: "0",
+        defaultTiming: 120,
+        mouseWheel: false,
+        //#previewLinks: false
+        //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+        //#postMessageEvents: false,
+        //#focusBodyOnPageVisibilityChange: true,
+        transition: "slide",
+        transitionSpeed: "default",
+        backgroundTransition: "fade",
+        //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+        //#pdfSeparateFragments: true,
+        //#pdfPageHeightOffset: -1,
+        viewDistance: 3,
+        //#mobileViewDistance: 2,
+        display: "block",
+        //#hideInactiveCursor: true,
+        //#hideCursorTime: 5000
+
+        // Parallax Background
+        parallaxBackgroundImage: "",
+        parallaxBackgroundSize: "",
+        parallaxBackgroundHorizontal: 0,
+        parallaxBackgroundVertical: 0,
+
+        //Presentation Size
+        width: 800,
+        height: 600,
+        margin: 0.04,
+        minScale: 0.2,
+        maxScale: 2,
+        disableLayout: false,
+
+        audio: {
+          prefix: "audio/", // audio files are stored in the "audio" folder
+          suffix: ".ogg", // audio files have the ".ogg" ending
+          textToSpeechURL: null, // the URL to the text to speech converter
+          defaultNotes: false, // use slide notes as default for the text to speech converter
+          defaultText: false, // use slide text as default for the text to speech converter
+          advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+          autoplay: false, // automatically start slideshow
+          defaultDuration: 5, // default duration in seconds if no audio is available
+          defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+          playerOpacity: 0.05, // opacity value of audio player if unfocused
+          playerStyle:
+            "position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;", // style used for container of audio controls
+          startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+        },
+
+        chalkboard: {
+          // font-awesome.min.css must be available
+          //src: "chalkboard/chalkboard.json",
+          storage: "chalkboard-demo",
+        },
+
+        customcontrols: {
+          controls: [
+            {
+              id: "toggle-overview",
+              title: "Toggle overview (O)",
+              icon: '<i class="fa fa-th"></i>',
+              action: "Reveal.toggleOverview();",
+            },
+            {
+              icon: '<i class="fa fa-pen-square"></i>',
+              title: "Toggle chalkboard (B)",
+              action: "RevealChalkboard.toggleChalkboard();",
+            },
+            {
+              icon: '<i class="fa fa-pen"></i>',
+              title: "Toggle notes canvas (C)",
+              action: "RevealChalkboard.toggleNotesCanvas();",
+            },
+          ],
+        },
+        chart: {
+          defaults: {
+            color: "lightgray", // color of labels
+            scale: {
+              beginAtZero: true,
+              ticks: { stepSize: 1 },
+              grid: { color: "lightgray" }, // color of grid lines
+            },
+          },
+          line: {
+            borderColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+            borderDash: [
+              [5, 10],
+              [0, 0],
+            ],
+          },
+          bar: {
+            backgroundColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+          },
+          pie: {
+            backgroundColor: [
+              [
+                "rgba(0,0,0,.8)",
+                "rgba(220,20,20,.8)",
+                "rgba(20,220,20,.8)",
+                "rgba(220,220,20,.8)",
+                "rgba(20,20,220,.8)",
+              ],
+            ],
+          },
+          radar: {
+            borderColor: [
+              "rgba(20,220,220,.8)",
+              "rgba(220,120,120,.8)",
+              "rgba(20,120,220,.8)",
+            ],
+          },
+        },
+        math: {
+          mathjax:
+            "https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js",
+          config: "TeX-AMS_HTML-full",
+          // pass other options into `MathJax.Hub.Config()`
+          TeX: { Macros: { RR: "{\\bf R}" } },
+        },
+        anything: [
+          {
+            className: "plot",
+            defaults: { width: 500, height: 500, grid: true },
+            initialize: function (container, options) {
+              options.target = "#" + container.id;
+              functionPlot(options);
+            },
+          },
+          {
+            className: "chart",
+            initialize: function (container, options) {
+              container.chart = new Chart(container.getContext("2d"), options);
+            },
+          },
+          {
+            className: "anything",
+            initialize: function (container, options) {
+              if (options && options.initialize) {
+                options.initialize(container);
+              }
+            },
+          },
+        ],
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: window.location.search.match(/print-pdf/gi)
+          ? printPlugins
+          : plugins,
+      });
+
+      // Change chalkboard theme :
+      function changeTheme(input) {
+        var config = {};
+        config.theme = input.value;
+        Reveal.getPlugin("RevealChalkboard").configure(config);
+        input.blur();
+      }
+
+      // // Handle the message inside the webview
+      // window.addEventListener('message', event => {
+
+      //     const message = event.data; // The JSON data our extension sent
+
+      //     switch (message.command) {
+      //         case 'refactor':
+      //             Reveal.toggleHelp();
+      //     }
+      // });
+
+      if (window.location.search.match(/print-pdf-now/gi)) {
+        setTimeout(() => {
+          window.print();
+        }, 2500);
+      }
+    </script>
+  </body>
+</html>

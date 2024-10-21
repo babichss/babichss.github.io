@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  --m-size: 24px;
+  --spacing: calc(var(--m-size) / 3);
+  --r-background-color: #edf2f4;
+  --r-main-color: #2b2d42;
+  --r-heading-color: var(--r-main-color);
+  --r-main-font-size: var(--m-size);
+  --r-main-font: Inter;
+  --r-heading-font: var(--r-main-font);
+  --r-heading-margin: 1em 0 0 0;
+
+  --scale: 1.2;
+  --r-heading4-size: calc(var(--r-main-font-size) * var(--scale));
+  --r-heading3-size: calc(var(--r-heading4-size) * var(--scale));
+  --r-heading2-size: calc(var(--r-heading3-size) * var(--scale));
+  --r-heading1-size: calc(var(--r-heading2-size) * var(--scale));
+
+  --r-link-color: #ef233c;
+}
+
+.reveal {
+  .slides {
+    text-align: left;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ul {
+    margin-left: 0;
+
+    li::after {
+      content: ";";
+    }
+
+    li:last-child::after {
+      content: ".";
+    }
+
+    li::marker {
+      content: "● ";
+      translate: 0 -0.3em;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap:0.5em;
+
+    li.book::marker {
+      content: "📖 ";
+    }
+
+    li.article::marker {
+      content: "📄 ";
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+
+  :is(h2, h3, h4, h5, h6) {
+    /* text-transform: none; */
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    margin-bottom: 0.25em;
+    font-weight: 300;
+  }
+
+  :is(p, ul, ol):has(+ :is(h1, h2, h3, h4, h5, h6, p, ul, ol)) {
+    margin-bottom: 0.5em;
+  }
+
+  blockquote {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    &::before {
+      content: "“";
+      bottom: 100%;
+      right: 100%;
+    }
+
+    &::after {
+      content: "„";
+      top: 100%;
+      left: 100%;
+    }
+
+    &::after,
+    &::before {
+      position: absolute;
+      font-family: serif;
+      font-size: 2em;
+      line-height: 0;
+    }
+  }
+
+  table {
+    margin: 0;
+    font-size: 1rem;
+
+    thead tr {
+      background-color: oklch(0.9 0 0);
+    }
+
+    & :is(th, td) {
+      border: none;
+      padding: var(--spacing) calc(var(--spacing) * 2);
+      vertical-align: top;
+    }
+  }
+
+  pre {
+    margin: 0;
+    box-shadow: none;
+
+    code {
+      background-color: var(--r-background-color);
+      font-size: 1.1rem;
+      line-height: 1.2em;
+    }
+  }
+
+  img {
+    margin: 0;
+  }
+
+  .my-links {
+    margin-top: 1rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    figcaption {
+      font-weight: 700;
+    }
+  }
+}
