@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+:root {
+  --font-family: "Inter", sans-serif;
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  body {
+    background-color: #121212;
+    font-family: var(--font-family);
+  }
+}
+
+.reveal {
+  --r-main-font: var(--font-family);
+  --r-heading-font: var(--font-family);
+  --r-main-font-size: 2.1rem;
+  font-weight: 500;
+
+  :is(b, strong) {
+    font-weight: 700;
+    color: #e0e0e0
+  }
+
+  & * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    color: #4fc3f7;
+    color: white;
+    text-wrap: balance;
+    font-weight: 200;
+  }
+
+  .slide-background {
+    background:
+      rgba(0, 0, 0, 0.7) url(./assets/slidespace.jpg);
+    background-blend-mode: darken;
+  }
+
+  .float-right {
+    float: right;
+    min-width: 40vw;
+  }
+
+  pre {
+    margin: 0;
+    border: 1px solid #4fc3f7;
+    box-shadow: 0 0 1rem #4fc3f7;
+    border-radius: 1rem;
+
+
+
+    &:has(+*) {
+      margin-bottom: 1rem;
+    }
+
+    code {
+      border-radius: inherit;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1rem;
+      line-height: 1.5;
+
+    }
+  }
+
+  .slides {
+    text-align: start;
+
+    h1 {
+      color: white;
+      text-align: center;
+      font-weight: 200;
+      font-size: 6rem;
+    }
+
+    .present p:has(img) {
+      float: right;
+      margin: 0;
+    }
+
+    img {
+      width: 20vw;
+      margin: 0;
+      border-radius: 1rem;
+      box-shadow: 0 0 1rem #4fc3f7;
+      border: 1px solid #4fc3f7;
+      filter: grayscale(.5);
+    }
+
+    :is(ul, ol) {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      max-width: 80%;
+
+      li {
+        text-wrap: pretty;
+
+        img {
+
+          aspect-ratio: 4/3;
+        }
+
+        &::after {
+          content: " ";
+          display: block;
+          width: 3vw;
+          height: 1vh;
+          background-color: #4fc3f7;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 15vw;
+  column-gap: 2rem;
+  margin: 0;
+  padding: 0;
+  max-width: 80%;
+
+  p {
+    margin: 0;
+  }
+}
+
+.h-stack {
+  display: flex;
+  gap: 5vw;
+}
+
+.subtitle {
+  font-size: 2rem;
+
+  font-weight: 300;
+  text-align: center;
+}
