@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto+Slab:wght@100..900&display=swap");
+
+:root {
+  --r-main-font-size: 42px;
+  --r-main-font: Inter;
+  --r-heading-font: "Inter Tight";
+  --r-background-color: black;
+
+  --r-heading-font-weight: 700;
+  /* --r-heading-text-transform: normal; */
+}
+.reveal {
+  .slide-background-content {
+    background-size: contain;
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  .slides {
+    text-align: start;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-inline-start: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+
+    li::marker {
+      content: "— ";
+    }
+
+    &.columned {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+      font-size: 0.6em;
+
+      li {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 0.5em;
+        border-radius: 8px;
+        &::marker {
+          content: "";
+        }
+      }
+    }
+  }
+
+  blockquote {
+    font-size: 0.6em;
+    font-family: "Roboto Slab", serif;
+    background: none;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  p {
+    max-width: 70%;
+    letter-spacing: 0.02em;
+    font-weight: 300;
+  }
+
+  pre {
+    margin: 0;
+    width: 70%;
+
+    code {
+      padding: 1em;
+    }
+
+    &:has(+ pre) {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  .links {
+    display: flex;
+    gap: 1em;
+
+    figcaption {
+      font-size: 0.6em;
+      opacity: 0.7;
+      margin-bottom: 0.25em;
+    }
+
+    img {
+      margin: 0;
+    }
+  }
+}

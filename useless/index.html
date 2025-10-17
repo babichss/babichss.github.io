@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>useLess</title>
+
+  <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+  <meta name="author" content="Hakim El Hattab">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/reveal.css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+  <!-- highlight Theme -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/11.3.1/styles/monokai.min.css">
+  
+	
+		
+	<link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/chalkboard/style.css">
+	
+	
+	
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
+  
+	
+
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="libs/reveal.js/4.3.1/theme/black.css" id="theme">
+  
+  
+
+  <link rel="stylesheet" href="libs/styles/tasklist.css">
+	<link rel="stylesheet" href="libs/styles/iota.css">
+	<link rel="stylesheet" href="libs/styles/layout.css">
+
+
+  <!-- Revealjs Theme -->
+  
+  <link rel="stylesheet" href="style.css">
+  
+
+   <!-- css list -->
+	
+
+   
+
+</head>
+
+<body>
+
+   
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1>use(Less)</h1>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke2.jpg">
+<h2>Проблема</h2>
+<p>В більшості випадків, додаючи до коду хук, ми вирішуємо рівно <strong>0</strong> проблем.</p>
+<p>Натомість ми можемо створити безліч нових.</p>
+<aside class="notes">
+<ul>
+<li>Ми звикли додавати хуки автоматично.</li>
+<li>Кожен <code>use*</code> робить компонент складнішим.</li>
+<li>React мусить виконувати більше роботи, навіть коли це не потрібно.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <p>Ця доповідь не про те, як працюють хуки,
+а про те, коли вони справді потрібні —
+і що відбувається, коли ми додаємо їх без потреби.</p>
+<aside class="notes">
+<ul>
+<li>Простий код не означає обмежений.</li>
+<li>Хуків має бути рівно стільки, скільки справді потрібно.</li>
+<li>React чудово працює, коли ми не ускладнюємо йому життя.</li>
+</ul>
+</aside>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke1.jpg">
+<h2>Як React працює з хуками</h2>
+<p>Хуки виглядають легкими, але для React це додаткові кроки під час оновлення. Кожен <code>use*</code> — ще одна точка, яку потрібно перевірити, тому зайві хуки реально уповільнюють роботу.</p>
+<aside class="notes">
+<ul>
+<li>React зберігає усі хуки в певному порядку всередині компонента.</li>
+<li>Кожен <code>use*</code> створює окремий запис, який треба відстежувати при кожному рендері.</li>
+<li>Чим більше хуків — тим більше перевірок і роботи для React.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke3.png">
+<h2>Не всі хуки рівні</h2>
+<p>Ми зосередимося на тих хуках, що найчастіше додають складності без користі. І головне питання для кожного з них — <strong>чи він справді потрібен у цьому місці</strong>?</p>
+<blockquote>
+<p>Не кожен use* робить код кращим. Не кожен use* робить код гіршим.
+Але кожен use* додає ще одну причину для рефакторингу.</p>
+</blockquote>
+<aside class="notes">
+<ul>
+<li>Деякі хуки ми використовуємо майже в кожному компоненті.</li>
+<li>Найчастіше проблеми виникають саме з <code>useState</code>, <code>useEffect</code>, <code>useMemo</code>, <code>useCallback</code> і кастомними хуками.</li>
+<li>Інші — спеціалізовані й рідко викликають плутанину.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke4.png">
+<blockquote>
+<p>disclaimer</p>
+</blockquote>
+<p>Ці поради — не правила, а спосіб мислити. Майже завжди правильна відповідь:</p>
+<h1 class="fragment">
+It depends
+</h1>
+<aside class="notes">
+<ul>
+<li>У React немає універсальних рецептів.</li>
+<li>Те, що спрацьовує в одному компоненті, може бути помилкою в іншому.</li>
+<li>Рішення завжди залежать від контексту і мети.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke5.png">
+<h2><code>useEffect</code></h2>
+<p><code>useEffect</code> часто використовують як “звалище логіки після рендеру”.
+Але більшість ефектів узагалі не потрібні — вони лише маскують відсутність розуміння того, як працює React.</p>
+<blockquote>
+<p>Ефект без причини — признак дурачіни.</p>
+</blockquote>
+<aside class="notes">
+<ul>
+<li>useEffect часто додають автоматично, коли “щось не працює”, не розібравшись у причинах.</li>
+<li>Це маскує нерозуміння, як React обробляє стан і ререндери.</li>
+<li>Ефекти зʼявляються “для підстраховки”, але лише погіршують структуру — логіка розповзається, зʼявляються дублювання й неочевидні оновлення.</li>
+<li>Такий код важко читати й підтримувати, бо втрачається причинність: що саме викликає зміни і коли.</li>
+</ul>
+</aside>
+</section>
+<section data-background-image="monke5.png">
+<p><code>useEffect</code> існує, щоб синхронізувати компонент із зовнішньою системою. Перед тим як додати ефект, спитайте себе: <strong>чому саме цей компонент має це робити — чи входить це до його зони відповідальності</strong>?</p>
+<aside class="notes">
+<ul>
+<li>useEffect — це міст між React і чимось поза React. Якщо все, що він робить, залишається усередині, — міст не потрібен.</li>
+<li>Трансформація або фільтрація даних — це обчислення, не синхронізація.</li>
+<li>Реакція на подію користувача — це інтеракція, не ефект.</li>
+<li>Встановлення стану після маунту — це обхід архітектури, не потреба.</li>
+<li>“трохи фетчу, трохи DOM” — ознака, що компонент тягне не свою відповідальність.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke6.png">
+<h2><code>useState</code></h2>
+<p>Коли кожна дрібниця стає станом — компонент тоне у власних оновленнях. А ми — в тому, хто кого оновлює.</p>
+<blockquote>
+<p>Якщо все — стан, то нічого не стан.</p>
+</blockquote>
+<aside class="notes">
+<ul>
+<li>Забагато useState — і код втрачає логіку: важко зрозуміти, що й коли оновлюється.</li>
+<li>setState розкидані по компоненту, тому послідовність змін неочевидна.</li>
+<li>Це ускладнює мислення: ти керуєш змінними, а не поведінкою.</li>
+<li>Кожен зайвий стан — ще одна точка плутанини.</li>
+<li>Меседж:</li>
+<li>“Коли станів занадто багато — ти вже не контролюєш код, він контролює тебе.”</li>
+</ul>
+</aside>
+</section>
+<section data-background-image="monke6.png">
+<p>Чи це справді щось, <strong>що треба змінювати явно</strong>? Чи це значення <strong>має жити між рендерами</strong>, чи його можна отримати наново.
+І головне — чи <strong>саме цей компонент</strong> повинен за нього <strong>відповідати</strong>?</p>
+<aside class="notes">
+<ul>
+<li>useState — не для всього, що ворушиться. Він потрібен лише там, де значення реально змінюється з часом.</li>
+<li>Якщо дані можна обчислити або передати через пропси, — це не стан, це похідне.</li>
+<li>Якщо значення не потрібно зберігати між рендерами, — звичайна змінна чи useMemo буде достатньо.</li>
+<li>Якщо стани можна обʼєднати в один обʼєкт — так і робіть.</li>
+<li>Завжди став питання: “чи саме цей компонент має нести відповідальність за ці дані?”</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke7.png">
+<h2><code>useMemo</code></h2>
+<p>Ми часто додаємо <code>useMemo</code>, аби здаватися уважними до швидкодії. Насправді ж ми створюємо лише ілюзію, яка може розвіятися у будь-яку мить.</p>
+<blockquote>
+<p>Оптимізація без вимірювання — як село без церкви.</p>
+</blockquote>
+<aside class="notes">
+<ul>
+<li>Найчастіша помилка — додавати useMemo для відчуття оптимізації, не маючи реального виміру користі.</li>
+<li>Така “оптимізація” створює ілюзію контролю, але насправді ускладнює логіку.</li>
+<li>Залежності стають пасткою: пропущена або зайва залежність легко призводить до неправильної поведінки або застарілих даних.</li>
+<li>У результаті код виглядає “професійно”, але поводиться менш передбачувано.</li>
+</ul>
+</aside>
+</section>
+<section data-background-image="monke7.png">
+<p>Головне призначення <code>useMemo</code> — забезпечення <em>stable reference</em> між рендерами. То чи дійсно мені потрібне це <strong>стабільне посилання</strong>?</p>
+<p>Ми “кешуємо” важкі обчислення. То чи насправді вони <strong>аж такі важке</strong>? І якщо так, то <strong>якого милого воно взагалі тут</strong> робить?</p>
+<aside class="notes">
+<ul>
+<li>Головна причина для useMemo — стабільність посилань. Якщо передаєш об’єкт, масив чи функцію далі як залежність — це допоможе уникнути зайвих викликів. Якщо не передаєш — він не потрібен.</li>
+<li>Друга причина — справді дороге обчислення. Але якщо воно таке важке, запитай себе: “чому це обчислення взагалі у компоненті?” Часто відповідь — винести логіку вище або в утиліту.</li>
+<li>“useMemo — це не оптимізація, а компроміс. Якщо він потрібен усюди — проблема не в React, а в архітектурі.”</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke8.png">
+<h2><code>useCallback</code></h2>
+<p>Його часто додають “на всяк випадок” — щоб не “створювати функцію заново” або “оптимізувати” рендер. Насправді він взагалі нічого не оптимізує: функція створюється щоразу, а код стає складнішим і менш передбачуваним.</p>
+<aside class="notes">
+<ul>
+<li>useCallback потрібен лише для стабільного посилання, коли функцію передають далі або використовують у залежностях.</li>
+<li>Аргумент “щоб не створювати функцію заново” — хибний:</li>
+<li>функція створюється при кожному рендері в будь-якому разі.</li>
+<li>Основна небезпека — старі замикання, коли залежності вказані неправильно.</li>
+<li>Меседж:</li>
+<li>“useCallback не економить створення — він лише фіксує посилання.</li>
+<li>Якщо це не потрібно, не ускладнюй код.”</li>
+</ul>
+</aside>
+</section>
+<section data-background-image="monke8.png">
+<p>Головне питання — чи треба нам сталість посилання? Якщо ні — забудьте про <code>useCallback</code>.</p>
+<aside class="notes">
+<ul>
+<li>useCallback має сенс лише тоді, коли функція використовується в залежностях або передається в мемо-компонент.</li>
+<li>Якщо ніхто не порівнює посилання, стабільність не потрібна — обгортка лише створює зайві залежності.</li>
+<li>Надмірне використання призводить до “порожньої оптимізації”: код складніший, а вигоди немає взагалі.</li>
+<li>Типова пастка — додавати useCallback автоматично “для порядку”.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke9.png">
+<h2>Кастомні хуки</h2>
+<p>Ми додаємо кастомні хуки “щоб винести код”. Але якщо логіка не стає зрозумілішою, а лише ховається глибше — це не покращення коду, а приховування безладу.</p>
+<aside class="notes">
+<ul>
+<li>Кастомний хук має сенс лише тоді, коли спрощує код або об’єднує спільну поведінку. І тільки тоді, коли він використовує інші, справжні хуки.</li>
+<li>Інакше це просто функція.</li>
+<li>“Винести логіку” — не мета, якщо код стає менш прозорим.</li>
+<li>Якщо не можеш коротко пояснити, навіщо цей хук, — він не потрібен.</li>
+<li>Критерій: хук має прояснювати структуру, а не ховати безлад.</li>
+</ul>
+</aside>
+</section>
+<section data-background-image="monke9.png">
+<p>Питайте в себе: чи <strong>справді</strong> ця логіка <strong>повторюється</strong> в кількох місцях? Чи стане компонент <strong>простішим</strong>, якщо я <strong>винесу це в хук</strong>? Чи можу я в одному реченні <strong>пояснити, що робить цей хук і навіщо він існує</strong>?</p>
+<aside class="notes">
+<ul>
+<li>Кастомні хуки — це нормально. Але якщо ваш кастомний хук робить замало — він не потрібен. Якщо забагато — тоді треба більше кастомних хуків.</li>
+<li>Призначення: кастомні хуки потрібні для реюзу логіки, а не стану — кожен має власний ізольований state.</li>
+<li>Ознаки “так”: хук інкапсулює одну поведінку, має чітку назву, зменшує дублювання й спрощує компонент. (DEV)</li>
+<li>Ознаки “ні”: хук просто ховає useState/useEffect, ускладнює залежності, зменшує прозорість. (Medium)</li>
+<li>Межа: важку бізнес-логіку краще виносити в утиліти чи сервіси, а не в хук. (Reddit)</li>
+<li>Критерій: якщо не можеш в одному реченні пояснити, що робить хук, — він зайвий. (Kent C. Dodds)</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke10.png">
+<h2>use Less, do more</h2>
+<p>Пишіть код, а не хуки.</p>
+<p>Не вирішуйте неіснуючих проблем.</p>
+<p>Завжди питайте себе: <strong>“Чи відпаде у мене срака, якщо тут не буде useMemo?”</strong>.</p>
+<aside class="notes">
+<p>Писати хороший код на React не значить писати на хуках. Це значить створювати зрозумілі та прозорі зв’язки між даними, діями та відображенням.</p>
+<p>Хук — це той самий електронний мікроскоп, яким ми зачасту забиваємо цвяхи.</p>
+<ul>
+<li>Не починай із питання “який хук тут потрібен?”. Почни з “чи він узагалі потрібен?”.</li>
+<li>Якщо код читається без коментарів — це вже оптимізація.</li>
+<li>Код, написаний просто, простіше підтримувати.</li>
+</ul>
+</aside>
+</section>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke11.png">
+<h2>Питайте шось</h2>
+<p>і підписуйтесь на Дивовижний світ веброзробки</p>
+<div class="links">
+  <figure>
+    <figcaption>Telegram</figcaption>
+    <img width=200 src="./telegram-qr.webp"/>
+  </figure>
+  <figure>
+    <figcaption>Youtube</figcaption>
+    <img width=200 src="./youtube-qr.webp"/>
+  </figure>
+</div>
+</section>
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <div class="line top"></div>
+  <div class="line bottom"></div>
+  <div class="line left"></div>
+  <div class="line right"></div>
+
+  <script src="libs/reveal.js/4.3.1/reveal.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/notes/notes.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/markdown/markdown.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/highlight/highlight.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/math/math.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/fullscreen/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/animate/svg.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/Chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/d3.v3.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3.patch.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/queue.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/d3/topojson.v1.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/anything/function-plot.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/customcontrols/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/embed-tweet/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/chart.min.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chart/plugin.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/verticator/verticator.js"></script>
+
+<script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+<script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
+
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/recorder.js"></script>-->
+<!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/RecordRTC.js"></script>-->
+
+  
+
+<script>
+  const printPlugins = [
+      RevealNotes,
+      RevealHighlight,
+      RevealMath.MathJax3,
+      RevealAnimate,
+      RevealChalkboard, 
+			RevealEmbedTweet,
+			RevealChart,
+		];
+
+		const plugins =  [...printPlugins,
+		RevealZoom, 
+		RevealSearch, 
+				RevealMarkdown, 
+				RevealMenu, 
+				RevealFullscreen,
+				RevealAnything,
+				//RevealAudioSlideshow,
+				//RevealAudioRecorder,
+				RevealCustomControls, 
+				// poll
+				// question
+				// seminar
+				Verticator 
+				 ]
+
+
+		// Also available as an ES module, see:
+		// https://revealjs.com/initialization/
+		Reveal.initialize({
+			controls: true,
+      controlsTutorial: true,
+      controlsLayout: 'bottom-right',
+      controlsBackArrows: 'faded',
+      progress: true,
+      slideNumber: false,
+      //#showSlideNumber "all" "print" "speaker"
+      hash: true, //# hash: false,
+      //# respondToHashChanges: true,
+      //# history: false,
+      keyboard: true,
+      //#keyboardCondition: null,
+      overview: true,
+      center: true,
+      touch: true,
+      loop: false,
+      rtl: false,
+      //#navigationMode: 'default', linear grid
+      shuffle: false,
+      fragments: true,
+      fragmentInURL: false,
+      embedded: false,
+      help: true,
+      //#pause: true
+      showNotes: false,
+      autoPlayMedia: false, // TODO fix this to a nullable value
+      //#preloadIframes: null. true false
+      //#autoAnimate: true
+      //#autoAnimateMatcher: null,
+      //#autoAnimateEasing: 'ease',
+      //autoAnimateDuration: 1.0,
+      //#autoAnimateUnmatched: true
+      //#autoAnimateStyles: []
+      autoSlide: 0, // TODO fix this to a falseable value
+      autoSlideStoppable: true,
+      autoSlideMethod: '0',
+      defaultTiming: 120,
+      mouseWheel: false,
+      //#previewLinks: false
+      //#postMessage: true, // TODO : this can cause issues with the vscode api ???
+      //#postMessageEvents: false,
+      //#focusBodyOnPageVisibilityChange: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      //#pdfMaxPagesPerSlide: Number.POSITIVE_INFINITY,
+      //#pdfSeparateFragments: true,
+      //#pdfPageHeightOffset: -1,
+      viewDistance: 3,
+      //#mobileViewDistance: 2,
+      display: 'block',
+      //#hideInactiveCursor: true,
+      //#hideCursorTime: 5000
+
+      // Parallax Background
+      parallaxBackgroundImage: '',
+      parallaxBackgroundSize: '',
+      parallaxBackgroundHorizontal: 0,
+      parallaxBackgroundVertical: 0,
+
+      //Presentation Size
+      width: 1280,
+			height: 720,
+			margin: 0.04,
+      minScale: 0.2,
+      maxScale: 2,
+      disableLayout: false,
+
+      audio: {
+        prefix: 'audio/', // audio files are stored in the "audio" folder
+        suffix: '.ogg', // audio files have the ".ogg" ending
+        textToSpeechURL: null, // the URL to the text to speech converter
+        defaultNotes: false, // use slide notes as default for the text to speech converter
+        defaultText: false, // use slide text as default for the text to speech converter
+        advance: 0, // advance to next slide after given time in milliseconds after audio has played, use negative value to not advance
+        autoplay: false, // automatically start slideshow
+        defaultDuration: 5, // default duration in seconds if no audio is available
+        defaultAudios: true, // try to play audios with names such as audio/1.2.ogg
+        playerOpacity: 0.05, // opacity value of audio player if unfocused
+        playerStyle: 'position: fixed; bottom: 4px; left: 25%; width: 50%; height:75px; z-index: 33;', // style used for container of audio controls
+        startAtFragment: false, // when moving to a slide, start at the current fragment or at the start of the slide
+      },
+      
+      chalkboard: { // font-awesome.min.css must be available
+        //src: "chalkboard/chalkboard.json",
+        storage: "chalkboard-demo",
+      },
+      
+			customcontrols: {
+					controls: [
+      						{
+						  id: 'toggle-overview',
+						  title: 'Toggle overview (O)',
+						  icon: '<i class="fa fa-th"></i>',
+						  action: 'Reveal.toggleOverview();'
+						}
+						,
+      {
+        icon: '<i class="fa fa-pen-square"></i>',
+        title: 'Toggle chalkboard (B)',
+        action: 'RevealChalkboard.toggleChalkboard();'
+      },
+      {
+        icon: '<i class="fa fa-pen"></i>',
+        title: 'Toggle notes canvas (C)',
+        action: 'RevealChalkboard.toggleNotesCanvas();'
+      }
+      
+				]
+			},
+			chart: {
+					defaults: { 
+						color: 'lightgray', // color of labels
+						scale: { 
+							beginAtZero: true, 
+							ticks: { stepSize: 1 },
+							grid: { color: "lightgray" } , // color of grid lines
+						},
+					},
+					line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ] }, 
+					bar: { backgroundColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+					pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+					radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+			},
+			math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				anything: [ 
+				{
+		className: "plot",
+		defaults: {width:500, height: 500, grid:true},
+		initialize: (function(container, options){ options.target = "#"+container.id; functionPlot(options) })
+	 },
+	 {
+		className: "chart",  
+		initialize: (function(container, options){ container.chart = new Chart(container.getContext("2d"), options);  })
+	 },
+	 {
+		className: "anything",
+		initialize: (function(container, options){ if (options && options.initialize) { options.initialize(container)} })
+	 },
+					],
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: (window.location.search.match(/print-pdf/gi) ? printPlugins : plugins ) 
+		});
+			
+
+
+	    // Change chalkboard theme : 
+		function changeTheme(input) {
+			var config = {};
+			config.theme = input.value;
+			Reveal.getPlugin("RevealChalkboard").configure(config);
+			input.blur();
+		}
+
+		// // Handle the message inside the webview
+        // window.addEventListener('message', event => {
+
+        //     const message = event.data; // The JSON data our extension sent
+
+        //     switch (message.command) {
+        //         case 'refactor':
+        //             Reveal.toggleHelp();
+        //     }
+        // });
+
+		if (window.location.search.match(/print-pdf-now/gi)) {
+      		setTimeout(() => {
+				window.print();
+			  }, 2500);
+			
+    }
+</script>
+
+</body>
+
+</html>
