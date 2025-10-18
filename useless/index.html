@@ -29,8 +29,6 @@
 	
 	
 	
-  <link rel="stylesheet" href="libs/reveal.js/4.3.1/plugin/customcontrols/style.css">
-  
 	
 
 
@@ -74,6 +72,7 @@
         <section >
             
             <h1>use(Less)</h1>
+<aside class="notes"> Ця доповідь не про те, як працюють хуки, а про те, коли вони справді потрібні — і що відбувається, коли ми додаємо їх без потреби.</aside>
 
             </section>
     
@@ -103,24 +102,6 @@
     
         <section >
             
-            <p>Ця доповідь не про те, як працюють хуки,
-а про те, коли вони справді потрібні —
-і що відбувається, коли ми додаємо їх без потреби.</p>
-<aside class="notes">
-<ul>
-<li>Простий код не означає обмежений.</li>
-<li>Хуків має бути рівно стільки, скільки справді потрібно.</li>
-<li>React чудово працює, коли ми не ускладнюємо йому життя.</li>
-</ul>
-</aside>
-            </section>
-    
-
-
-
-    
-        <section >
-            
             <section data-background-image="monke1.jpg">
 <h2>Як React працює з хуками</h2>
 <p>Хуки виглядають легкими, але для React це додаткові кроки під час оновлення. Кожен <code>use*</code> — ще одна точка, яку потрібно перевірити, тому зайві хуки реально уповільнюють роботу.</p>
@@ -129,6 +110,9 @@
 <li>React зберігає усі хуки в певному порядку всередині компонента.</li>
 <li>Кожен <code>use*</code> створює окремий запис, який треба відстежувати при кожному рендері.</li>
 <li>Чим більше хуків — тим більше перевірок і роботи для React.</li>
+<li>Простий код не означає обмежений.</li>
+<li>Хуків має бути рівно стільки, скільки справді потрібно.</li>
+<li>React чудово працює, коли ми не ускладнюємо йому життя.</li>
 </ul>
 </aside>
 </section>
@@ -141,12 +125,8 @@
         <section >
             
             <section data-background-image="monke3.png">
-<h2>Не всі хуки рівні</h2>
-<p>Ми зосередимося на тих хуках, що найчастіше додають складності без користі. І головне питання для кожного з них — <strong>чи він справді потрібен у цьому місці</strong>?</p>
-<blockquote>
-<p>Не кожен use* робить код кращим. Не кожен use* робить код гіршим.
-Але кожен use* додає ще одну причину для рефакторингу.</p>
-</blockquote>
+<h2>Не всі хуки однаково <s>корисні</s> безглузді</h2>
+<p>Ми зосередимося на тих хуках, що найчастіше додають складності без користі.</p>
 <aside class="notes">
 <ul>
 <li>Деякі хуки ми використовуємо майже в кожному компоненті.</li>
@@ -176,6 +156,9 @@ It depends
 <li>У React немає універсальних рецептів.</li>
 <li>Те, що спрацьовує в одному компоненті, може бути помилкою в іншому.</li>
 <li>Рішення завжди залежать від контексту і мети.</li>
+<li>Важливо, хуки є невідʼємною частиною React.</li>
+<li>Вони не є чудовою магією, вони намагаються вирішити або маскувати недоліки архітектури.</li>
+<li>Інше питання — коли вони доцільні. Ми не можемо відмовитися від них взагалі, але маємо розуміти, для чого вони нам.</li>
 </ul>
 </aside>
 </section>
@@ -191,9 +174,6 @@ It depends
 <h2><code>useEffect</code></h2>
 <p><code>useEffect</code> часто використовують як “звалище логіки після рендеру”.
 Але більшість ефектів узагалі не потрібні — вони лише маскують відсутність розуміння того, як працює React.</p>
-<blockquote>
-<p>Ефект без причини — признак дурачіни.</p>
-</blockquote>
 <aside class="notes">
 <ul>
 <li>useEffect часто додають автоматично, коли “щось не працює”, не розібравшись у причинах.</li>
@@ -241,8 +221,8 @@ It depends
 </aside>
 </section>
 <section data-background-image="monke6.png">
-<p>Чи це справді щось, <strong>що треба змінювати явно</strong>? Чи це значення <strong>має жити між рендерами</strong>, чи його можна отримати наново.
-І головне — чи <strong>саме цей компонент</strong> повинен за нього <strong>відповідати</strong>?</p>
+<p><code>useState</code> зберігає локальні дані, що змінюються з часом і впливають на рендер.</p>
+<p>Тож головні питання: чи це справді <strong>треба змінювати</strong>? Чи це значення <strong>має жити між рендерами</strong>? І головне — чи <strong>саме цей компонент</strong> повинен за нього <strong>відповідати</strong>?</p>
 <aside class="notes">
 <ul>
 <li>useState — не для всього, що ворушиться. Він потрібен лише там, де значення реально змінюється з часом.</li>
@@ -277,7 +257,8 @@ It depends
 </aside>
 </section>
 <section data-background-image="monke7.png">
-<p>Головне призначення <code>useMemo</code> — забезпечення <em>stable reference</em> між рендерами. То чи дійсно мені потрібне це <strong>стабільне посилання</strong>?</p>
+<p>Задача <code>useMemo</code> — забезпечення <em>stable reference</em> між рендерами.</p>
+<p>То чи дійсно мені потрібне це <strong>стабільне посилання</strong>?</p>
 <p>Ми “кешуємо” важкі обчислення. То чи насправді вони <strong>аж такі важке</strong>? І якщо так, то <strong>якого милого воно взагалі тут</strong> робить?</p>
 <aside class="notes">
 <ul>
@@ -343,7 +324,7 @@ It depends
 </aside>
 </section>
 <section data-background-image="monke9.png">
-<p>Питайте в себе: чи <strong>справді</strong> ця логіка <strong>повторюється</strong> в кількох місцях? Чи стане компонент <strong>простішим</strong>, якщо я <strong>винесу це в хук</strong>? Чи можу я в одному реченні <strong>пояснити, що робить цей хук і навіщо він існує</strong>?</p>
+<p>Питайте в себе: чи <strong>справді</strong> ця логіка <strong>повторюється</strong> в кількох місцях? Чи стане компонент <strong>простішим</strong>, якщо <strong>винести це в хук</strong>? Чи можна в одному реченні <strong>пояснити, що робить цей хук і навіщо він існує</strong>?</p>
 <aside class="notes">
 <ul>
 <li>Кастомні хуки — це нормально. Але якщо ваш кастомний хук робить замало — він не потрібен. Якщо забагато — тоді треба більше кастомних хуків.</li>
@@ -437,7 +418,7 @@ It depends
 
 <script src="libs/reveal.js/4.3.1/plugin/zoom/zoom.js"></script>
 <script src="libs/reveal.js/4.3.1/plugin/search/search.js"></script>
-<script src="libs/reveal.js/4.3.1/plugin/menu/menu.js"></script>
+
 <script src="libs/reveal.js/4.3.1/plugin/chalkboard/plugin.js"></script>
 
 <!--	<script src="libs/reveal.js/4.3.1/plugin/audio-slideshow/plugin.js"></script>  -->
@@ -461,12 +442,12 @@ It depends
 		RevealZoom, 
 		RevealSearch, 
 				RevealMarkdown, 
-				RevealMenu, 
+				
 				RevealFullscreen,
 				RevealAnything,
 				//RevealAudioSlideshow,
 				//RevealAudioRecorder,
-				RevealCustomControls, 
+				
 				// poll
 				// question
 				// seminar
@@ -477,7 +458,7 @@ It depends
 		// Also available as an ES module, see:
 		// https://revealjs.com/initialization/
 		Reveal.initialize({
-			controls: true,
+			controls: false,
       controlsTutorial: true,
       controlsLayout: 'bottom-right',
       controlsBackArrows: 'faded',
