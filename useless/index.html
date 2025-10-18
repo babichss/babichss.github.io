@@ -71,7 +71,7 @@
     
         <section >
             
-            <h1>use(Less)</h1>
+            <h1 class="title">useLess</h1>
 <aside class="notes"> Ця доповідь не про те, як працюють хуки, а про те, коли вони справді потрібні — і що відбувається, коли ми додаємо їх без потреби.</aside>
 
             </section>
@@ -103,17 +103,16 @@
         <section >
             
             <section data-background-image="monke1.jpg">
-<h2>Як React працює з хуками</h2>
-<p>Хуки виглядають легкими, але для React це додаткові кроки під час оновлення. Кожен <code>use*</code> — ще одна точка, яку потрібно перевірити, тому зайві хуки реально уповільнюють роботу.</p>
+<h2>Що таке хуки</h2>
+<p>Це функції, які дають <strong>функціональним</strong> компонентам змогу «підключатися» до стану, контексту, побічних ефектів та інших можливостей, не використовуючи <strong>класи</strong>.</p>
 <aside class="notes">
-<ul>
-<li>React зберігає усі хуки в певному порядку всередині компонента.</li>
-<li>Кожен <code>use*</code> створює окремий запис, який треба відстежувати при кожному рендері.</li>
-<li>Чим більше хуків — тим більше перевірок і роботи для React.</li>
-<li>Простий код не означає обмежений.</li>
-<li>Хуків має бути рівно стільки, скільки справді потрібно.</li>
-<li>React чудово працює, коли ми не ускладнюємо йому життя.</li>
-</ul>
+  - Клас — постійний інстанс. Функція — одноразов.
+  - React зберігає усі хуки в певному порядку всередині компонента.
+  - Кожен `use*` створює окремий запис, який треба відстежувати при кожному рендері.
+  - Чим більше хуків&nbsp;— тим більше перевірок і роботи для React.
+  - Простий код не означає обмежений.
+  - Хуків має бути рівно стільки, скільки справді потрібно.
+  - React чудово працює, коли ми не ускладнюємо йому життя.
 </aside>
 </section>
             </section>
@@ -183,7 +182,15 @@ It depends
 </ul>
 </aside>
 </section>
-<section data-background-image="monke5.png">
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke5.png">
 <p><code>useEffect</code> існує, щоб синхронізувати компонент із зовнішньою системою. Перед тим як додати ефект, спитайте себе: <strong>чому саме цей компонент має це робити — чи входить це до його зони відповідальності</strong>?</p>
 <aside class="notes">
 <ul>
@@ -220,7 +227,15 @@ It depends
 </ul>
 </aside>
 </section>
-<section data-background-image="monke6.png">
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke6.png">
 <p><code>useState</code> зберігає локальні дані, що змінюються з часом і впливають на рендер.</p>
 <p>Тож головні питання: чи це справді <strong>треба змінювати</strong>? Чи це значення <strong>має жити між рендерами</strong>? І головне — чи <strong>саме цей компонент</strong> повинен за нього <strong>відповідати</strong>?</p>
 <aside class="notes">
@@ -256,10 +271,18 @@ It depends
 </ul>
 </aside>
 </section>
-<section data-background-image="monke7.png">
-<p>Задача <code>useMemo</code> — забезпечення <em>stable reference</em> між рендерами.</p>
-<p>То чи дійсно мені потрібне це <strong>стабільне посилання</strong>?</p>
-<p>Ми “кешуємо” важкі обчислення. То чи насправді вони <strong>аж такі важке</strong>? І якщо так, то <strong>якого милого воно взагалі тут</strong> робить?</p>
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke7.png">
+<p>Задача <code>useMemo</code> — забезпечення <em>stable reference</em> між рендерами.
+То чи дійсно потрібне це <strong>стабільне посилання</strong>?</p>
+<p>Ми “кешуємо” важкі обчислення. А чи насправді вони <strong>аж такі важке</strong>? І якщо так, то <strong>якого милого воно взагалі тут</strong> робить?</p>
 <aside class="notes">
 <ul>
 <li>Головна причина для useMemo — стабільність посилань. Якщо передаєш об’єкт, масив чи функцію далі як залежність — це допоможе уникнути зайвих викликів. Якщо не передаєш — він не потрібен.</li>
@@ -291,7 +314,15 @@ It depends
 </ul>
 </aside>
 </section>
-<section data-background-image="monke8.png">
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke8.png">
 <p>Головне питання — чи треба нам сталість посилання? Якщо ні — забудьте про <code>useCallback</code>.</p>
 <aside class="notes">
 <ul>
@@ -323,7 +354,15 @@ It depends
 </ul>
 </aside>
 </section>
-<section data-background-image="monke9.png">
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <section data-background-image="monke9.png">
 <p>Питайте в себе: чи <strong>справді</strong> ця логіка <strong>повторюється</strong> в кількох місцях? Чи стане компонент <strong>простішим</strong>, якщо <strong>винести це в хук</strong>? Чи можна в одному реченні <strong>пояснити, що робить цей хук і навіщо він існує</strong>?</p>
 <aside class="notes">
 <ul>

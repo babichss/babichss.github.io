@@ -7,7 +7,6 @@
   --r-background-color: black;
 
   --r-heading-font-weight: 700;
-  /* --r-heading-text-transform: normal; */
 }
 .reveal {
   .slide-background-content {
@@ -93,5 +92,9 @@
     img {
       margin: 0;
     }
+  }
+
+  .title {
+    text-transform: none;
   }
 }
