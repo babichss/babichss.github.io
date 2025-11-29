@@ -88,4 +88,16 @@
     font-style: italic;
     font-size: 0.9em;
   }
+
+  .qr-list {
+    display: flex;
+
+    > * {
+      flex: 1;
+    }
+
+    img {
+      width: 6em;
+      margin-right: 1em;
+  }
 }
