@@ -1,0 +1,268 @@
+@layer components {
+  @scope (.slide) {
+    --flow-chars-per-line: 72;
+    --flow-width-ratio: 0.8;
+    --min-size: 28px;
+
+    /* Slide shell */
+    :scope:not([hidden]) {
+      display: flex;
+    }
+
+    :scope {
+      container-type: size;
+      overflow: hidden;
+      flex-direction: column;
+      padding: min(5vh, 5vw);
+      border-radius: var(--theme-radius-sm);
+      background: var(--theme-fill-surface);
+      color: var(--theme-color-text);
+      font-family: var(--theme-font-presentation);
+      block-size: stretch;
+
+      &.title-slide {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-block-size: 0;
+        min-inline-size: 0;
+      }
+
+      &.layout-focus {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    /* Typography system */
+    :where(h1, h2, h3) {
+      line-height: 1;
+      text-wrap: balance;
+      font-size: max(var(--min-size), calc(200cqi / var(--chars-per-line)));
+      margin-bottom: 0.5em;
+    }
+
+    :where(h4, h5, h6) {
+      font-size: 1em;
+      margin-bottom: 1em;
+    }
+
+    h1 {
+      --min-size: 2em;
+      --chars-per-line: 24;
+    }
+
+    h2 {
+      --min-size: 1.5em;
+      --chars-per-line: 36;
+    }
+
+    h3 {
+      --min-size: 1.2em;
+      --chars-per-line: 42;
+    }
+
+    /* Tables inherit the slide type scale, but use scale for density adjustments. */
+    :where(p, ul, ol, blockquote, figure, table, pre) {
+      --scale: 1;
+      --chars-per-line: var(--flow-chars-per-line);
+
+      font-size: max(
+        var(--min-size),
+        calc(200cqi / calc(var(--chars-per-line) / var(--scale)))
+      );
+      line-height: 1.2;
+      text-wrap: pretty;
+      text-box: var(--theme-text-box);
+
+      &:not(:last-child) {
+        margin-bottom: 1.5em;
+      }
+    }
+
+    /* Content measure */
+    /* Flow content shares slide typography but keeps a narrower reading measure than tables. */
+    :where(p, ul, ol, blockquote, figure, pre) {
+      --max-inline-size: calc(
+        var(--flow-chars-per-line) * calc(var(--flow-width-ratio) * 1ch)
+      );
+      max-inline-size: var(--max-inline-size);
+    }
+
+    table {
+      --min-size: 0.8em;
+      --scale: 0.8;
+      --max-inline-size: calc(var(--flow-chars-per-line) * 1ch);
+      max-inline-size: var(--max-inline-size);
+      border-collapse: collapse;
+      background-color: var(--theme-fill-surface-secondary);
+      border-radius: var(--theme-radius-sm);
+      align-self: start;
+
+      td {
+        color: var(--theme-color-text-muted);
+      }
+
+      :is(th, td) {
+        text-align: start;
+        padding: 0.75em;
+
+        :is(thead tr, tbody tr:not(:last-child)) & {
+          border-bottom: 1px solid
+            color-mix(in srgb, var(--theme-fill-surface-secondary), white 20%);
+        }
+      }
+    }
+
+    figure {
+      min-block-size: 0;
+      block-size: min(stretch, fit-content);
+      max-inline-size: 100%;
+      border-radius: var(--theme-radius-sm);
+    }
+
+    img {
+      min-block-size: 0;
+      inline-size: auto;
+      block-size: auto;
+      max-inline-size: 100%;
+      max-block-size: 100%;
+      object-fit: contain;
+      border-radius: var(--theme-radius-sm);
+    }
+
+    :not(.layout-focus) :is(img, figure) {
+      align-self: start;
+    }
+
+    /* Content styling */
+    p {
+      color: var(--theme-color-text-muted);
+    }
+
+    blockquote {
+      padding: 0.5em;
+      font-style: italic;
+      border-inline-start: 2px solid var(--theme-color-text);
+
+      p {
+        color: var(--theme-color-text);
+        font-size: 0.8em;
+      }
+    }
+
+    :where(ul, ol) {
+      padding-inline-start: 1em;
+    }
+
+    li:not(:last-child) {
+      margin-bottom: 0.75em;
+    }
+
+    ul ::marker {
+      content: '– ';
+    }
+
+    ol ::marker {
+      color: var(--theme-color-text-muted);
+    }
+
+    :where(code, pre) {
+      font-family: var(--theme-font-mono);
+    }
+
+    pre {
+      background-color: var(--theme-fill-surface-secondary);
+      padding: 1em;
+      border-radius: var(--theme-radius-sm);
+      margin-block-end: 1em;
+    }
+
+    :not(pre) code {
+      font-size: 90%;
+      color: var(--theme-color-text);
+    }
+
+    /* Variants */
+    :where(p, ul, ol, li, table).compact {
+      --scale: 0.75;
+    }
+
+    .punchline {
+      --chars-per-line: 32;
+
+      align-self: center;
+      margin-block: auto;
+      color: var(--theme-color-text);
+      font-weight: 600;
+      text-align: center;
+      text-wrap: balance;
+
+      &:where(ul, ol) {
+        padding-inline-start: 0;
+        list-style: none;
+      }
+
+      :is(&, & *) {
+        text-align: center;
+      }
+    }
+
+    /* Responsive fit */
+    /* Wider slides increase readable measure to preserve the vertical fit budget. */
+    @container (aspect-ratio > 16 / 9) {
+      :is(p, ul, ol, blockquote, figure, table, pre) {
+        --flow-chars-per-line: 72;
+      }
+    }
+
+    @container (aspect-ratio > 18 / 9) {
+      :is(p, ul, ol, blockquote, figure, table, pre) {
+        --flow-chars-per-line: 80;
+      }
+    }
+
+    @container (aspect-ratio > 21 / 10) {
+      :is(p, ul, ol, blockquote, figure, pre) {
+        --flow-width-ratio: 1;
+      }
+      table {
+        --scale: 0.9;
+      }
+    }
+
+    @container (aspect-ratio <= 4 / 3) {
+      :is(p, ul, ol, blockquote, figure, table, pre) {
+        --flow-chars-per-line: 64;
+      }
+    }
+
+    @container (aspect-ratio < 1/1) {
+      :is(p, ul, ol, blockquote, figure, table, pre) {
+        --flow-chars-per-line: 48;
+        --min-size: 16px;
+        max-inline-size: stretch;
+      }
+      h1 {
+        --chars-per-line: 16;
+      }
+
+      h2 {
+        --chars-per-line: 20;
+      }
+
+      h3 {
+        --chars-per-line: 24;
+      }
+
+      :is(h2, h3) {
+        line-height: 1.2em;
+      }
+
+      table {
+        inline-size: stretch;
+      }
+    }
+  }
+}

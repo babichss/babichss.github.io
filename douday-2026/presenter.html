@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="uk" class="theme-nocturne">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Воно просто працює Presenter View</title>
+    <link rel="stylesheet" href="styles/layers.css" />
+    <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/nocturne.css" />
+    <link rel="stylesheet" href="styles/shell.css" />
+    <link rel="stylesheet" href="styles/deck.css" />
+    <link rel="stylesheet" href="styles/slide.css" />
+    <link rel="stylesheet" href="styles/preview.css" />
+    <script type="module" src="js/elements/x-deck.js"></script>
+    <script type="module" src="js/elements/x-counter.js"></script>
+    <script type="module" src="js/elements/x-slide-preview.js"></script>
+    <script type="module" src="js/scripts/presenter.js"></script>
+  </head>
+  <body class="viewer-shell theme-nocturne">
+    <header class="app-bar">
+      <p>Presenter: Воно просто працює</p>
+      <x-counter max="11"></x-counter>
+    </header>
+    <main class="presenter-main">
+      <section class="notes">
+        <h2 class="subtitle">Notes</h2>
+        <x-deck id="presenter-notes" enable-view-transition
+          ><article data-id="slide-1" class="slide" data-index="0" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-2" class="slide" data-index="1" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-3" class="slide" data-index="2" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-4" class="slide" data-index="3" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-5" class="slide" data-index="4" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-6" class="slide" data-index="5" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-7" class="slide" data-index="6" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-8" class="slide" data-index="7" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-9" class="slide" data-index="8" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-10" class="slide" data-index="9" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article>
+          <article data-id="slide-11" class="slide" data-index="10" hidden>
+            <p class="notes-empty">No notes for this slide.</p>
+          </article></x-deck
+        >
+      </section>
+      <section class="previews">
+        <h2 class="subtitle" id="title-current">Current</h2>
+        <h2 class="subtitle" id="title-next">Next</h2>
+        <p class="end">End of deck</p>
+        <x-deck id="previews" visible-count="2" enable-view-transition
+          ><x-slide-preview
+            data-id="slide-1"
+            hidden
+            data-index="0"
+            aria-labelledby="slide-1-title"
+            ><div class="slide title-slide">
+              <h1 id="slide-1-title">Воно просто працює</h1>
+              <p>
+                Розбір коду повноцінно* працюючого застосунку без білдерів і
+                фреймворків
+              </p>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-2"
+            hidden
+            data-index="1"
+            aria-labelledby="slide-2-title"
+            ><div class="slide layout-focus">
+              <h2 id="slide-2-title">Коротка передісторія</h2>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-3"
+            hidden
+            data-index="2"
+            aria-label="Slide 3"
+            ><div class="slide layout-focus">
+              <p>Одного разу я сів повайберкодить.</p>
+              <img
+                src="assets/img-vibercode.webp"
+                alt=""
+              /></div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-4"
+            hidden
+            data-index="3"
+            aria-label="Slide 4"
+            ><div class="slide layout-focus">
+              <p>А потім заглянув в код…</p>
+              <img src="assets/img-code.webp" alt="" /></div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-5"
+            hidden
+            data-index="4"
+            aria-label="Slide 5"
+            ><div class="slide layout-focus">
+              <p>Результат дещо передбачуваний</p>
+              <img src="assets/img-thanos.webp" alt="" /></div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-6"
+            hidden
+            data-index="5"
+            aria-labelledby="slide-6-title"
+            ><div class="slide layout-focus">
+              <h2 id="slide-6-title">І я створив…</h2>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-7"
+            hidden
+            data-index="6"
+            aria-labelledby="slide-7-title"
+            ><div class="slide layout-focus">
+              <h2 id="slide-7-title">…ці слайди</h2>
+              <img src="assets/img-screen.webp" alt="" />
+              <p><em>вірніше, манюнький рушій для слайдів</em></p>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-8"
+            hidden
+            data-index="7"
+            aria-labelledby="slide-8-title"
+            ><div class="slide">
+              <h2 id="slide-8-title">Шо воно вміє</h2>
+              <ul>
+                <li>Показувати слайди</li>
+                <li>Перемикати слайди туда-сюда</li>
+                <li>Відкривати вікна (спікер мод)</li>
+                <li>Показувать всі слайди зразу</li>
+                <li>Є нескучні теми!</li>
+              </ul>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-9"
+            hidden
+            data-index="8"
+            aria-labelledby="slide-9-title"
+            ><div class="slide">
+              <h2 id="slide-9-title">В чому прикол?</h2>
+              <ul>
+                <li>нема фреймворків</li>
+                <li>зовсім нема</li>
+                <li>навіть реакта нема</li>
+              </ul>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-10"
+            hidden
+            data-index="9"
+            aria-labelledby="slide-10-title"
+            ><div class="slide">
+              <h2 id="slide-10-title">А шо є:</h2>
+              <ul>
+                <li>Custom Components</li>
+                <li>Чистий, як сльоза, JS</li>
+                <li>Тільки Browser API, тільки хардкор</li>
+                <li>Чудасії з CSS</li>
+              </ul>
+            </div></x-slide-preview
+          ><x-slide-preview
+            data-id="slide-11"
+            hidden
+            data-index="10"
+            aria-label="Slide 11"
+            ><div class="slide layout-focus">
+              <p>Ну в общім харе триндіть, давайте дивитись код</p>
+            </div></x-slide-preview
+          ></x-deck
+        >
+      </section>
+    </main>
+  </body>
+</html>
