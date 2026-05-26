@@ -1,0 +1,45 @@
+@layer components {
+  x-deck {
+    display: contents;
+  }
+
+  :root {
+    view-transition-name: none;
+  }
+
+  .app-content {
+    view-transition-name: deck-stage;
+  }
+
+  ::view-transition-group(deck-stage) {
+    animation-duration: var(--theme-motion-duration-md);
+    animation-timing-function: var(--theme-motion-easing-md);
+    overflow: clip;
+  }
+
+  ::view-transition-old(deck-stage) {
+    animation: deck-old-hold var(--theme-motion-duration-md) linear both;
+  }
+
+  ::view-transition-new(deck-stage) {
+    animation: deck-slide-in var(--theme-motion-duration-md) var(--theme-motion-easing-md) both;
+  }
+}
+
+@keyframes deck-old-hold {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes deck-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(var(--deck-enter-offset, 5vw));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

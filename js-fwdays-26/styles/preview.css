@@ -1,0 +1,24 @@
+@layer components {
+  x-slide-preview {
+    display: block;
+    min-inline-size: 0;
+    aspect-ratio: 1440 / 900;
+    position: relative;
+    background: var(--theme-fill-surface);
+    overflow: hidden;
+    border-radius: var(--theme-radius-sm);
+
+    &[hidden] {
+      display: none;
+    }
+
+    .slide {
+      aspect-ratio: inherit;
+      transform-origin: 0 0;
+      scale: var(--preview-content-scale);
+      inline-size: 1440px;
+      block-size: unset;
+      pointer-events: none;
+    }
+  }
+}

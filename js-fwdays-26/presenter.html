@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="uk" class="theme-nocturne">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Фреймворки: срібна куля чи згубна звичка? Presenter View</title>
+    <link rel="stylesheet" href="styles/layers.css" />
+    <link rel="stylesheet" href="styles/theme.css" />
+    <link rel="stylesheet" href="styles/nocturne.css" />
+    <link rel="stylesheet" href="styles/shell.css" />
+    <link rel="stylesheet" href="styles/deck.css" />
+    <link rel="stylesheet" href="styles/slide.css" />
+    <link rel="stylesheet" href="styles/preview.css" />
+    <script type="module" src="js/elements/x-deck.js"></script>
+    <script type="module" src="js/elements/x-counter.js"></script>
+    <script type="module" src="js/elements/x-slide-preview.js"></script>
+    <script type="module" src="js/scripts/presenter.js"></script>
+  </head>
+  <body class="viewer-shell theme-nocturne">
+    <header class="app-bar">
+      <p>Presenter: Фреймворки: срібна куля чи згубна звичка?</p>
+      <x-counter max="15"></x-counter>
+    </header>
+    <main class="presenter-main">
+      <section class="notes">
+        <h2 class="subtitle">Notes</h2>
+        <x-deck id="presenter-notes" enable-view-transition><article data-id="slide-1" class="slide" data-index="0" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-2" class="slide" data-index="1" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-3" class="slide" data-index="2" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-4" class="slide" data-index="3" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-5" class="slide" data-index="4" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-6" class="slide" data-index="5" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-7" class="slide" data-index="6" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-8" class="slide" data-index="7" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-9" class="slide" data-index="8" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-10" class="slide" data-index="9" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-11" class="slide" data-index="10" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-12" class="slide" data-index="11" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-13" class="slide" data-index="12" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-14" class="slide" data-index="13" hidden><p class="notes-empty">No notes for this slide.</p></article>
+<article data-id="slide-15" class="slide" data-index="14" hidden><p class="notes-empty">No notes for this slide.</p></article></x-deck>
+      </section>
+      <section class="previews">
+        <h2 class="subtitle" id="title-current">Current</h2>
+        <h2 class="subtitle" id="title-next">Next</h2>
+        <p class="end">End of deck</p>
+        <x-deck id="previews" visible-count="2" enable-view-transition><x-slide-preview data-id="slide-1" hidden data-index="0" aria-labelledby="slide-1-title"><div class="slide title-slide"><h1 id="slide-1-title">Фреймворки: срібна куля чи згубна звичка?</h1></div></x-slide-preview><x-slide-preview data-id="slide-2" hidden data-index="1" aria-label="Slide 2"><div class="slide layout-focus"><p><em>Цитати великих людей</em></p>
+<blockquote>
+<p>Мене дратує, коли комбайном сапають вазони.</p>
+</blockquote></div></x-slide-preview><x-slide-preview data-id="slide-3" hidden data-index="2" aria-labelledby="slide-3-title"><div class="slide"><h2 id="slide-3-title">За часів давніх богів, воєвод і царів</h2>
+<ul>
+<li>Вебплатформа довго не встигала за тим, що від неї вже хотіли продукти.</li>
+<li>Бравзери поводилися по-різному, а HTML, CSS і JavaScript закривали менше задач.</li>
+<li>Frontend швидко виріс із “трохи скриптів біля сторінки” в окремий застосунок.</li>
+<li>Фреймворки зʼявилися не від хорошого життя.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-4" hidden data-index="3" aria-labelledby="slide-4-title"><div class="slide"><h2 id="slide-4-title">Фреймворк прийде&nbsp;— порядок наведе</h2>
+<ul>
+<li>Компоненти, модулі, роутинг.</li>
+<li>Замість ручного оновлення DOM — залежність від стану.</li>
+<li>Оптимізації, швидкодія, універсальність.</li>
+<li>Збірка, транспіляція, dev server, hot reload та інші небачені дива.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-5" hidden data-index="4" aria-labelledby="slide-5-title"><div class="slide"><h2 id="slide-5-title">А тепер усе інакше</h2>
+<p>…просто, просто, просто навпаки…</p>
+<ul>
+<li>HTML, CSS і JavaScript вже мають величезні можливості з коробки.</li>
+<li>Кросбравзерність тепер не проблема, а фіча.</li>
+<li>Часто платформа не лише вчасно наздоганяє реальність, а й іноді випереджає.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-6" hidden data-index="5" aria-labelledby="slide-6-title"><div class="slide"><h2 id="slide-6-title">Але є одне але</h2>
+<p>Ми досі «вирішуємо» проблеми десятирічної давності так, ніби надворі досі 2015.</p>
+<p><em><small>…так, React, я дивлюсь на тебе</small></em></p>
+<p><em><small><small>…і на твій Virtual DOM</small></small></em></p></div></x-slide-preview><x-slide-preview data-id="slide-7" hidden data-index="6" aria-labelledby="slide-7-title"><div class="slide"><h2 id="slide-7-title">Коли в руках молоток, усе навколо здається цвяхом</h2>
+<ul>
+<li>Фреймворк сприймається як частина вимог, а не як окреме рішення.</li>
+<li>Ознайомленість команди й ринок найму маскуються під потребу продукту.</li>
+<li>Найбільший ризик — коли зникає вибір.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-8" hidden data-index="7" aria-labelledby="slide-8-title"><div class="slide"><h2 id="slide-8-title">Гарбуз перетворився на спорткар</h2>
+<p>Бравзер уже вміє більше, ніж ми часто від нього очікуємо.</p>
+<p>Якщо задача закривається через <code>&lt;dialog&gt;</code>, Popover API, CSS або Custom Elements — починати треба з них.</p></div></x-slide-preview><x-slide-preview data-id="slide-9" hidden data-index="8" aria-labelledby="slide-9-title"><div class="slide"><h2 id="slide-9-title">Не кожен сайт — застосунок</h2>
+<ul>
+<li>Інтерактивність ще не робить сторінку повноцінним застосунком.</li>
+<li>Runtime-фреймворк має ціну: вага, складність, залежності й підтримка.</li>
+<li>Якщо задача простіша за стек, ми створюємо проблему ще до першого релізу.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-10" hidden data-index="9" aria-labelledby="slide-10-title"><div class="slide"><h2 id="slide-10-title">Я схуд. Ваш бандл теж може.</h2>
+<ul>
+<li>Типи, транспіляція і всілякі оптимізації досі можуть бути потрібні.</li>
+<li>Але бандлінг уже не завжди є першим кроком.</li>
+<li>Native modules, dynamic import, import maps, preload і caching дають більше варіантів.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-11" hidden data-index="10" aria-labelledby="slide-11-title"><div class="slide"><h2 id="slide-11-title">То що тепер, викинути {framework_name} на смітник?</h2>
+<p><del>так</del></p>
+<ul>
+<li>Ні. Фреймворки й інструменти досі потрібні для складних застосунків та великих команд.</li>
+<li>Це не означає, що кожну задачу треба вирішувати через повний стек.</li>
+<li>Фреймворк, білдер, роутинг, SSR, CSR та інші слова мають бути відповіддю на потребу, а не ритуалом.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-12" hidden data-index="11" aria-labelledby="slide-12-title"><div class="slide"><h2 id="slide-12-title">У випадку пожежі телефонуйте 101</h2>
+<p>А у випадку задачі:</p>
+<ul>
+<li>Спершу зрозумійте, що перед вами: сторінка, застосунок чи кілька інтерактивних шматків.</li>
+<li>Подивіться, які дійсні потреби треба закрити: функціонал, можливості, DX чи шо ще.</li>
+<li>Якщо це вже вміє платформа — не тягніть фреймворк за інерцією.</li>
+<li>Якщо без фреймворку стає гірше — беріть фреймворк, шо я вам зроблю вже.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-13" hidden data-index="12" aria-labelledby="slide-13-title"><div class="slide"><h2 id="slide-13-title">Підсумок</h2>
+<ul>
+<li>Фреймворки, білдери й tooling досі потрібні.</li>
+<li>Але вони мають зʼявлятися після питання, а не замість нього.</li>
+<li>Не починайте зі стеку. Починайте із задачі.</li>
+</ul></div></x-slide-preview><x-slide-preview data-id="slide-14" hidden data-index="13" aria-labelledby="slide-14-title"><div class="slide layout-focus"><p>одним словом</p>
+<h2 id="slide-14-title">Думай-те</h2></div></x-slide-preview><x-slide-preview data-id="slide-15" hidden data-index="14" aria-labelledby="slide-15-title"><div class="slide layout-focus"><h1 id="slide-15-title">Питайте, чи шо</h1></div></x-slide-preview></x-deck>
+      </section>
+    </main>
+  </body>
+</html>
