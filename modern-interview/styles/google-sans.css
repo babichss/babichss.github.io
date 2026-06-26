@@ -1,0 +1,51 @@
+@layer theme {
+  .theme-google-sans {
+    color-scheme: dark;
+
+    --theme-fill-canvas: #0b1016;
+    --theme-fill-surface: #141c27;
+    --theme-fill-surface-secondary: #213246;
+    --theme-color-text: #f8fbff;
+    --theme-color-text-muted: #d2dced;
+    --theme-color-border: #4b6283;
+    --theme-color-accent: #9fc2ff;
+    --theme-font-body:
+      'Google Sans Text', 'Google Sans', 'Product Sans', 'Segoe UI', Inter,
+      ui-sans-serif, system-ui, sans-serif;
+    --theme-font-presentation:
+      'Google Sans Display', 'Google Sans', 'Product Sans', 'Segoe UI', Inter,
+      ui-sans-serif, system-ui, sans-serif;
+    --theme-text-box: trim-both cap alphabetic;
+    --theme-motion-duration-md: 220ms;
+    --theme-motion-easing-md: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+    @scope (.slide) {
+      :is(h1, h2, h3) {
+        color: #c2d7ff;
+        font-weight: 500;
+        letter-spacing: -0.03em;
+      }
+
+      :is(h4, h5, h6, strong, b, th) {
+        font-weight: 500;
+      }
+
+      p {
+        color: var(--theme-color-text-muted);
+      }
+
+      .punchline {
+        color: #c2d7ff;
+        font-weight: 100;
+      }
+
+      blockquote {
+        border-inline-start-color: color-mix(
+          in srgb,
+          var(--theme-color-accent),
+          white 22%
+        );
+      }
+    }
+  }
+}

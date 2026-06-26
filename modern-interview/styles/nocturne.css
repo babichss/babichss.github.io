@@ -1,0 +1,27 @@
+@layer theme {
+  .theme-nocturne {
+    color-scheme: dark;
+
+    --theme-fill-canvas: #111315;
+    --theme-fill-surface: #20262b;
+    --theme-fill-surface-secondary: #2b3339;
+    --theme-color-text: #ffffff;
+    --theme-color-text-muted: #a8b3bd;
+    --theme-color-border: #394149;
+    --theme-color-accent: #5ed0bd;
+    --theme-font-presentation:
+      'Avenir Next', Avenir, 'Segoe UI', Inter, ui-sans-serif, system-ui, sans-serif;
+    --theme-text-box: trim-both cap alphabetic;
+
+    &::view-transition-group(*) {
+      --theme-motion-duration-md: 400ms;
+      --theme-motion-easing-md: ease;
+    }
+
+    @scope (.slide) {
+      :is(h1, h2, h3, b, strong, th) {
+        font-weight: 500;
+      }
+    }
+  }
+}
