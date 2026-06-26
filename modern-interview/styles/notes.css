@@ -1,0 +1,80 @@
+@layer theme {
+  .theme-notes {
+    color-scheme: dark;
+
+    --theme-fill-canvas: #0d1013;
+    --theme-fill-surface: #171c21;
+    --theme-fill-surface-secondary: #222932;
+    --theme-color-text: #f2f6fa;
+    --theme-color-text-muted: #b7c2cc;
+    --theme-color-border: #38424c;
+    --theme-color-accent: #9cc9ff;
+    --theme-font-presentation:
+      'Avenir Next', Avenir, 'Segoe UI', Inter, ui-sans-serif, system-ui,
+      sans-serif;
+    --theme-text-box: normal;
+    --theme-motion-duration-md: 120ms;
+    --theme-motion-easing-md: ease-out;
+
+    @scope (.slide) {
+      :scope {
+        padding: min(3vh, 3vw);
+      }
+
+      :scope:not(.title-slide, .layout-focus, .layout-center, .layout-bottom):not([hidden]) {
+        display: block;
+        text-align: start;
+      }
+
+      :scope:not(.title-slide, .layout-focus, .layout-center, .layout-bottom) {
+        column-count: 2;
+        column-gap: 3.2em;
+        /* column-fill: auto; */
+
+        column-rule: 1px solid
+          color-mix(in srgb, var(--theme-color-border), transparent 35%);
+
+        @media (orientation: portrait) {
+          columns: 1;
+        }
+      }
+
+      :where(h1, h2) {
+        column-span: all;
+      }
+
+      h1 {
+        --chars-per-line: 24;
+      }
+
+      h2 {
+        --chars-per-line: 36;
+      }
+
+      h3 {
+        --chars-per-line: 72;
+      }
+
+      :where(p, ul, ol, blockquote, figure, table, pre) {
+        --min-size: 11px;
+        --scale: 0.55;
+        --flow-chars-per-line: 64;
+        --flow-width-ratio: 1.35;
+
+        line-height: 1.14;
+        max-inline-size: stretch;
+        break-inside: avoid-column;
+      }
+
+      :where(ul, ol) {
+        break-inside: auto;
+      }
+
+      @container (aspect-ratio <= 4 / 3) {
+        :where(p, ul, ol, blockquote, figure, table, pre) {
+          --flow-chars-per-line: 32;
+        }
+      }
+    }
+  }
+}

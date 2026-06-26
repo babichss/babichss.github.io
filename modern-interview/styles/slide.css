@@ -33,6 +33,14 @@
         justify-content: center;
         text-align: center;
       }
+
+      &.layout-center {
+        justify-content: center;
+      }
+
+      &.layout-bottom {
+        justify-content: end;
+      }
     }
 
     /* Typography system */
@@ -41,6 +49,7 @@
       text-wrap: balance;
       font-size: max(var(--min-size), calc(200cqi / var(--chars-per-line)));
       margin-bottom: 0.5em;
+      max-width: 70vw;
     }
 
     :where(h4, h5, h6) {
@@ -117,28 +126,40 @@
 
     figure {
       min-block-size: 0;
-      block-size: min(stretch, fit-content);
       max-inline-size: 100%;
       border-radius: var(--theme-radius-sm);
+
+      figcaption {
+        margin-top: 0.75em;
+        color: var(--theme-color-text-muted);
+        font-size: 0.8em;
+        line-height: 1.2;
+        text-wrap: pretty;
+      }
     }
 
     img {
+      display: block;
+      object-fit: contain;
+      border-radius: var(--theme-radius-sm);
       min-block-size: 0;
+    }
+
+    > img {
       inline-size: auto;
       block-size: auto;
       max-inline-size: 100%;
       max-block-size: 100%;
-      object-fit: contain;
-      border-radius: var(--theme-radius-sm);
     }
 
-    :not(.layout-focus) :is(img, figure) {
+    :not(.layout-focus, .layout-center) :is(img, figure) {
       align-self: start;
     }
 
     /* Content styling */
     p {
       color: var(--theme-color-text-muted);
+      max-inline-size: 70vw;
     }
 
     blockquote {
@@ -161,7 +182,7 @@
     }
 
     ul ::marker {
-      content: '– ';
+      content: '— ';
     }
 
     ol ::marker {
@@ -206,6 +227,44 @@
 
       :is(&, & *) {
         text-align: center;
+      }
+    }
+
+    .row {
+      --row-gap: var(--theme-spacing-md);
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: var(--row-gap);
+      max-inline-size: 100%;
+
+      &[data-flow='start'] {
+        justify-content: flex-start;
+      }
+
+      &[data-flow='even'] {
+        justify-content: space-evenly;
+      }
+
+      &[data-flow='end'] {
+        justify-content: flex-end;
+      }
+
+      > * {
+        margin: 0;
+      }
+
+      > :is(figure, img) {
+        flex: 0 0 auto;
+        max-inline-size: fit-content;
+      }
+
+      > figure > img {
+        display: block;
+        max-inline-size: 100%;
+        max-block-size: none;
       }
     }
 

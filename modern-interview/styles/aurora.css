@@ -1,0 +1,20 @@
+@layer theme {
+  .theme-aurora {
+    color-scheme: dark;
+
+    --theme-fill-canvas: #101611;
+    --theme-fill-surface: #183125;
+    --theme-fill-surface-secondary: #234336;
+    --theme-color-text: #f7fff9;
+    --theme-color-text-muted: #b7d6c4;
+    --theme-color-border: #3a6250;
+    --theme-color-accent: #90e4b0;
+    --theme-font-presentation: Optima, Candara, 'Aptos', 'Avenir Next', Corbel, sans-serif;
+    --theme-text-box: trim-both cap alphabetic;
+
+    &::view-transition-group(*) {
+      --theme-motion-duration-md: 400ms;
+      --theme-motion-easing-md: cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+  }
+}

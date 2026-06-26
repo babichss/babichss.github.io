@@ -1,0 +1,18 @@
+@layer theme {
+  .theme-paper {
+    color-scheme: light;
+
+    --theme-fill-canvas: #f4f6f2;
+    --theme-fill-surface: #fffdf7;
+    --theme-fill-surface-secondary: #e7ece4;
+    --theme-color-text: #172018;
+    --theme-color-text-muted: #536154;
+    --theme-color-border: #c7d0c5;
+    --theme-color-accent: #2e7f61;
+    --theme-font-presentation:
+      Charter, 'Bitstream Charter', Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    --theme-text-box: trim-both cap alphabetic;
+    --theme-motion-duration-md: 180ms;
+    --theme-motion-easing-md: ease-out;
+  }
+}
